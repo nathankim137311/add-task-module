@@ -46,14 +46,28 @@ function addTask() {
 }
 
 function createTask(task) {
-    const taskItems = document.createElement('li'); 
-    const taskTitle = document.createElement('h3'); 
-    const taskPriority = document.createElement('p');
-    taskTitle.textContent = task.title;
-    taskPriority.textContent = task.priority; 
-    taskItems.append(taskTitle, taskPriority); 
-    taskList.appendChild(taskItems);
+        const taskItems = document.createElement('li'); 
+        taskItems.classList.add('task-items');
+        taskItems.setAttribute('id', myTasks.indexOf(task))
+        const taskTitle = document.createElement('h3'); 
+        taskTitle.textContent = task.title;
+        const taskPriority = document.createElement('p');
+        taskPriority.textContent = task.priority; 
+        const trashBtn = document.createElement('button'); 
+        trashBtn.classList.add('trash-btn'); 
+        trashBtn.textContent = 'delete'; 
+        trashBtn.addEventListener('click', (e)=>{
+            const taskPosition = myTasks.indexOf(task); 
+            myTasks.splice(taskPosition, 1); 
+            taskItems.remove(); 
+            saveLocal(); 
+        }); 
+        taskItems.append(taskTitle, taskPriority, trashBtn); 
+        taskList.appendChild(taskItems);
 }
+
+
+
 
 // save to local storage 
 function saveLocal() {

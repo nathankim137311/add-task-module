@@ -30,7 +30,25 @@
     list-style-type: none;
 }
 
-#task-list li {
+/* list item */ 
+
+.task-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     border: 1px red solid;
     width: 100%;
+}
+
+.task-items h3 {
+    margin: 0px;
+}
+
+.task-items p {
+    margin: 0px;
+}
+
+.trash-btn {
+    width: 50px;
 }
