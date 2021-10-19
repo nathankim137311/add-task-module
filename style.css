@@ -1,0 +1,36 @@
+.form-popup {
+    display: none;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px red solid;
+}
+
+.form-container > * {
+    margin-bottom: 20px;
+}
+
+#task-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px red solid;
+    height: 600px;
+}
+
+#task-list {
+    border: 1px red solid;
+    width: 80%;
+    height: 400px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+#task-list li {
+    border: 1px red solid;
+    width: 100%;
+}

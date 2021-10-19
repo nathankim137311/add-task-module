@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>todo-list</h1>
+    <button id="task-btn">click to add task</button>
+
+    <div class="form-popup" id="myForm">
+        <form class="form-container">
+        <h2>Add Task</h2>
+        <label for="title">title:</label>
+        <input type="text" placeholder="Title: Homework" name="title" id="title-input">
+        <label for="detail">details:</label>
+        <textarea name="detail" id="detail-input" cols="30" rows="6" placeholder="do homework before 9pm..."></textarea>
+        <label for="project">project:</label>
+        <input type="text" placeholder="enter project name" name="project" id="project-input">
+        <select name="priority-level" id="priority-input">
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+        </select>
+        <div id="button-container">
+            <button id="close-btn">close</button>
+            <button id="add-btn">add</button>
+        </div>
+    </form>
+    </div>
+
+    <div id="task-container">
+        <h2>task-list</h2>
+        <ul id="task-list">
+        </ul>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
