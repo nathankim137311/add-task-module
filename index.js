@@ -90,8 +90,6 @@ function addProject(project) {
     localStorage.setItem('projects', JSON.stringify(myProjects));
 }
 
-
-
 // save to local storage 
 function saveLocal() {
     localStorage.setItem('tasks', JSON.stringify(myTasks));
