@@ -5,7 +5,7 @@ const addBtn = document.getElementById('add-btn');
 const taskList = document.getElementById('task-list');
 // task library 
 let myTasks = [];
-let myProjects = []; 
+let myProjects = [];
 // input elements
 const titleInput = document.getElementById('title-input');
 const projectInput = document.getElementById('project-input'); 
@@ -36,14 +36,14 @@ addBtn.addEventListener('click', (e) => {
     e.preventDefault(); 
     // add task to container 
     addTask(); 
-    createTask(myTasks.at(-1)); // new at() method selects last item of array 
-    console.log(myProjects);
 });
 
 // adds task and saves object in local storage
 function addTask() {
     const task = new Task(); 
     myTasks.push(task); 
+    createTask(myTasks.at(-1)); // new at() method selects last item of array 
+    createProjectList(); 
     saveLocal(); 
 }
 
@@ -66,12 +66,11 @@ function createTask(task) {
         saveLocal(); 
     }); 
     taskItems.append(taskTitle, taskPriority, trashBtn); 
-    taskList.appendChild(taskItems);
-    addProject(task.project); 
+    taskList.appendChild(taskItems); 
 }
 
 // adds project to project list 
-function addProject(project) {
+function createProjectList() {
     const projectsList = document.getElementById('projects-list'); 
     const projectsListItem = document.createElement('li'); 
     const projectName = document.createElement('a');
@@ -81,12 +80,11 @@ function addProject(project) {
         // display tasks associated with project 
         const projectNameH2 = document.getElementById('project-name'); 
         projectNameH2.textContent = `${project} tasks`; 
-    })
+    });
     projectName.textContent = project;  
     projectsList.appendChild(projectsListItem); 
     projectsListItem.appendChild(projectName); 
     // pushes project value to array and saves to local storage 
-    myProjects.push(project); 
     localStorage.setItem('projects', JSON.stringify(myProjects));
 }
 
@@ -104,6 +102,19 @@ if(localStorage.getItem('tasks') === null) {
     for(let i = 0; i < myTasks.length; i++) {
         createTask(myTasks[i]);
     }
+}
+
+if(localStorage.getItem('projects') === null) {
+    myProjects = []; 
+} else {
+    const projectsFromStorage = JSON.parse(localStorage.getItem('projects')); 
+    myProjects = projectsFromStorage; 
+    myTasks.forEach(element => {
+        myProjects.push(element.value); 
+    });
+    // for(let i = 0; i < myTask.length; i++) {
+    //      addProject(myTask[i].project); 
+    // }
 }
 
 function openForm() {
