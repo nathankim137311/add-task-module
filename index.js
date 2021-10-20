@@ -5,6 +5,7 @@ const addBtn = document.getElementById('add-btn');
 const taskList = document.getElementById('task-list');
 // task library 
 let myTasks = [];
+let myProjects = []; 
 // input elements
 const titleInput = document.getElementById('title-input');
 const projectInput = document.getElementById('project-input'); 
@@ -35,8 +36,8 @@ addBtn.addEventListener('click', (e) => {
     e.preventDefault(); 
     // add task to container 
     addTask(); 
-    createTask(myTasks.at(-1)); // new at() method selects last item of array
-    closeForm(); 
+    createTask(myTasks.at(-1)); // new at() method selects last item of array 
+    console.log(myProjects);
 });
 
 // adds task and saves object in local storage
@@ -44,7 +45,6 @@ function addTask() {
     const task = new Task(); 
     myTasks.push(task); 
     saveLocal(); 
-    console.log(myTasks); 
 }
 
 // creates task item 
@@ -67,8 +67,7 @@ function createTask(task) {
     }); 
     taskItems.append(taskTitle, taskPriority, trashBtn); 
     taskList.appendChild(taskItems);
-    console.log(task.project);
-    addProject(task.project);
+    addProject(task.project); 
 }
 
 // adds project to project list 
@@ -76,17 +75,29 @@ function addProject(project) {
     const projectsList = document.getElementById('projects-list'); 
     const projectsListItem = document.createElement('li'); 
     const projectName = document.createElement('a');
+    projectName.classList.add('projects'); 
     projectName.setAttribute('href', '#');
+    projectName.addEventListener('click', ()=>{
+        // display tasks associated with project 
+        const projectNameH2 = document.getElementById('project-name'); 
+        projectNameH2.textContent = `${project} tasks`; 
+    })
     projectName.textContent = project;  
     projectsList.appendChild(projectsListItem); 
     projectsListItem.appendChild(projectName); 
+    // pushes project value to array and saves to local storage 
+    myProjects.push(project); 
+    localStorage.setItem('projects', JSON.stringify(myProjects));
 }
+
+
 
 // save to local storage 
 function saveLocal() {
     localStorage.setItem('tasks', JSON.stringify(myTasks));
 }
 
+// checks if tasks array is empty if it's not generate tasks 
 if(localStorage.getItem('tasks') === null) {
     myTasks = []; 
 } else {
