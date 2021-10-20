@@ -36,15 +36,16 @@ addBtn.addEventListener('click', (e) => {
     e.preventDefault(); 
     // add task to container 
     addTask(); 
+    createProjectList(); 
 });
 
-// adds task and saves object in local storage
+// adds task (the service provider)
 function addTask() {
     const task = new Task(); 
     myTasks.push(task); 
     createTask(myTasks.at(-1)); // new at() method selects last item of array 
-    createProjectList(); 
-    saveLocal(); 
+    myProjects = [...new Set(myTasks.map(item => item.project))];
+    createProjectList(myProjects.at(-1)); 
 }
 
 // creates task item 
@@ -59,62 +60,56 @@ function createTask(task) {
     const trashBtn = document.createElement('button'); 
     trashBtn.classList.add('trash-btn'); 
     trashBtn.textContent = 'delete'; 
+    // deletes task item and saves to local
     trashBtn.addEventListener('click', (e)=>{
         const taskPosition = myTasks.indexOf(task); 
         myTasks.splice(taskPosition, 1); 
         taskItems.remove(); 
-        saveLocal(); 
+        saveLocal('tasks', myTasks); 
     }); 
     taskItems.append(taskTitle, taskPriority, trashBtn); 
     taskList.appendChild(taskItems); 
+    saveLocal('tasks', myTasks); 
 }
 
 // adds project to project list 
-function createProjectList() {
+function createProjectList(project) {
     const projectsList = document.getElementById('projects-list'); 
     const projectsListItem = document.createElement('li'); 
     const projectName = document.createElement('a');
     projectName.classList.add('projects'); 
     projectName.setAttribute('href', '#');
-    projectName.addEventListener('click', ()=>{
-        // display tasks associated with project 
+    projectName.addEventListener('click', (e)=>{
         const projectNameH2 = document.getElementById('project-name'); 
-        projectNameH2.textContent = `${project} tasks`; 
+        projectNameH2.textContent = e.target.textContent + ' ' + 'Tasks'; 
+        // display tasks associated with project 
     });
     projectName.textContent = project;  
     projectsList.appendChild(projectsListItem); 
     projectsListItem.appendChild(projectName); 
-    // pushes project value to array and saves to local storage 
-    localStorage.setItem('projects', JSON.stringify(myProjects));
+    saveLocal('projects', myProjects); 
 }
 
-// save to local storage 
-function saveLocal() {
-    localStorage.setItem('tasks', JSON.stringify(myTasks));
+// save to local storage (the service provider)
+function saveLocal(name, arr) {
+    localStorage.setItem(name, JSON.stringify(arr)); 
 }
 
 // checks if tasks array is empty if it's not generate tasks 
 if(localStorage.getItem('tasks') === null) {
     myTasks = []; 
+    myProjects = [];
 } else {
     const tasksFromStorage = JSON.parse(localStorage.getItem('tasks')); 
     myTasks = tasksFromStorage; 
+    myProjects = [...new Set(myTasks.map(item => item.project))]; // unique projects only
+    // creates from existing library 
     for(let i = 0; i < myTasks.length; i++) {
         createTask(myTasks[i]);
     }
-}
-
-if(localStorage.getItem('projects') === null) {
-    myProjects = []; 
-} else {
-    const projectsFromStorage = JSON.parse(localStorage.getItem('projects')); 
-    myProjects = projectsFromStorage; 
-    myTasks.forEach(element => {
-        myProjects.push(element.value); 
-    });
-    // for(let i = 0; i < myTask.length; i++) {
-    //      addProject(myTask[i].project); 
-    // }
+    for(let i = 0; i < myProjects.length; i++) {
+        createProjectList(myProjects[i]); 
+    }
 }
 
 function openForm() {
