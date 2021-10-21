@@ -42,13 +42,30 @@ addBtn.addEventListener('click', (e) => {
 // adds task (the service provider)
 function addTask() {
     const task = new Task(); 
-    myTasks.push(task); 
-    createTask(task); // new at() method selects last item of array 
+    checkTasks(task);  
+}
+
+// checks tasks and pushes task if it matches current project name
+function checkTasks(task) {
+    const currentTab = document.getElementById('project-name');
+    const currentTabString = currentTab.textContent;
+    const firstWord = getFirstWord(currentTabString);
+    if(task.project !== firstWord) {
+        myTasks.push(task);
+        saveLocal('tasks', myTasks); 
+    } else if(task.project === firstWord) {
+        myTasks.push(task);
+        createTask(task); 
+    } 
+}
+
+function getFirstWord(str) {
+    let spaceIndex = str.indexOf(' ');
+    return spaceIndex === -1 ? str : str.substr(0, spaceIndex);
 }
 
 // creates task item 
 function createTask(task) {
-
     const taskItems = document.createElement('li'); 
     taskItems.classList.add('task-items');
     taskItems.setAttribute('id', myTasks.indexOf(task))
@@ -106,7 +123,6 @@ function filter(name) {
 }
 
 function createNewProjectList(project) {
-    deleteProjectList(); 
     for(let i = 0; i < project.length; i++) {
         createTask(project[i]);  
     }
