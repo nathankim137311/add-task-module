@@ -43,9 +43,7 @@ addBtn.addEventListener('click', (e) => {
 function addTask() {
     const task = new Task(); 
     myTasks.push(task); 
-    createTask(myTasks.at(-1)); // new at() method selects last item of array 
-    myProjects = [...new Set(myTasks.map(item => item.project))];
-    createProjectList(myProjects.at(-1)); 
+    createTask(task); // new at() method selects last item of array 
 }
 
 // creates task item 
@@ -82,12 +80,38 @@ function createProjectList(project) {
     projectName.addEventListener('click', (e)=>{
         const projectNameH2 = document.getElementById('project-name'); 
         projectNameH2.textContent = e.target.textContent + ' ' + 'Tasks'; 
-        // display tasks associated with project 
+        // display tasks associated with project
+        filter(e.target.textContent); 
     });
     projectName.textContent = project;  
     projectsList.appendChild(projectsListItem); 
     projectsListItem.appendChild(projectName); 
     saveLocal('projects', myProjects); 
+}
+
+function deleteProjectList() {
+    document.getElementById('task-list').innerHTML = ''; 
+}
+
+function filter(name) {
+    const specificProject = myTasks.filter(task => task.project == name);
+    console.log(specificProject);
+    deleteProjectList(); 
+    for(let i = 0; i < specificProject.length; i++) {
+        createTask(specificProject[i]);  
+    }
+}
+
+function moveSelected(src, dest)  {
+    var i = 0;
+    while ( i < src.length ) {
+        var item = src[i];
+        if (item.selected) {
+            src.splice(i,1);
+            dest.push(item);
+        }
+        else i++;
+    }
 }
 
 // save to local storage (the service provider)
