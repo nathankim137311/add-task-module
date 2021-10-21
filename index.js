@@ -48,6 +48,7 @@ function addTask() {
 
 // creates task item 
 function createTask(task) {
+
     const taskItems = document.createElement('li'); 
     taskItems.classList.add('task-items');
     taskItems.setAttribute('id', myTasks.indexOf(task))
@@ -81,12 +82,18 @@ function createProjectList(project) {
         const projectNameH2 = document.getElementById('project-name'); 
         projectNameH2.textContent = e.target.textContent + ' ' + 'Tasks'; 
         // display tasks associated with project
-        filter(e.target.textContent); 
+        replaceProjectList(e.target.textContent);
     });
     projectName.textContent = project;  
     projectsList.appendChild(projectsListItem); 
     projectsListItem.appendChild(projectName); 
     saveLocal('projects', myProjects); 
+}
+
+function replaceProjectList(name) {
+    deleteProjectList();
+    const specificProject = filter(name); 
+    createNewProjectList(specificProject); 
 }
 
 function deleteProjectList() {
@@ -95,22 +102,13 @@ function deleteProjectList() {
 
 function filter(name) {
     const specificProject = myTasks.filter(task => task.project == name);
-    console.log(specificProject);
-    deleteProjectList(); 
-    for(let i = 0; i < specificProject.length; i++) {
-        createTask(specificProject[i]);  
-    }
+    return specificProject
 }
 
-function moveSelected(src, dest)  {
-    var i = 0;
-    while ( i < src.length ) {
-        var item = src[i];
-        if (item.selected) {
-            src.splice(i,1);
-            dest.push(item);
-        }
-        else i++;
+function createNewProjectList(project) {
+    deleteProjectList(); 
+    for(let i = 0; i < project.length; i++) {
+        createTask(project[i]);  
     }
 }
 
