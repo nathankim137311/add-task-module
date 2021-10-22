@@ -21,6 +21,7 @@ function createTaskDom(obj) {
     taskItems.append(taskTitle, taskPriority, trashBtn); 
     taskList.appendChild(taskItems); 
 }
+/*
 // adds project to project list 
 export function createProjectListDom(arr) {
     const projectsList = document.getElementById('projects-list'); 
@@ -34,9 +35,9 @@ export function createProjectListDom(arr) {
         // display tasks associated with project
         replaceProjectList(e.target.textContent);
     });
-    projectName.textContent = arr.at(-1).textContent;  
+    projectName.textContent = 'ass'; // change later 
     projectsList.appendChild(projectsListItem); 
     projectsListItem.appendChild(projectName); 
 }
-
+*/
 export default createTaskDom

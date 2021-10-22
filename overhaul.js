@@ -1,6 +1,5 @@
 import Task from './taskObj.js'; 
 import createTaskDom from './dom.js';
-import createProjectListDom from './dom.js';
 
 // add task to list and project name to project array 
 const taskBtn = document.getElementById('task-btn');
@@ -63,6 +62,24 @@ function createProjects() {
 function saveLocal(name, arr) {
     localStorage.setItem(name, JSON.stringify(arr)); 
 }
+
+function createProjectListDom(arr) {
+    const projectsList = document.getElementById('projects-list'); 
+    const projectsListItem = document.createElement('li'); 
+    const projectName = document.createElement('a');
+    projectName.classList.add('projects'); 
+    projectName.setAttribute('href', '#');
+    projectName.addEventListener('click', (e)=>{
+        const projectNameH2 = document.getElementById('project-name'); 
+        projectNameH2.textContent = e.target.textContent + ' ' + 'Tasks'; 
+        // display tasks associated with project
+        replaceProjectList(e.target.textContent);
+    });
+    projectName.textContent = 'ass'; // change later 
+    projectsList.appendChild(projectsListItem); 
+    projectsListItem.appendChild(projectName); 
+}
+
 
 /*
 // checks if tasks array is empty if it's not generate tasks 
