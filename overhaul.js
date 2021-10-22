@@ -1,6 +1,6 @@
 import Task from './taskObj.js'; 
-import createTaskDom from './dom.js';
-
+import createTaskDom, { createProjectListDom } from './dom.js';
+import { projectInput } from './taskObj.js';
 // add task to list and project name to project array 
 const taskBtn = document.getElementById('task-btn');
 const closeBtn = document.getElementById('close-btn');
@@ -8,6 +8,11 @@ const addBtn = document.getElementById('add-btn');
 export const taskList = document.getElementById('task-list');
 // task library 
 export let myTasks = [];
+const myProjects = [];
+
+// let unique = new UniqueArray(myTasks);
+// console.log(unique);
+
 //  opens pop-up form 
 taskBtn.addEventListener('click', (e) => {
     e.preventDefault(); 
@@ -52,10 +57,15 @@ function pushObject(arr, obj) {
 
 // delegates commands 
 function createProjects() {
+    // const projectName = projectInput.value; 
+    // myProjects.push(projectName); 
+    console.log(myProjects); 
+    createProjectListDom(myProjects); 
+    //const myProjects = [...new Set(myTasks.map(obj => obj.project))]; 
+    //const project = new Project(); 
+    //const projects = [];
     // creates unique project items from myTasks array
-    const myProjects = [...new Set(myTasks.map(obj => obj.project))]; 
-    createProjectListDom(myProjects);
-    saveLocal('projects', myProjects); 
+    // saveLocal('projects', myProjects); 
 }
 
 // sets object to local storage 
@@ -63,6 +73,7 @@ function saveLocal(name, arr) {
     localStorage.setItem(name, JSON.stringify(arr)); 
 }
 
+/*
 function createProjectListDom(arr) {
     const projectsList = document.getElementById('projects-list');
     const projectsListItem = document.createElement('li'); 
@@ -81,8 +92,6 @@ function createProjectListDom(arr) {
     projectsList.appendChild(projectsListItem); 
     projectsListItem.appendChild(projectName); 
 }
-
-/*
 // checks if tasks array is empty if it's not generate tasks 
 if(localStorage.getItem('tasks') === null) {
     myTasks = []; 

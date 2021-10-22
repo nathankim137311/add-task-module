@@ -1,7 +1,8 @@
 import { myTasks } from "./overhaul.js";
 import { taskList } from "./overhaul.js";
+import { projectInput } from "./taskObj.js";
 // creates task item via DOM 
-function createTaskDom(obj) {   
+export function createTaskDom(obj) {   
     const taskItems = document.createElement('li'); 
     taskItems.classList.add('task-items');
     taskItems.setAttribute('id', myTasks.indexOf(obj))
@@ -21,23 +22,36 @@ function createTaskDom(obj) {
     taskItems.append(taskTitle, taskPriority, trashBtn); 
     taskList.appendChild(taskItems); 
 }
-/*
 // adds project to project list 
 export function createProjectListDom(arr) {
-    const projectsList = document.getElementById('projects-list'); 
-    const projectsListItem = document.createElement('li'); 
-    const projectName = document.createElement('a');
-    projectName.classList.add('projects'); 
-    projectName.setAttribute('href', '#');
-    projectName.addEventListener('click', (e)=>{
-        const projectNameH2 = document.getElementById('project-name'); 
-        projectNameH2.textContent = e.target.textContent + ' ' + 'Tasks'; 
-        // display tasks associated with project
-        replaceProjectList(e.target.textContent);
-    });
-    projectName.textContent = 'ass'; // change later 
-    projectsList.appendChild(projectsListItem); 
-    projectsListItem.appendChild(projectName); 
+        const projectsList = document.getElementById('projects-list'); 
+        const projectsListItem = document.createElement('li'); 
+        const projectName = document.createElement('a');
+        projectName.classList.add('projects'); 
+        projectName.setAttribute('href', '#');
+        projectName.addEventListener('click', (e)=>{
+            const projectNameH2 = document.getElementById('project-name'); 
+            projectNameH2.textContent = e.target.textContent + ' ' + 'Tasks'; 
+            // display tasks associated with project
+            replaceProjectList(e.target.textContent);
+        });
+        // function filterValue(obj, key, value) {
+        //     return obj.find(function(v){ return v[key] === value}); 
+        // }
+
+        if(arr.length === 0) {
+            console.log('no projects');
+            arr.push(projectInput.value); 
+        } else if (arr.find(o => o.project === projectInput.value)) {
+            console.log('project exists');
+        } else {
+            console.log('unique project');
+            arr.push(projectInput.value); 
+        }
+        // for(let i = 0; i < arr.length; i++) {
+        // }
+        projectName.textContent = 'ass'; // change later 
+        projectsList.appendChild(projectsListItem); 
+        projectsListItem.appendChild(projectName); 
 }
-*/
 export default createTaskDom
