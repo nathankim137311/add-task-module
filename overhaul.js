@@ -53,7 +53,7 @@ function pushObject(arr, obj) {
 // delegates commands 
 function createProjects() {
     // creates unique project items from myTasks array
-    const myProjects = [...new Set(myTasks.map(obj => obj.project))]; ; 
+    const myProjects = [...new Set(myTasks.map(obj => obj.project))]; 
     createProjectListDom(myProjects);
     saveLocal('projects', myProjects); 
 }
@@ -64,7 +64,7 @@ function saveLocal(name, arr) {
 }
 
 function createProjectListDom(arr) {
-    const projectsList = document.getElementById('projects-list'); 
+    const projectsList = document.getElementById('projects-list');
     const projectsListItem = document.createElement('li'); 
     const projectName = document.createElement('a');
     projectName.classList.add('projects'); 
@@ -75,11 +75,12 @@ function createProjectListDom(arr) {
         // display tasks associated with project
         replaceProjectList(e.target.textContent);
     });
-    projectName.textContent = 'ass'; // change later 
+    // checks if array item is the same 
+    projectName.textContent = arr[0]; // change later 
+    //console.log(arr.every(projectName.textContent));
     projectsList.appendChild(projectsListItem); 
     projectsListItem.appendChild(projectName); 
 }
-
 
 /*
 // checks if tasks array is empty if it's not generate tasks 
