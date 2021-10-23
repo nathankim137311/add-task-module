@@ -57,17 +57,26 @@ function pushObject(arr, obj) {
 
 // delegates commands 
 function createProjects() {
-    // const projectName = projectInput.value; 
-    // myProjects.push(projectName); 
-    console.log(myProjects); 
-    createProjectListDom(myProjects); 
-    //const myProjects = [...new Set(myTasks.map(obj => obj.project))]; 
-    //const project = new Project(); 
-    //const projects = [];
-    // creates unique project items from myTasks array
-    // saveLocal('projects', myProjects); 
+    const projectName = projectInput.value; 
+    const projectNames = [];
+    projectNames.push(projectName); 
+    checkArray(projectName, projectName);
 }
 
+// loops over array and checks item
+function checkArray(arr, item) {
+    for(let i = 0; i < arr.length; i++) {
+        checkItem(item); 
+    }
+}
+
+// checks array for duplicates
+function checkItem(item) {
+    if(myProjects.indexOf(item) === -1) {
+        myProjects.push(item);
+        createProjectListDom(item); 
+    }
+}
 // sets object to local storage 
 function saveLocal(name, arr) {
     localStorage.setItem(name, JSON.stringify(arr)); 

@@ -23,7 +23,7 @@ export function createTaskDom(obj) {
     taskList.appendChild(taskItems); 
 }
 // adds project to project list 
-export function createProjectListDom(arr) {
+export function createProjectListDom(str) {
         const projectsList = document.getElementById('projects-list'); 
         const projectsListItem = document.createElement('li'); 
         const projectName = document.createElement('a');
@@ -35,22 +35,7 @@ export function createProjectListDom(arr) {
             // display tasks associated with project
             replaceProjectList(e.target.textContent);
         });
-        // function filterValue(obj, key, value) {
-        //     return obj.find(function(v){ return v[key] === value}); 
-        // }
-
-        if(arr.length === 0) {
-            console.log('no projects');
-            arr.push(projectInput.value); 
-        } else if (arr.find(o => o.project === projectInput.value)) {
-            console.log('project exists');
-        } else {
-            console.log('unique project');
-            arr.push(projectInput.value); 
-        }
-        // for(let i = 0; i < arr.length; i++) {
-        // }
-        projectName.textContent = 'ass'; // change later 
+        projectName.textContent = str; // change later 
         projectsList.appendChild(projectsListItem); 
         projectsListItem.appendChild(projectName); 
 }
