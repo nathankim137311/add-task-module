@@ -34,17 +34,17 @@ addBtn.addEventListener('click', (e) => {
     e.preventDefault(); 
     createTask(); 
     createProjects(); 
+    // finds number of repeated key values 
+    numberOfOccurances(); 
     saveLocal('tasks', myTasks); 
     saveLocal('projects', myProjects); 
-    // finds number of repeated key values 
-    console.log(findOcc(myTasks, 'project'));
-    /*
-    // checks for project name 'sex' in array of objects
-    const project = 'sex';
-    const numberOfProjects = myTasks.filter((obj) => obj.project === project).length;
-    console.log(numberOfProjects); 
-    */
 });
+
+// displays the number of tasks a project has
+function numberOfOccurances() {
+    const occuranceArr = findOcc(myTasks, 'project');
+    console.log(occuranceArr); 
+}
 
 // finds occurances of repeated key values in array of objects 
 function findOcc(arr, key) {
@@ -92,7 +92,6 @@ function checkItem(item) {
     if(myProjects.indexOf(item) === -1) {
         myProjects.push(item);
         createProjectListDom(item); 
-        console.log(myProjects); 
     }
 }
 
