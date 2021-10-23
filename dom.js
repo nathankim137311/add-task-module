@@ -1,5 +1,6 @@
-import { myTasks } from "./overhaul.js";
+import { myTasks, myProjects } from "./overhaul.js";
 import { taskList } from "./overhaul.js";
+import saveLocal from "./overhaul.js"
 // creates task item via DOM 
 export function createTaskDom(obj) {   
     const taskItems = document.createElement('li'); 
@@ -14,13 +15,27 @@ export function createTaskDom(obj) {
     trashBtn.textContent = 'delete'; 
     // deletes task item and saves to local
     trashBtn.addEventListener('click', (e)=>{
-        const taskPosition = myTasks.indexOf(obj); 
+        const taskPosition = myTasks.indexOf(obj);
+        // console.log(arrayContains(myProjects, obj.project)); 
         myTasks.splice(taskPosition, 1); 
         taskItems.remove(); 
+        saveLocal('tasks', myTasks); 
+        saveLocal('projects', myProjects); 
     }); 
     taskItems.append(taskTitle, taskPriority, trashBtn); 
     taskList.appendChild(taskItems); 
 }
+
+/*
+// deletes project from local storage 
+function arrayContains(arr, str) {
+    if(arr.indexOf(str) > -1) {
+        console.log('i don\'t know what this does');
+    } else {
+        console.log('i don\'t care what people think'); 
+    }
+}
+*/
 // adds project to project list 
 export function createProjectListDom(str) {
         const projectsList = document.getElementById('projects-list'); 

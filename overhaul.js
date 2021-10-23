@@ -8,11 +8,7 @@ const addBtn = document.getElementById('add-btn');
 export const taskList = document.getElementById('task-list');
 // task library 
 export let myTasks = [];
-let myProjects = [];
-
-// let unique = new UniqueArray(myTasks);
-// console.log(unique);
-
+export let myProjects = [];
 //  opens pop-up form 
 taskBtn.addEventListener('click', (e) => {
     e.preventDefault(); 
@@ -40,7 +36,37 @@ addBtn.addEventListener('click', (e) => {
     createProjects(); 
     saveLocal('tasks', myTasks); 
     saveLocal('projects', myProjects); 
+    // finds number of repeated key values 
+    console.log(findOcc(myTasks, 'project'));
+    /*
+    // checks for project name 'sex' in array of objects
+    const project = 'sex';
+    const numberOfProjects = myTasks.filter((obj) => obj.project === project).length;
+    console.log(numberOfProjects); 
+    */
 });
+
+// finds occurances of repeated key values in array of objects 
+function findOcc(arr, key) {
+    let arr2 = [];
+
+    arr.forEach((x) => {
+        if(arr2.some((val)=>{ return val[key] == x[key] })) {
+            arr2.forEach((k)=>{
+                if(k[key] === x[key]) {
+                    k['occurrence']++
+                }
+            })
+        } else {
+            let a = {}
+            a[key] = x[key]
+            a["occurrence"] = 1
+            arr2.push(a);
+        }
+    });
+
+    return arr2
+}
 
 // creates task 
 function createTask() {
@@ -69,16 +95,12 @@ function checkItem(item) {
         console.log(myProjects); 
     }
 }
-// sets object to local storage 
-function saveLocal(name, arr) {
-    localStorage.setItem(name, JSON.stringify(arr)); 
-}
 
 // when page loads populate the page 
 window.onload = function() {
     localStorageItems(); 
 }
-
+// save to local storage 
 // checks if tasks array is empty if it's not generate tasks 
 function localStorageItems() {
     if(getItemsFromStorage('tasks') === null || getItemsFromStorage('projects') === null) {
@@ -93,6 +115,11 @@ function localStorageItems() {
         createItemsFromStorage(myTasks); 
         createItemsFromStorage(myProjects);
     }
+}
+
+// sets object to local storage 
+export default function saveLocal(name, arr) {
+    localStorage.setItem(name, JSON.stringify(arr)); 
 }
 
 function getItemsFromStorage(str) {
@@ -112,39 +139,3 @@ function createItemsFromStorage(arr) {
             } 
     }
 }
-/*
-function createProjectListDom(arr) {
-    const projectsList = document.getElementById('projects-list');
-    const projectsListItem = document.createElement('li'); 
-    const projectName = document.createElement('a');
-    projectName.classList.add('projects'); 
-    projectName.setAttribute('href', '#');
-    projectName.addEventListener('click', (e)=>{
-        const projectNameH2 = document.getElementById('project-name'); 
-        projectNameH2.textContent = e.target.textContent + ' ' + 'Tasks'; 
-        // display tasks associated with project
-        replaceProjectList(e.target.textContent);
-    });
-    // checks if array item is the same 
-    projectName.textContent = arr[0]; // change later 
-    //console.log(arr.every(projectName.textContent));
-    projectsList.appendChild(projectsListItem); 
-    projectsListItem.appendChild(projectName); 
-}
-// checks if tasks array is empty if it's not generate tasks 
-if(localStorage.getItem('tasks') === null) {
-    myTasks = []; 
-    myProjects = [];
-} else {
-    const tasksFromStorage = JSON.parse(localStorage.getItem('tasks')); 
-    myTasks = tasksFromStorage; 
-    myProjects = [...new Set(myTasks.map(item => item.project))]; // unique projects only
-    // creates from existing library 
-    for(let i = 0; i < myTasks.length; i++) {
-        createTask(myTasks[i]);
-    }
-    for(let i = 0; i < myProjects.length; i++) {
-        createProjectList(myProjects[i]); 
-    }
-}
-*/
