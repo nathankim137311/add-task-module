@@ -58,28 +58,51 @@ function pushObject(arr, obj) {
 // delegates commands 
 function createProjects() {
     const projectName = projectInput.value; 
-    const projectNames = [];
-    projectNames.push(projectName); 
-    checkArray(projectName, projectName);
+    //const projectNames = [];
+    //projectNames.push(projectName); 
+    // checkArray(projectName, projectName);
+    checkItem(projectName); 
 }
 
 // loops over array and checks item
+/*
 function checkArray(arr, item) {
     for(let i = 0; i < arr.length; i++) {
         checkItem(item); 
     }
 }
+*/
 
 // checks array for duplicates
 function checkItem(item) {
     if(myProjects.indexOf(item) === -1) {
         myProjects.push(item);
         createProjectListDom(item); 
+        console.log(myProjects); 
     }
 }
 // sets object to local storage 
 function saveLocal(name, arr) {
     localStorage.setItem(name, JSON.stringify(arr)); 
+}
+
+// checks if tasks array is empty if it's not generate tasks 
+if(localStorage.getItem('tasks') === null) {
+    myTasks = []; 
+    myProjects = [];
+} else {
+    const tasksFromStorage = JSON.parse(localStorage.getItem('tasks')); 
+    myTasks = tasksFromStorage;
+    // creates from existing library 
+
+    /*
+    for(let i = 0; i < myTasks.length; i++) {
+        createTask(myTasks[i]);
+    }
+    for(let i = 0; i < myProjects.length; i++) {
+        createProjectList(myProjects[i]); 
+    }
+    */
 }
 
 /*

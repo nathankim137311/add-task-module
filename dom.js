@@ -39,4 +39,29 @@ export function createProjectListDom(str) {
         projectsList.appendChild(projectsListItem); 
         projectsListItem.appendChild(projectName); 
 }
+
+function replaceProjectList(name) {
+    deleteProjectList();
+    /*
+    const specificProject = filter(name); 
+    createNewProjectList(specificProject);
+    */ 
+}
+
+function deleteProjectList() {
+    document.getElementById('task-list').innerHTML = ''; 
+}
+/*
+function filter(name) {
+    const specificProject = myTasks.filter(task => task.project == name);
+    return specificProject
+}
+
+function createNewProjectList(project) {
+    for(let i = 0; i < project.length; i++) {
+        createTask(project[i]);  
+    }
+}
+*/
+
 export default createTaskDom
