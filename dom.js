@@ -1,6 +1,5 @@
 import { myTasks } from "./overhaul.js";
 import { taskList } from "./overhaul.js";
-import { projectInput } from "./taskObj.js";
 // creates task item via DOM 
 export function createTaskDom(obj) {   
     const taskItems = document.createElement('li'); 
@@ -26,32 +25,32 @@ export function createTaskDom(obj) {
 export function createProjectListDom(str) {
         const projectsList = document.getElementById('projects-list'); 
         const projectsListItem = document.createElement('li'); 
-        const projectName = document.createElement('a');
-        projectName.classList.add('projects'); 
-        projectName.setAttribute('href', '#');
-        projectName.addEventListener('click', (e)=>{
+        const projectLink = document.createElement('a');
+        projectLink.classList.add('projects'); 
+        projectLink.setAttribute('href', '#');
+        // when link is clicked populates container with corresponding tasks
+        projectLink.addEventListener('click', (e)=>{
+            const projectName = e.target.textContent; 
             const projectNameH2 = document.getElementById('project-name'); 
-            projectNameH2.textContent = e.target.textContent + ' ' + 'Tasks'; 
-            // display tasks associated with project
-            replaceProjectList(e.target.textContent);
+            projectNameH2.textContent = projectName.toUpperCase() + ' ' + 'Tasks'; 
+            replaceProjectList(projectName);
         });
-        projectName.textContent = str; // change later 
+        projectLink.textContent = str; // change later 
         projectsList.appendChild(projectsListItem); 
-        projectsListItem.appendChild(projectName); 
+        projectsListItem.appendChild(projectLink); 
 }
 
+// sorts tasks by project name 
 function replaceProjectList(name) {
     deleteProjectList();
-    /*
     const specificProject = filter(name); 
     createNewProjectList(specificProject);
-    */ 
 }
 
 function deleteProjectList() {
     document.getElementById('task-list').innerHTML = ''; 
 }
-/*
+
 function filter(name) {
     const specificProject = myTasks.filter(task => task.project == name);
     return specificProject
@@ -59,9 +58,8 @@ function filter(name) {
 
 function createNewProjectList(project) {
     for(let i = 0; i < project.length; i++) {
-        createTask(project[i]);  
+        createTaskDom(project[i]);  
     }
 }
-*/
 
 export default createTaskDom

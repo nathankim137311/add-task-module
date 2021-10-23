@@ -74,7 +74,10 @@ function saveLocal(name, arr) {
     localStorage.setItem(name, JSON.stringify(arr)); 
 }
 
-localStorageItems(); 
+// when page loads populate the page 
+window.onload = function() {
+    localStorageItems(); 
+}
 
 // checks if tasks array is empty if it's not generate tasks 
 function localStorageItems() {
@@ -84,10 +87,8 @@ function localStorageItems() {
     } else {
         const tasksFromStorage = getItemsFromStorage('tasks'); 
         myTasks = tasksFromStorage;
-        console.log(myTasks); 
         const projectsFromStorage = getItemsFromStorage('projects')
         myProjects = projectsFromStorage; 
-        console.log(myProjects);
         // creates from existing library 
         createItemsFromStorage(myTasks); 
         createItemsFromStorage(myProjects);
