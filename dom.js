@@ -5,7 +5,7 @@ import saveLocal from "./overhaul.js"
 export function createTaskDom(obj) {   
     const taskItems = document.createElement('li'); 
     taskItems.classList.add('task-items');
-    taskItems.setAttribute('id', myTasks.indexOf(obj))
+    taskItems.setAttribute('id', 'task-' + myTasks.indexOf(obj))
     const taskTitle = document.createElement('h3'); 
     taskTitle.textContent = obj.title;
     const taskPriority = document.createElement('p');
@@ -38,10 +38,16 @@ function arrayContains(arr, str) {
 */
 // adds project to project list 
 export function createProjectListDom(str) {
-        const projectsList = document.getElementById('projects-list'); 
-        const projectsListItem = document.createElement('li'); 
+        const projectList = document.getElementById('projects-list'); 
+        const projectListItem = document.createElement('li'); 
+        projectListItem.classList.add('project-items'); 
+        projectListItem.setAttribute('id', 'project-' + myProjects.indexOf(str)); 
+        const projectListItemDiv = document.createElement('div'); 
+        projectListItemDiv.classList.add('number-of-tasks');
+        const projectListItemP = document.createElement('p');
+        projectListItemP.textContent = '';
         const projectLink = document.createElement('a');
-        projectLink.classList.add('projects'); 
+        projectLink.classList.add('project-links'); 
         projectLink.setAttribute('href', '#');
         // when link is clicked populates container with corresponding tasks
         projectLink.addEventListener('click', (e)=>{
@@ -51,8 +57,9 @@ export function createProjectListDom(str) {
             replaceProjectList(projectName);
         });
         projectLink.textContent = str; // change later 
-        projectsList.appendChild(projectsListItem); 
-        projectsListItem.appendChild(projectLink); 
+        projectList.appendChild(projectListItem);
+        projectListItemDiv.appendChild(projectListItemP); 
+        projectListItem.append(projectListItemDiv, projectLink); 
 }
 
 // sorts tasks by project name 

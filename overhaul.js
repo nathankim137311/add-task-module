@@ -41,14 +41,28 @@ addBtn.addEventListener('click', (e) => {
 
 // creates numbers of repeated key values 
 function createIterators() {
-    numberOfOccurances(); 
+    const occurrencesArr = createOccurrencesArray();
+    console.log(occurrencesArr);
+    // add number via DOM
+    createDomElements(occurrencesArr); 
+}
 
+function createDomElements(arr) {
+    for(let i = 0; i < arr.length; i++) {
+        const numberArray = Array.from(document.querySelectorAll('.number-of-tasks')); 
+        numberArray[i].textContent = arr[i];   
+        console.log('working');
+    }
 }
 
 // displays the number of tasks a project has
-function numberOfOccurances() {
-    const occuranceArr = findOcc(myTasks, 'project');
-    console.log(occuranceArr); 
+function createOccurrencesArray() {
+    const occurrenceArr = findOcc(myTasks, 'project');
+    const arr = [];
+    occurrenceArr.forEach((obj)=>{
+        arr.push(obj.occurrence);
+    })
+    return arr
 }
 
 // finds occurances of repeated key values in array of objects 
@@ -101,6 +115,7 @@ function checkItem(item) {
 // when page loads populate the page 
 window.onload = function() {
     localStorageItems(); 
+    createIterators(); 
 }
 // save to local storage 
 // checks if tasks array is empty if it's not generate tasks 

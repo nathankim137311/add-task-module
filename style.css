@@ -45,8 +45,9 @@
     list-style-type: none;
 }
 
-/* list item */ 
+/* list items */ 
 
+/* task list */
 .task-items {
     display: flex;
     flex-direction: row;
@@ -66,4 +67,28 @@
 
 .trash-btn {
     width: 50px;
+}
+
+/* project list */
+.project-items {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.project-items p {
+    margin: 0px;
+}
+
+/* iterators */ 
+.number-of-tasks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    margin: 10px;
 }
