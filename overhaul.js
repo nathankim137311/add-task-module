@@ -34,11 +34,16 @@ addBtn.addEventListener('click', (e) => {
     e.preventDefault(); 
     createTask(); 
     createProjects(); 
-    // finds number of repeated key values 
-    numberOfOccurances(); 
+    createIterators();
     saveLocal('tasks', myTasks); 
     saveLocal('projects', myProjects); 
 });
+
+// creates numbers of repeated key values 
+function createIterators() {
+    numberOfOccurances(); 
+
+}
 
 // displays the number of tasks a project has
 function numberOfOccurances() {
@@ -49,7 +54,6 @@ function numberOfOccurances() {
 // finds occurances of repeated key values in array of objects 
 function findOcc(arr, key) {
     let arr2 = [];
-
     arr.forEach((x) => {
         if(arr2.some((val)=>{ return val[key] == x[key] })) {
             arr2.forEach((k)=>{
@@ -64,7 +68,6 @@ function findOcc(arr, key) {
             arr2.push(a);
         }
     });
-
     return arr2
 }
 
