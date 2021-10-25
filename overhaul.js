@@ -51,15 +51,22 @@ addBtn.addEventListener('click', (e) => {
 // creates numbers of repeated key values 
 function createIterators() {
     const occurrencesArr = createOccurrencesArray();
-    console.log(occurrencesArr);
-    // add number via DOM
-    createDomElements(occurrencesArr); 
+    console.log(occurrencesArr); 
+    checkNumberArr(occurrencesArr); 
 }
 
-function createDomElements(arr) {
-    for(let i = 0; i < arr.length; i++) {
-        const numberArray = Array.from(document.querySelectorAll('.number-of-tasks')); 
-        numberArray[i].textContent = arr[i];   
+function checkNumberArr(arr) {
+    const numberArray = Array.from(document.querySelectorAll('.number-of-tasks'));
+    if(numberArray.length === 1) {
+        console.log('numberArray is empty'); 
+    } else {
+        displayNumbers(numberArray, arr); 
+    }
+}
+
+function displayNumbers(arr, occurencesArr) {
+    for(let i = 0; i < occurencesArr.length; i++) {
+       arr[i].textContent = occurencesArr[i];
     }
 }
 
@@ -74,7 +81,7 @@ function createOccurrencesArray() {
 }
 
 // finds occurances of repeated key values in array of objects 
-function findOcc(arr, key) {
+export function findOcc(arr, key) {
     let arr2 = [];
     arr.forEach((x) => {
         if(arr2.some((val)=>{ return val[key] == x[key] })) {
@@ -122,9 +129,10 @@ function checkItem(item) {
 
 // when page loads populate the page 
 window.onload = function() {
-    localStorageItems(); 
-    createIterators(); 
+    localStorageItems();  
+    createIterators();
 }
+
 // save to local storage 
 // checks if tasks array is empty if it's not generate tasks 
 function localStorageItems() {

@@ -1,6 +1,6 @@
-import { myTasks, myProjects } from "./overhaul.js";
-import { taskList } from "./overhaul.js";
-import saveLocal from "./overhaul.js"
+import { myTasks, myProjects, taskList } from "./overhaul.js";
+import saveLocal from "./overhaul.js";
+import findOcc from "./overhaul.js";
 // creates task item via DOM 
 export function createTaskDom(obj) {   
     const taskItems = document.createElement('li'); 
@@ -16,39 +16,82 @@ export function createTaskDom(obj) {
     // deletes task item and saves to local
     trashBtn.addEventListener('click', (e)=>{
         const taskPosition = myTasks.indexOf(obj);
-        // console.log(arrayContains(myProjects, obj.project)); 
         myTasks.splice(taskPosition, 1); 
         taskItems.remove(); 
         saveLocal('tasks', myTasks); 
-        saveLocal('projects', myProjects); 
+        saveLocal('projects', myProjects);  
     }); 
     taskItems.append(taskTitle, taskPriority, trashBtn); 
     taskList.appendChild(taskItems); 
 }
 // adds project to project list 
 export function createProjectListDom(str) {
-        const projectList = document.getElementById('projects-list'); 
-        const projectListItem = document.createElement('li'); 
-        projectListItem.classList.add('project-items'); 
-        projectListItem.setAttribute('id', 'project-' + myProjects.indexOf(str)); 
-        const projectListItemDiv = document.createElement('div'); 
-        projectListItemDiv.classList.add('number-of-tasks');
-        const projectListItemP = document.createElement('p');
-        projectListItemP.textContent = '';
-        const projectLink = document.createElement('a');
-        projectLink.classList.add('project-links'); 
-        projectLink.setAttribute('href', '#');
-        // when link is clicked populates container with corresponding tasks
-        projectLink.addEventListener('click', (e)=>{
-            const projectName = e.target.textContent; 
-            const projectNameH2 = document.getElementById('project-name'); 
-            projectNameH2.textContent = projectName.toUpperCase(); 
-            replaceProjectList(projectName);
-        });
-        projectLink.textContent = str; // change later 
-        projectList.appendChild(projectListItem);
-        projectListItemDiv.appendChild(projectListItemP); 
-        projectListItem.append(projectListItemDiv, projectLink); 
+    const projectList = document.getElementById('projects-list'); 
+    const projectListItem = document.createElement('li'); 
+    projectListItem.classList.add('project-items'); 
+    projectListItem.setAttribute('id', 'project-' + myProjects.indexOf(str)); 
+    const projectListItemDiv = document.createElement('div'); 
+    projectListItemDiv.classList.add('number-of-tasks');
+    const projectListItemP = document.createElement('p');
+    projectListItemP.textContent = '';
+    const projectLink = document.createElement('a');
+    projectLink.classList.add('project-links'); 
+    projectLink.setAttribute('href', '#');
+    // trash button 
+    const trashBtn = document.createElement('button'); 
+    trashBtn.classList.add('trash-btn'); 
+    trashBtn.textContent = 'delete'; 
+    // deletes project item and saves to local
+    trashBtn.addEventListener('click', (e)=>{
+        // prompt user 
+        confirmDelete(e); 
+    }); 
+    // when link is clicked populates container with corresponding tasks
+    projectLink.addEventListener('click', (e)=>{
+        const projectName = e.target.textContent; 
+        const projectNameH2 = document.getElementById('project-name'); 
+        projectNameH2.textContent = projectName.toUpperCase(); 
+        replaceProjectList(projectName);
+    });
+    projectLink.textContent = str; // change later 
+    projectList.appendChild(projectListItem);
+    projectListItemDiv.appendChild(projectListItemP); 
+    projectListItem.append(projectListItemDiv, projectLink, trashBtn); 
+}
+
+function confirmDelete(event) {
+    const currentParent = event.target.parentElement;
+    let projectKeyValue = event.target.parentElement.textContent;
+    projectKeyValue = projectKeyValue.replace('delete', '');
+    projectKeyValue = projectKeyValue.replace('2', ''); 
+    console.log(currentParent); 
+    console.log(projectKeyValue); 
+    if(confirm('delete project and its contents?')) {
+        let myTasksDuplicate = myTasks.slice();
+        let myProjectsDuplicate = myProjects.slice();  
+        currentParent.remove(); 
+        myTasksDuplicate = deleteSpecificTasks(myTasks, projectKeyValue); 
+        myProjectsDuplicate = deleteSpecificProjects(myProjects, projectKeyValue); 
+        saveLocal('tasks', myTasksDuplicate); 
+        saveLocal('projects', myProjectsDuplicate);
+        /*
+        const taskPosition = myProjects.indexOf(e.target.textContent);
+        myProjects.splice(taskPosition, 1); 
+        projectListItem.remove(); 
+        saveLocal('tasks', myTasks); 
+        saveLocal('projects', myProjects);
+        */
+    } else {
+        // do nothing 
+    }
+}
+
+function deleteSpecificTasks(arr, value) {
+    return arr.filter(e => e.value === value); 
+}
+
+function deleteSpecificProjects(arr, value) {
+    return arr.filter(e => e !== value)
 }
 
 // sorts tasks by project name 
