@@ -1,6 +1,5 @@
 import { myTasks, myProjects, taskList } from "./overhaul.js";
 import saveLocal from "./overhaul.js";
-import findOcc from "./overhaul.js";
 // creates task item via DOM 
 export function createTaskDom(obj) {   
     const taskItems = document.createElement('li'); 
@@ -101,7 +100,7 @@ function replaceProjectList(name) {
     createNewProjectList(specificProject);
 }
 
-function deleteProjectList() {
+export function deleteTaskList() {
     document.getElementById('task-list').innerHTML = ''; 
 }
 
@@ -110,7 +109,7 @@ function filter(name) {
     return specificProject
 }
 
-function createNewProjectList(project) {
+export function createNewProjectList(project) {
     for(let i = 0; i < project.length; i++) {
         createTaskDom(project[i]);  
     }

@@ -1,6 +1,7 @@
 import Task from './taskObj.js'; 
-import createTaskDom, { createProjectListDom } from './dom.js';
 import { projectInput } from './taskObj.js';
+import createTaskDom, { createProjectListDom } from './dom.js';
+import deleteTaskList from './dom.js';
 // add task to list and project name to project array 
 const taskBtn = document.getElementById('task-btn');
 const closeBtn = document.getElementById('close-btn');
@@ -12,12 +13,26 @@ export let myTasks = [];
 export let myProjects = [];
 // all tasks link 
 allTasksLink.addEventListener('click', (e) => {
+   /*
     // populate all tasks
-    createItemsFromStorage(myTasks); 
+    getItemsFromStorage('projects'); 
+    let myTasks = getItemsFromStorage('tasks'); 
     const projectName = e.target.textContent; 
     const projectNameH2 = document.getElementById('project-name'); 
-    projectNameH2.textContent = projectName.toUpperCase(); 
+    projectNameH2.textContent = projectName.toUpperCase();
+    deleteTaskList(); 
+    createTaskList(myTasks);  
+    */
 });
+
+function createTaskList(arr) {
+    const newObject = Object.assign({}, arr);
+    console.log(newObject); 
+    for(let i = 0; i < arr.length; i++) {
+        createTaskDom(newObject);
+    }
+}
+
 //  opens pop-up form 
 taskBtn.addEventListener('click', (e) => {
     e.preventDefault(); 
@@ -81,7 +96,7 @@ function createOccurrencesArray() {
 }
 
 // finds occurances of repeated key values in array of objects 
-export function findOcc(arr, key) {
+function findOcc(arr, key) {
     let arr2 = [];
     arr.forEach((x) => {
         if(arr2.some((val)=>{ return val[key] == x[key] })) {
