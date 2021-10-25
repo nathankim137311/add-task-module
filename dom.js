@@ -25,17 +25,6 @@ export function createTaskDom(obj) {
     taskItems.append(taskTitle, taskPriority, trashBtn); 
     taskList.appendChild(taskItems); 
 }
-
-/*
-// deletes project from local storage 
-function arrayContains(arr, str) {
-    if(arr.indexOf(str) > -1) {
-        console.log('i don\'t know what this does');
-    } else {
-        console.log('i don\'t care what people think'); 
-    }
-}
-*/
 // adds project to project list 
 export function createProjectListDom(str) {
         const projectList = document.getElementById('projects-list'); 
@@ -53,7 +42,7 @@ export function createProjectListDom(str) {
         projectLink.addEventListener('click', (e)=>{
             const projectName = e.target.textContent; 
             const projectNameH2 = document.getElementById('project-name'); 
-            projectNameH2.textContent = projectName.toUpperCase() + ' ' + 'Tasks'; 
+            projectNameH2.textContent = projectName.toUpperCase(); 
             replaceProjectList(projectName);
         });
         projectLink.textContent = str; // change later 

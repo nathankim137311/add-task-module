@@ -5,10 +5,19 @@ import { projectInput } from './taskObj.js';
 const taskBtn = document.getElementById('task-btn');
 const closeBtn = document.getElementById('close-btn');
 const addBtn = document.getElementById('add-btn'); 
+const allTasksLink = document.getElementById('all-tasks-link');
 export const taskList = document.getElementById('task-list');
 // task library 
 export let myTasks = [];
 export let myProjects = [];
+// all tasks link 
+allTasksLink.addEventListener('click', (e) => {
+    // populate all tasks
+    createItemsFromStorage(myTasks); 
+    const projectName = e.target.textContent; 
+    const projectNameH2 = document.getElementById('project-name'); 
+    projectNameH2.textContent = projectName.toUpperCase(); 
+});
 //  opens pop-up form 
 taskBtn.addEventListener('click', (e) => {
     e.preventDefault(); 
@@ -51,14 +60,13 @@ function createDomElements(arr) {
     for(let i = 0; i < arr.length; i++) {
         const numberArray = Array.from(document.querySelectorAll('.number-of-tasks')); 
         numberArray[i].textContent = arr[i];   
-        console.log('working');
     }
 }
 
 // displays the number of tasks a project has
 function createOccurrencesArray() {
     const occurrenceArr = findOcc(myTasks, 'project');
-    const arr = [];
+    const arr = [myTasks.length];
     occurrenceArr.forEach((obj)=>{
         arr.push(obj.occurrence);
     })
