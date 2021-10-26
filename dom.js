@@ -1,3 +1,42 @@
+// input elements
+const titleInput = document.getElementById('title-input');
+const projectInput = document.getElementById('project-input'); 
+const priorityInput = document.getElementById('priority-input'); 
+const title = titleInput.value;
+const project = projectInput.value;
+const priority = priorityInput.value; 
+
+class UI {
+    // LOADING CONTENT
+    static loadHomePage() {
+        window.onload = function() {
+            localStorageItems();  
+            initButtons(); 
+            // createIterators();
+        }
+    }
+    static initButtons() {
+        const taskBtn = document.getElementById('task-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const addBtn = document.getElementById('add-btn'); 
+        //  opens pop-up form 
+        taskBtn.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        document.getElementById('myForm').style.display = 'block'; 
+        console.log('working');
+        }); 
+        // closes pop-up form 
+        closeBtn.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        document.getElementById('myForm').style.display = 'none';
+        });
+        // on button click creates task object 
+        addBtn.addEventListener('click', () => {
+        console.log('add button working');
+        });
+    }
+}
+/*
 import { myTasks, myProjects, taskList } from "./overhaul.js";
 import saveLocal from "./overhaul.js";
 // creates task item via DOM 
@@ -75,13 +114,11 @@ function confirmDelete(event) {
         console.log(myProjectsDuplicate); 
         saveLocal('tasks', myTasksDuplicate); 
         saveLocal('projects', myProjectsDuplicate);
-        /*
         const taskPosition = myProjects.indexOf(e.target.textContent);
         myProjects.splice(taskPosition, 1); 
         projectListItem.remove(); 
         saveLocal('tasks', myTasks); 
         saveLocal('projects', myProjects);
-        */
     } else {
         // do nothing 
     }
@@ -104,7 +141,6 @@ function deleteSpecificTasks(arr, value) {
     return newArr;
     // return arr.filter(e => e.value != value); 
 }
-*/
 
 function deleteSpecificProjects(arr, value) {
     return arr.filter(e => e !== value)
@@ -132,4 +168,4 @@ export function createNewProjectList(project) {
     }
 }
 
-export default createTaskDom
+export default createTaskDom */

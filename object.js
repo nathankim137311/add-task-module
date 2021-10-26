@@ -1,10 +1,5 @@
-// input elements
-const titleInput = document.getElementById('title-input');
-const projectInput = document.getElementById('project-input'); 
-const priorityInput = document.getElementById('priority-input'); 
-
 // individual task 
-class Task {
+export default class Task {
     constructor(title, project, priority) {
         this.title = title;
         this.project = project; 
@@ -13,7 +8,7 @@ class Task {
 }
 
 // all tasks 
-class Tasks {
+export class Tasks {
     constructor() {
         this.tasks = [];
     }
@@ -30,13 +25,13 @@ class Tasks {
     }
 }
 
-class Project {
+export class Project {
     constructor(project) {
         this.project = project; 
     }
 }
 // all projects
-class Projects {
+export class Projects {
     constructor() {
         this.projects = []; 
     }
