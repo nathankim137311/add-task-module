@@ -151,7 +151,7 @@ window.onload = function() {
 // save to local storage 
 // checks if tasks array is empty if it's not generate tasks 
 function localStorageItems() {
-    if(getItemsFromStorage('tasks') === null || getItemsFromStorage('projects') === null) {
+    if(localStorage.getItem('tasks') === null || localStorage.getItem('projects') === null) {
         myTasks = [];
         myProjects = [];
     } else {
@@ -170,8 +170,9 @@ export default function saveLocal(name, arr) {
     localStorage.setItem(name, JSON.stringify(arr)); 
 }
 
+
 function getItemsFromStorage(str) {
-    return JSON.parse(localStorage.getItem(str))
+    console.log('poop');
 }
 
 function createItemsFromStorage(arr) {

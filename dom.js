@@ -62,15 +62,17 @@ function confirmDelete(event) {
     const currentParent = event.target.parentElement;
     let projectKeyValue = event.target.parentElement.textContent;
     projectKeyValue = projectKeyValue.replace('delete', '');
-    projectKeyValue = projectKeyValue.replace('2', ''); 
+    projectKeyValue = projectKeyValue.replace(/[0-9]/, ''); 
     console.log(currentParent); 
     console.log(projectKeyValue); 
     if(confirm('delete project and its contents?')) {
         let myTasksDuplicate = myTasks.slice();
         let myProjectsDuplicate = myProjects.slice();  
         currentParent.remove(); 
-        myTasksDuplicate = deleteSpecificTasks(myTasks, projectKeyValue); 
-        myProjectsDuplicate = deleteSpecificProjects(myProjects, projectKeyValue); 
+        myTasksDuplicate = removeSpecificTasks(myTasks, projectKeyValue);
+        console.log(myTasksDuplicate); 
+        myProjectsDuplicate = deleteSpecificProjects(myProjects, projectKeyValue);
+        console.log(myProjectsDuplicate); 
         saveLocal('tasks', myTasksDuplicate); 
         saveLocal('projects', myProjectsDuplicate);
         /*
@@ -85,9 +87,24 @@ function confirmDelete(event) {
     }
 }
 
-function deleteSpecificTasks(arr, value) {
-    return arr.filter(e => e.value === value); 
+function removeSpecificTasks(arr, str) {
+    arr.filter((el)=>{
+        return el.project != str; 
+    });
 }
+/*
+function removeSpecificItems (arr, key, val) {
+    const index = arr.findIndex(obj => obj[key] === val);
+    return index >= 0 ? [
+        ...arr.slice(0, index),
+        ...arr.slice(index + 1)
+    ] : arr;
+}
+function deleteSpecificTasks(arr, value) {
+    return newArr;
+    // return arr.filter(e => e.value != value); 
+}
+*/
 
 function deleteSpecificProjects(arr, value) {
     return arr.filter(e => e !== value)
@@ -95,7 +112,7 @@ function deleteSpecificProjects(arr, value) {
 
 // sorts tasks by project name 
 function replaceProjectList(name) {
-    deleteProjectList();
+    deleteTaskList();
     const specificProject = filter(name); 
     createNewProjectList(specificProject);
 }
