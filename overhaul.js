@@ -1,7 +1,6 @@
-import Task from './taskObj.js'; 
-import { projectInput } from './taskObj.js';
+import Task from './object.js'; 
+import { projectInput } from './object.js';
 import createTaskDom, { createProjectListDom } from './dom.js';
-import deleteTaskList from './dom.js';
 // add task to list and project name to project array 
 const taskBtn = document.getElementById('task-btn');
 const closeBtn = document.getElementById('close-btn');
@@ -146,45 +145,4 @@ function checkItem(item) {
 window.onload = function() {
     localStorageItems();  
     createIterators();
-}
-
-// save to local storage 
-// checks if tasks array is empty if it's not generate tasks 
-function localStorageItems() {
-    if(localStorage.getItem('tasks') === null || localStorage.getItem('projects') === null) {
-        myTasks = [];
-        myProjects = [];
-    } else {
-        const tasksFromStorage = getItemsFromStorage('tasks'); 
-        myTasks = tasksFromStorage;
-        const projectsFromStorage = getItemsFromStorage('projects')
-        myProjects = projectsFromStorage; 
-        // creates from existing library 
-        createItemsFromStorage(myTasks); 
-        createItemsFromStorage(myProjects);
-    }
-}
-
-// sets object to local storage 
-export default function saveLocal(name, arr) {
-    localStorage.setItem(name, JSON.stringify(arr)); 
-}
-
-
-function getItemsFromStorage(str) {
-    console.log('poop');
-}
-
-function createItemsFromStorage(arr) {
-    switch(arr) {
-        case myTasks:
-            for(let i = 0; i < arr.length; i++) {
-                createTaskDom(arr[i]); 
-            }
-            break;
-        case myProjects:
-            for(let i = 0; i < arr.length; i++) {
-                createProjectListDom(arr[i]); 
-            } 
-    }
 }
