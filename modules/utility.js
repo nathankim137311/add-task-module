@@ -1,8 +1,24 @@
+import Tasks from "./task.js";
+
 ///////////////////////
 // utility functions //
 ///////////////////////
 
 export default class Utility {
+    static createNewTask() {
+        // inputs
+        const titleInput = document.getElementById('title-input');
+        const projectInput = document.getElementById('project-input'); 
+        const priorityInput = document.getElementById('priority-input'); 
+        const title = titleInput.value;
+        const project = projectInput.value;
+        const priority = priorityInput.value; 
+        // create new Task object
+        const task = new Tasks();
+        task.newTasks('homework', 'school', 'high');
+        console.log(task)
+        // console.log(task.allTasks); 
+    }
     static confirmDelete(event) {
         const currentParent = event.target.parentElement;
         let projectKeyValue = event.target.parentElement.textContent;

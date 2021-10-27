@@ -1,6 +1,9 @@
 //////////////////////////
 // event listener class //
 //////////////////////////
+
+import Utility from "./utility.js";
+
 export default class Event {
     // form buttons // 
     // adds task
@@ -15,7 +18,7 @@ export default class Event {
             const title = titleInput.value;
             const project = projectInput.value;
             const priority = priorityInput.value; 
-            console.log(title, project, priority); 
+            Utility.createNewTask(); 
         });
     }
     // opens pop-up form 
@@ -37,35 +40,29 @@ export default class Event {
     // task buttons //
     static trashBtn() {
         const trashBtn = document.getElementById('trash-btn'); 
-        if(trashBtn !== null) {
-            trashBtn.addEventListener('click', () => {
-                const taskPosition = myTasks.indexOf(obj);
-                myTasks.splice(taskPosition, 1); 
-                taskItems.remove(); 
-                saveLocal('tasks', myTasks); 
-                saveLocal('projects', myProjects);  
-            });  
-        }
+        trashBtn.addEventListener('click', () => {
+            const taskPosition = myTasks.indexOf(obj);
+            myTasks.splice(taskPosition, 1); 
+            taskItems.remove(); 
+            saveLocal('tasks', myTasks); 
+            saveLocal('projects', myProjects);  
+        });  
     }
     // project button //
     static deleteBtn() {
         const deleteBtn = document.getElementById('delete-btn'); 
-        if(deleteBtn !== null) {
-            deleteBtn.addEventListener('click', () => {
-                confirmDelete(e); 
-            });
-        }
+        deleteBtn.addEventListener('click', () => {
+            confirmDelete(e); 
+        });
     }
     // when link is clicked populates container with tasks
     static relevantTasks() {
         const projectLink = document.getElementById('project-link'); 
-        if(projectLink !== null) {
-            projectLink.addEventListener('click', (e) => {
-                const projectName = e.target.textContent; 
-                const projectNameH2 = document.getElementById('project-name'); 
-                projectNameH2.textContent = projectName.toUpperCase(); 
-                replaceProjectList(projectName);
-            });
-        }
+        projectLink.addEventListener('click', (e) => {
+            const projectName = e.target.textContent; 
+            const projectNameH2 = document.getElementById('project-name'); 
+            projectNameH2.textContent = projectName.toUpperCase(); 
+            replaceProjectList(projectName);
+        });
     }
 }

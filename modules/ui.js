@@ -8,9 +8,11 @@ export default class UI {
         Event.addBtn(); 
         Event.taskBtn();
         Event.closeBtn(); 
-        // task 
+    }
+    static loadTaskBtns() {
         Event.trashBtn(); 
-        // project 
+    }
+    static loadProjectBtns() {
         Event.deleteBtn(); 
         Event.relevantTasks(); 
     }
