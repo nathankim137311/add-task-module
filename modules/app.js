@@ -1,15 +1,14 @@
-import Task from "./task.js"
-import Tasks from "./task.js"
 import Project from "./project.js"
 import Projects from "./project.js"
-import Storage from "./storage.js"  
-import UI from "./dom.js"
+import Task from "./task.js"
+import Tasks from "./task.js"
 import Utility from "./utility.js"
+import UI from "./ui.js"
+import Storage from "./storage.js"  
 
-// input elements
-const titleInput = document.getElementById('title-input');
-const projectInput = document.getElementById('project-input'); 
-const priorityInput = document.getElementById('priority-input'); 
-const title = titleInput.value;
-const project = projectInput.value;
-const priority = priorityInput.value; 
+window.onload = function() {
+    UI.loadBtns(); 
+    // localStorageItems();  
+    // createIterators();
+}
+

@@ -1,10 +1,9 @@
 // individual task 
 export default class Task {
-    constructor(title, project, priority, dueDate) {
+    constructor(title, project, priority) {
         this.title = title;
         this.project = project; 
         this.priority = priority;
-        this.dueDate = dueDate; 
     }
 }
 // all tasks 
@@ -26,8 +25,7 @@ export class Tasks {
 // testing 
 let task = new Tasks(); 
 task.newTasks('homework', 'school', 'low'); 
-task.newTasks('workout', 'gym', 'high');
-task.saveTasks; 
+task.newTasks('workout', 'gym', 'high'); 
 console.log(task.allTasks);
 */
 

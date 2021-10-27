@@ -1,4 +1,7 @@
-// utility functions 
+///////////////////////
+// utility functions //
+///////////////////////
+
 export default class Utility {
     static confirmDelete(event) {
         const currentParent = event.target.parentElement;

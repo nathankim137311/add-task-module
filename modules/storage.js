@@ -1,4 +1,7 @@
-// save to local storage 
+///////////////////////////
+// save to local storage //
+///////////////////////////
+
 export default class Storage {
     // sets object to local storage 
     static saveItems(str, arr) {
@@ -27,8 +30,8 @@ export default class Storage {
     // checks if tasks array is empty if it's not generate tasks 
     static loadItemsFromStorage() {
         if(localStorage.getItem('tasks') === null || localStorage.getItem('projects') === null) {
-            myTasks = [];
-            myProjects = [];
+            // myTasks = [];
+            // myProjects = [];
         } else {
             const tasksFromStorage = getItemsFromStorage('tasks'); 
             myTasks = tasksFromStorage;
