@@ -1,5 +1,7 @@
+// imports
+import Storage from "./storage.js";
 // task array 
-export const tasksArr = []
+export const taskArr = []
 // task class 
 export default class Task {
     constructor(title, project, priority) {
@@ -10,13 +12,13 @@ export default class Task {
         Task.saveTask(); 
     }
     static addTask(item) {
-        tasksArr.push(item);
+        taskArr.push(item);
     }
     static saveTask() {
-        localStorage.setItem('tasks', JSON.stringify(tasksArr));
+        Storage.saveTasks()
     }
     static getTasks() {
-        return tasksArr
+        return taskArr
     }
 }
 

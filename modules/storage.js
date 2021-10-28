@@ -1,16 +1,19 @@
+// imports
+import { projectArr } from "./project.js";
+import { taskArr } from "./task.js";
 ///////////////////////////
 // save to local storage //
 ///////////////////////////
-
-import { tasksArr } from "./task.js";
-
 export default class Storage {
     // sets object to local storage 
-    static saveItems(str, arr) {
-        localStorage.setItem(str, JSON.stringify(arr));
+    static saveTasks() {
+        localStorage.setItem('tasks', JSON.stringify(taskArr));
+    }
+    static saveProjects() {
+        localStorage.setItem('projects', JSON.stringify(projectArr));
     }
     static saveAll() {
-        localStorage.setItem('tasks', JSON.stringify(tasksArr));
+        localStorage.setItem('tasks', JSON.stringify(taskArr));
         // localStorage.setItem('projects', JSON.stringify(projects)); 
     }
     static getItemsFromStorage(str) {

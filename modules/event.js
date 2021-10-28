@@ -1,5 +1,4 @@
 // imports 
-import { tasksArr } from "./task.js";
 import Utility from "./utility.js";
 //////////////////////////
 // event listener class //
@@ -33,12 +32,22 @@ export default class Event {
     }
     // task buttons //
     static trashBtn(obj) {
-        if(tasksArr !== null) {
-            const trashBtn = document.getElementById('trash-btn'); 
+        const trashBtns = document.getElementsByClassName('trash-btn'); 
+        Array.from(trashBtns).forEach((trashBtn) => {
             trashBtn.addEventListener('click', () => {
                 Utility.deleteTaskItem(obj); 
-            });  
-        }
+                trashBtn.parentNode.remove(); 
+            }); 
+        });
+    }
+    // project button //
+    static deleteBtn() {
+        const deleteBtns = document.getElementsByClassName('delete-btn');
+        Array.from(deleteBtns).forEach((deleteBtn) => {
+            deleteBtn.addEventListener('click', () => {
+                console.log('project delete'); // placeholder 
+            });
+        });
     }
 }
 

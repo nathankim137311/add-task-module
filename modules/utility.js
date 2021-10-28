@@ -1,7 +1,7 @@
 import Task from "./task.js";
 import UI from "./ui.js";
 import Storage from "./storage.js";
-import { tasksArr } from "./task.js";
+import { taskArr } from "./task.js";
 import Project from "./project.js";
 
 ///////////////////////
@@ -20,15 +20,17 @@ export default class Utility {
     static createNewProject() {
         const projectName = document.getElementById('project-input').value; 
         // create new Project object
-        const project = new Project(projectName); 
+        let project = new Project(projectName); 
+            project = project.project;  
+        UI.createProjectListDom(project); 
+        console.log(Project.getProjects());
     }
     static deleteTaskItem(obj) {
-        const taskPosition = tasksArr.indexOf(obj);
-        tasksArr.splice(taskPosition, 1); 
-        console.log(tasksArr); 
-        Storage.saveAll(); 
+        const taskPosition = taskArr.indexOf(obj);
+        taskArr.splice(taskPosition, 1); 
+        console.log(taskArr); 
+        // Storage.saveTasks(); 
     }
-
 }
 
 /*

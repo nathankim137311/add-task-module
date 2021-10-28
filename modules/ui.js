@@ -1,5 +1,6 @@
 import Event from "./event.js";
-import { tasksArr } from "./task.js";
+import { projectArr } from "./project.js";
+import { taskArr } from "./task.js";
 //////////////////
 // Todo List UI //
 //////////////////
@@ -11,12 +12,12 @@ export default class UI {
         Event.closeBtn();
     }
     static loadTaskBtns() {
-        if(tasksArr !== null) {
+        if(taskArr !== null) {
             Event.trashBtn(); 
         } 
     }
     static loadProjectBtns() {
-        if(tasksArr !== null) {
+        if(taskArr !== null) {
             Event.deleteBtn(); 
         } 
     }
@@ -24,16 +25,16 @@ export default class UI {
         const taskList = document.getElementById('task-list');
         const taskItems = document.createElement('li'); 
         taskItems.classList.add('task-items');
-        taskItems.setAttribute('id', 'task-' + tasksArr.indexOf(obj))
+        taskItems.setAttribute('id', 'task-' + taskArr.indexOf(obj))
         const taskTitle = document.createElement('h3'); 
         taskTitle.textContent = obj.title;
         const taskPriority = document.createElement('p');
         taskPriority.textContent = obj.priority; 
         // trash button 
         const trashBtn = document.createElement('button'); 
-        trashBtn.setAttribute('id', 'trash-btn'); 
+        trashBtn.classList.add('trash-btn'); 
         trashBtn.classList.add('btn'); 
-        trashBtn.textContent = 'delete'; 
+        trashBtn.textContent = 'trash'; 
         taskItems.append(taskTitle, taskPriority, trashBtn); 
         taskList.appendChild(taskItems); 
         // add event listener to buttons
@@ -43,7 +44,7 @@ export default class UI {
         const projectList = document.getElementById('projects-list'); 
         const projectListItem = document.createElement('li'); 
         projectListItem.classList.add('project-items'); 
-        projectListItem.setAttribute('id', 'project-' + myProjects.indexOf(str)); 
+        projectListItem.setAttribute('id', 'project-' + projectArr.indexOf(str)); 
         const projectListItemDiv = document.createElement('div'); 
         projectListItemDiv.classList.add('number-of-tasks');
         const projectListItemP = document.createElement('p');
@@ -51,10 +52,10 @@ export default class UI {
         const projectLink = document.createElement('a');
         projectLink.classList.add('project-links'); 
         projectLink.setAttribute('href', '#');
-        projectLink.setAttribute('project-link'); 
+        projectLink.setAttribute('id', 'project-link'); 
         // trash button 
         const trashBtn = document.createElement('button'); 
-        trashBtn.setAttribute('delete-btn')
+        trashBtn.classList.add('delete-btn')
         trashBtn.classList.add('btn'); 
         trashBtn.textContent = 'delete'; 
         projectLink.textContent = str; // change later 
