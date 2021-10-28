@@ -1,13 +1,12 @@
+// imports
 import Task from "./task.js";
 import UI from "./ui.js";
 import Storage from "./storage.js";
 import { taskArr } from "./task.js";
-import Project from "./project.js";
-
+import Project, { projectArr } from "./project.js";
 ///////////////////////
 // utility functions //
 ///////////////////////
-
 export default class Utility {
     static createNewTask() {
         const title = document.getElementById('title-input').value;
@@ -16,24 +15,53 @@ export default class Utility {
         // create new Task object
         const task = new Task(title, project, priority);
         UI.createTaskDom(task);
+        Storage.saveTasks(); 
     }
     static createNewProject() {
         const projectName = document.getElementById('project-input').value; 
         // create new Project object
-        let project = new Project(projectName); 
-            project = project.project;  
-        UI.createProjectListDom(project); 
-        console.log(Project.getProjects());
+        const project = new Project(projectName);   
+        UI.createProjectListDom(project.project);
+        Storage.saveProjects();
     }
-    static deleteTaskItem(obj) {
+    static deleteTask(obj) {
         const taskPosition = taskArr.indexOf(obj);
         taskArr.splice(taskPosition, 1); 
-        console.log(taskArr); 
-        // Storage.saveTasks(); 
+    }
+    static deleteProject(str) {
+        console.log('poop');
     }
 }
 
 /*
+        Task.removeTask(obj)
+        console.log(Task.getTasks());
+        const id = e.target.parentNode.id;
+        let taskPosition = id.match(/\d+/);  
+        taskArr.splice(taskPosition, 1); 
+        console.log(Task.getTasks());
+        // Storage.saveTasks(); 
+
+static deleteProjectItem(button) {
+    if(confirm('delete project and its contents?') === true) {
+        button.parentNode.remove(); 
+        console.log(projectArr);
+        let myTasksDuplicate = taskArr.slice();
+        let myProjectsDuplicate = projectArr.slice();  
+        currentParent.remove(); 
+        myTasksDuplicate = removeSpecificTasks(myTasks, projectKeyValue);
+        console.log(myTasksDuplicate); 
+        myProjectsDuplicate = deleteSpecificProjects(myProjects, projectKeyValue);
+        console.log(myProjectsDuplicate); 
+        saveLocal('tasks', myTasksDuplicate); 
+        saveLocal('projects', myProjectsDuplicate);
+        const taskPosition = myProjects.indexOf(e.target.textContent);
+        myProjects.splice(taskPosition, 1); 
+        projectListItem.remove(); 
+        saveLocal('tasks', myTasks); 
+        saveLocal('projects', myProjects);
+    }
+}
     static confirmDelete(event) {
         const currentParent = event.target.parentElement;
         let projectKeyValue = event.target.parentElement.textContent;

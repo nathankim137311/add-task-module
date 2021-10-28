@@ -1,3 +1,4 @@
+// imports 
 import Project from "./project.js"
 import Projects from "./project.js"
 import Task from "./task.js"
@@ -8,7 +9,5 @@ import Storage from "./storage.js"
 
 window.onload = function() {
     UI.loadFormBtns(); 
-    // localStorageItems();  
-    // createIterators();
 }
 

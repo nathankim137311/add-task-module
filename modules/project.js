@@ -10,7 +10,10 @@ export default class Project {
         Project.saveProject()
     }
     static addProject(item) {
-        projectArr.push(item);
+        // checks project array for duplicates
+        if(projectArr.indexOf(item.project) === -1) {
+            projectArr.push(item.project);
+        }
     }
     static saveProject() {
         Storage.saveProjects(); 

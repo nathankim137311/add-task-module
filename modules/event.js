@@ -8,7 +8,7 @@ export default class Event {
     // adds task
     static addBtn() {
         const addBtn = document.getElementById('add-btn'); 
-        addBtn.addEventListener('click', (e) => {
+        addBtn.addEventListener('click', (e) => { 
             e.preventDefault(); 
             Utility.createNewTask(); 
             Utility.createNewProject(); 
@@ -29,25 +29,6 @@ export default class Event {
             e.preventDefault(); 
             document.getElementById('myForm').style.display = 'none';
             });
-    }
-    // task buttons //
-    static trashBtn(obj) {
-        const trashBtns = document.getElementsByClassName('trash-btn'); 
-        Array.from(trashBtns).forEach((trashBtn) => {
-            trashBtn.addEventListener('click', () => {
-                Utility.deleteTaskItem(obj); 
-                trashBtn.parentNode.remove(); 
-            }); 
-        });
-    }
-    // project button //
-    static deleteBtn() {
-        const deleteBtns = document.getElementsByClassName('delete-btn');
-        Array.from(deleteBtns).forEach((deleteBtn) => {
-            deleteBtn.addEventListener('click', () => {
-                console.log('project delete'); // placeholder 
-            });
-        });
     }
 }
 
