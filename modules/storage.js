@@ -2,14 +2,16 @@
 // save to local storage //
 ///////////////////////////
 
+import { tasksArr } from "./task.js";
+
 export default class Storage {
     // sets object to local storage 
     static saveItems(str, arr) {
         localStorage.setItem(str, JSON.stringify(arr));
     }
     static saveAll() {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        localStorage.setItem('projects', JSON.stringify(projects)); 
+        localStorage.setItem('tasks', JSON.stringify(tasksArr));
+        // localStorage.setItem('projects', JSON.stringify(projects)); 
     }
     static getItemsFromStorage(str) {
         JSON.parse(localStorage.getItem(str));

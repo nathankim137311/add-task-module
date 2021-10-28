@@ -7,7 +7,7 @@ import UI from "./ui.js"
 import Storage from "./storage.js"  
 
 window.onload = function() {
-    UI.loadBtns(); 
+    UI.loadFormBtns(); 
     // localStorageItems();  
     // createIterators();
 }

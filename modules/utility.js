@@ -1,4 +1,8 @@
-import Tasks from "./task.js";
+import Task from "./task.js";
+import UI from "./ui.js";
+import Storage from "./storage.js";
+import { tasksArr } from "./task.js";
+import Project from "./project.js";
 
 ///////////////////////
 // utility functions //
@@ -6,19 +10,28 @@ import Tasks from "./task.js";
 
 export default class Utility {
     static createNewTask() {
-        // inputs
-        const titleInput = document.getElementById('title-input');
-        const projectInput = document.getElementById('project-input'); 
-        const priorityInput = document.getElementById('priority-input'); 
-        const title = titleInput.value;
-        const project = projectInput.value;
-        const priority = priorityInput.value; 
+        const title = document.getElementById('title-input').value;
+        const project = document.getElementById('project-input').value; 
+        const priority = document.getElementById('priority-input').value; 
         // create new Task object
-        const task = new Tasks();
-        task.newTasks('homework', 'school', 'high');
-        console.log(task)
-        // console.log(task.allTasks); 
+        const task = new Task(title, project, priority);
+        UI.createTaskDom(task);
     }
+    static createNewProject() {
+        const projectName = document.getElementById('project-input').value; 
+        // create new Project object
+        const project = new Project(projectName); 
+    }
+    static deleteTaskItem(obj) {
+        const taskPosition = tasksArr.indexOf(obj);
+        tasksArr.splice(taskPosition, 1); 
+        console.log(tasksArr); 
+        Storage.saveAll(); 
+    }
+
+}
+
+/*
     static confirmDelete(event) {
         const currentParent = event.target.parentElement;
         let projectKeyValue = event.target.parentElement.textContent;
@@ -83,3 +96,4 @@ export default class Utility {
         }
     }
 }
+*/

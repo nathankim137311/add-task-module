@@ -1,36 +1,43 @@
 import Event from "./event.js";
+import { tasksArr } from "./task.js";
 //////////////////
 // Todo List UI //
 //////////////////
 export default class UI {
     // LOADING CONTENT
-    static loadBtns() {
+    static loadFormBtns() {
         Event.addBtn(); 
         Event.taskBtn();
-        Event.closeBtn(); 
+        Event.closeBtn();
     }
     static loadTaskBtns() {
-        Event.trashBtn(); 
+        if(tasksArr !== null) {
+            Event.trashBtn(); 
+        } 
     }
     static loadProjectBtns() {
-        Event.deleteBtn(); 
-        Event.relevantTasks(); 
+        if(tasksArr !== null) {
+            Event.deleteBtn(); 
+        } 
     }
     static createTaskDom(obj) {   
+        const taskList = document.getElementById('task-list');
         const taskItems = document.createElement('li'); 
         taskItems.classList.add('task-items');
-        taskItems.setAttribute('id', 'task-' + myTasks.indexOf(obj))
+        taskItems.setAttribute('id', 'task-' + tasksArr.indexOf(obj))
         const taskTitle = document.createElement('h3'); 
         taskTitle.textContent = obj.title;
         const taskPriority = document.createElement('p');
         taskPriority.textContent = obj.priority; 
         // trash button 
         const trashBtn = document.createElement('button'); 
-        trashBtn.setAttribute('delete-btn'); 
+        trashBtn.setAttribute('id', 'trash-btn'); 
         trashBtn.classList.add('btn'); 
         trashBtn.textContent = 'delete'; 
         taskItems.append(taskTitle, taskPriority, trashBtn); 
         taskList.appendChild(taskItems); 
+        // add event listener to buttons
+        UI.loadTaskBtns(obj); 
     }
     static createProjectListDom(str) {
         const projectList = document.getElementById('projects-list'); 
@@ -47,12 +54,14 @@ export default class UI {
         projectLink.setAttribute('project-link'); 
         // trash button 
         const trashBtn = document.createElement('button'); 
-        trashBtn.setAttribute('trash-btn')
+        trashBtn.setAttribute('delete-btn')
         trashBtn.classList.add('btn'); 
         trashBtn.textContent = 'delete'; 
         projectLink.textContent = str; // change later 
         projectList.appendChild(projectListItem);
         projectListItemDiv.appendChild(projectListItemP); 
-        projectListItem.append(projectListItemDiv, projectLink, trashBtn); 
+        projectListItem.append(projectListItemDiv, projectLink, trashBtn);
+        // add event listener to buttons 
+        UI.loadProjectBtns();
     }
 }

@@ -1,20 +1,19 @@
-// individual project 
+// project array 
+export const projectArr = [];
+// project class 
 export default class Project {
     constructor(project) {
         this.project = project; 
+        Project.addProject(this);
+        Project.saveTask()
     }
-}
-// all projects
-export class Projects {
-    constructor() {
-        this.projects = []; 
+    static addProject(item) {
+        projectArr.push(item);
     }
-    newProjects(project) {
-        let projectObj = new Project(project);
-        this.projects.push(projectObj);
-        return projectObj; 
+    static saveProject() {
+        localStorage.setItem('project', JSON.stringify(projectArr));
     }
-    get allProjects() {
-        return this.projects; 
+    static getProjects() {
+        return projectArr
     }
 }

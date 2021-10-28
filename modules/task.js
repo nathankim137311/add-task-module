@@ -1,23 +1,22 @@
-// individual task 
+// task array 
+export const tasksArr = []
+// task class 
 export default class Task {
     constructor(title, project, priority) {
         this.title = title;
         this.project = project; 
         this.priority = priority;
+        Task.addTask(this);
+        Task.saveTask(); 
     }
-}
-// all tasks 
-export class Tasks {
-    constructor() {
-        this.tasks = [];
+    static addTask(item) {
+        tasksArr.push(item);
     }
-    newTasks(title, project, priority) {
-        let taskObj = new Task(title, project, priority);
-        this.tasks.push(taskObj);
-        return taskObj; 
+    static saveTask() {
+        localStorage.setItem('tasks', JSON.stringify(tasksArr));
     }
-    get allTasks() {
-        return this.tasks;
+    static getTasks() {
+        return tasksArr
     }
 }
 
