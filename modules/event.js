@@ -11,7 +11,7 @@ export default class Event {
         addBtn.addEventListener('click', (e) => { 
             e.preventDefault(); 
             Utility.createNewTask(); 
-            Utility.createNewProject(); 
+            Utility.checkProject(); 
         });
     }
     // opens pop-up form 

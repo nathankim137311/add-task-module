@@ -37,7 +37,6 @@ export default class UI {
         const projectList = document.getElementById('projects-list'); 
         const projectListItem = document.createElement('li'); 
         projectListItem.classList.add('project-items'); 
-        projectListItem.setAttribute('id', 'project-' + projectArr.indexOf(str)); 
         const projectListItemDiv = document.createElement('div'); 
         projectListItemDiv.classList.add('number-of-tasks');
         const projectListItemP = document.createElement('p');
@@ -45,7 +44,6 @@ export default class UI {
         const projectLink = document.createElement('a');
         projectLink.classList.add('project-links'); 
         projectLink.setAttribute('href', '#');
-        projectLink.setAttribute('id', 'project-link'); 
         // trash button 
         const trashBtn = document.createElement('button'); 
         trashBtn.addEventListener('click', () => {

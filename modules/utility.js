@@ -17,16 +17,24 @@ export default class Utility {
         UI.createTaskDom(task);
         Storage.saveTasks(); 
     }
-    static createNewProject() {
-        const projectName = document.getElementById('project-input').value; 
+    static createNewProject(str) {
         // create new Project object
-        const project = new Project(projectName);   
+        const project = new Project(str);  
         UI.createProjectListDom(project.project);
         Storage.saveProjects();
+    }
+    static checkProject() {
+        const projectName = document.getElementById('project-input').value; 
+        if(projectArr.length === 0) { // if there are no items 
+            Utility.createNewProject(projectName); 
+        } else if(projectArr.includes(projectName) === false) { 
+            Utility.createNewProject(projectName); 
+        }
     }
     static deleteTask(obj) {
         const taskPosition = taskArr.indexOf(obj);
         taskArr.splice(taskPosition, 1); 
+        Storage.saveTasks(); 
     }
     static deleteProject(str) {
         console.log('poop');
