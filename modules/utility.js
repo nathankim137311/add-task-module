@@ -42,11 +42,20 @@ export default class Utility {
     }
     static confirmDelete(str) {
         if(confirm('delete project and all of its contents?')) {
-            const projectPosition = projectArr.indexOf(str);
-            projectArr.splice(projectPosition, 1);
+            // delete current project
+            Utility.deleteFromStorage(projectArr, str)
+            // delete tasks 
             Utility.deleteSpecificTasks(taskArr, str); 
+            Utility.deleteTaskDom(str);
             Storage.saveAll(); 
         } 
+    }
+    // move to ui
+    static deleteTaskDom(str) { // modify later 
+        const taskItemsArr = [...document.querySelectorAll('.task-titles')];
+        taskItemsArr.forEach(item => {
+            item.parentNode.remove();
+        });
     }
     static deleteSpecificTasks(arr, value) {
         for(let i = arr.length - 1; i >= 0; --i) {
@@ -55,12 +64,17 @@ export default class Utility {
             }
         }
         // delete tasks in container 
-        
-        // console.log(arr.filter(obj => obj.project != value)); 
+    }
+    static deleteFromStorage(arr, value) {
+        const position = arr.indexOf(value);
+        arr.splice(position, 1); 
     }
 }
-
 /*
+$(".block:contains(text)").filter(function () {
+    return $(this).children("button").length > 0;
+}).remove();
+
         Task.removeTask(obj)
         console.log(Task.getTasks());
         const id = e.target.parentNode.id;

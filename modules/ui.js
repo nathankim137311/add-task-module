@@ -19,6 +19,7 @@ export default class UI {
         taskItems.classList.add('task-items');
         taskItems.setAttribute('id', 'task-' + taskArr.indexOf(obj))
         const taskTitle = document.createElement('h3'); 
+        taskTitle.classList.add('task-titles')
         taskTitle.textContent = obj.title;
         const taskPriority = document.createElement('p');
         taskPriority.textContent = obj.priority; 
