@@ -40,7 +40,6 @@ export default class UI {
             item.parentNode.remove();
         });
     }
-    // new
     static clearTaskList() {
         document.getElementById('task-list').innerHTML = ''; 
     }
@@ -67,9 +66,13 @@ export default class UI {
         });
         trashBtn.classList.add('btn'); 
         trashBtn.textContent = 'delete'; 
-        projectLink.textContent = str; // change later 
+        projectLink.textContent = str;
         projectList.appendChild(projectListItem);
         projectListItemDiv.appendChild(projectListItemP); 
         projectListItem.append(projectListItemDiv, projectLink, trashBtn);
+    }
+    static displayNumbers() { // change 
+        const p = document.createElement('p'); 
+        p.textContent = 'poop'; 
     }
 }
