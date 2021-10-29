@@ -1,6 +1,6 @@
 // imports
 import Event from "./event.js";
-import { taskArr } from "./storage.js";
+import { projectArr, taskArr } from "./storage.js";
 import Utility from "./utility.js";
 //////////////////
 // Todo List UI //
@@ -40,6 +40,10 @@ export default class UI {
             item.parentNode.remove();
         });
     }
+    // new
+    static clearTaskList() {
+        document.getElementById('task-list').innerHTML = ''; 
+    }
     static createProjectListDom(str) {
         const projectList = document.getElementById('projects-list'); 
         const projectListItem = document.createElement('li'); 
@@ -48,7 +52,11 @@ export default class UI {
         projectListItemDiv.classList.add('number-of-tasks');
         const projectListItemP = document.createElement('p');
         projectListItemP.textContent = '';
+        // project link
         const projectLink = document.createElement('a');
+        projectLink.addEventListener('click', () => {
+            Utility.filterTasksByProject(str); 
+        });
         projectLink.classList.add('project-links'); 
         projectLink.setAttribute('href', '#');
         // trash button 

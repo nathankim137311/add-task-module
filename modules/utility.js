@@ -38,10 +38,9 @@ export default class Utility {
         Storage.saveTasks(); 
     }
     static deleteProject(str) {
-        // confirm deletion 
         Utility.confirmDelete(str); 
     }
-    static confirmDelete(str) {
+    static confirmDelete(str) { // prompts user 
         if(confirm('delete project and all of its contents?')) {
             // delete current project
             Utility.deleteFromStorage(projectArr, str)
@@ -62,12 +61,24 @@ export default class Utility {
         const position = arr.indexOf(value);
         arr.splice(position, 1); 
     }
+    // new functions added below 
+    // sorts tasks by project name 
+    static filterTasksByProject(name) {
+        UI.clearTaskList();
+        const specificProject = Utility.filter(name); 
+        Utility.createNewProjectList(specificProject);
+    }
+    static filter(name) {
+        const specificProject = taskArr.filter(task => task.project == name);
+        return specificProject
+    }
+    static createNewProjectList(project) {
+        for(let i = 0; i < project.length; i++) {
+            UI.createTaskDom(project[i]);  
+        }
+    }
 }
 /*
-$(".block:contains(text)").filter(function () {
-    return $(this).children("button").length > 0;
-}).remove();
-
         Task.removeTask(obj)
         console.log(Task.getTasks());
         const id = e.target.parentNode.id;
