@@ -33,15 +33,6 @@ export default class Event {
 }
 
 /*
-// project button //
-    static deleteBtn() {
-        const deleteBtn = document.getElementById('delete-btn'); 
-        deleteBtn.addEventListener('click', (e) => {
-            console.log('project delete');
-            // confirmDelete(e); 
-        });
-    }
-
  // when link is clicked populates container with tasks
  static relevantTasks() {
     const projectLink = document.getElementById('project-link'); 

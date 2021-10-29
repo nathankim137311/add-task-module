@@ -14,7 +14,7 @@ export default class Storage {
     }
     static saveAll() {
         localStorage.setItem('tasks', JSON.stringify(taskArr));
-        // localStorage.setItem('projects', JSON.stringify(projects)); 
+        localStorage.setItem('projects', JSON.stringify(projectArr)); 
     }
     static getItemsFromStorage(str) {
         JSON.parse(localStorage.getItem(str));

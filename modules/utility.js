@@ -37,7 +37,26 @@ export default class Utility {
         Storage.saveTasks(); 
     }
     static deleteProject(str) {
-        console.log('poop');
+        // confirm deletion 
+        Utility.confirmDelete(str); 
+    }
+    static confirmDelete(str) {
+        if(confirm('delete project and all of its contents?')) {
+            const projectPosition = projectArr.indexOf(str);
+            projectArr.splice(projectPosition, 1);
+            Utility.deleteSpecificTasks(taskArr, str); 
+            Storage.saveAll(); 
+        } 
+    }
+    static deleteSpecificTasks(arr, value) {
+        for(let i = arr.length - 1; i >= 0; --i) {
+            if(arr[i].project == value) {
+                arr.splice(i, 1); 
+            }
+        }
+        // delete tasks in container 
+        
+        // console.log(arr.filter(obj => obj.project != value)); 
     }
 }
 
