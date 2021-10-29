@@ -1,7 +1,6 @@
 // imports 
 import Storage from "./storage.js";
-// project array 
-export const projectArr = [];
+import { projectArr } from "./storage.js";
 // project class 
 export default class Project {
     constructor(project) {

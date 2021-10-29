@@ -1,6 +1,8 @@
 // imports
-import { projectArr } from "./project.js";
-import { taskArr } from "./task.js";
+import UI from "./ui.js";
+// arrays
+export let taskArr = []
+export let projectArr = [];
 ///////////////////////////
 // save to local storage //
 ///////////////////////////
@@ -16,35 +18,51 @@ export default class Storage {
         localStorage.setItem('tasks', JSON.stringify(taskArr));
         localStorage.setItem('projects', JSON.stringify(projectArr)); 
     }
-    static getItemsFromStorage(str) {
-        JSON.parse(localStorage.getItem(str));
+    // load items if local storage is not empty (false)
+    static loadItemsFromStorage() {
+        if(Storage.checkItemsFromStorage() === false) {
+            Storage.loadProjects();
+            Storage.loadTasks();
+        }
+    }
+    // returns false if there are items in local storage 
+    static checkItemsFromStorage() {
+        if(localStorage.getItem('projects') === null && localStorage.getItem('tasks') === null) {
+            projectArr = [];
+            taskArr = [];
+            return true 
+        } else {
+            return false
+        }
+    }
+    static loadProjects() {
+        if(localStorage.getItem('projects') === null) {
+            projectArr = []; 
+        } else {
+            projectArr = JSON.parse(localStorage.getItem('projects'));
+            Storage.createItemsFromStorage(projectArr); 
+        }
+    }
+    static loadTasks() {
+        if(localStorage.getItem('tasks') === null) {
+            taskArr = []; 
+        } else {
+            taskArr = JSON.parse(localStorage.getItem('tasks'));
+            Storage.createItemsFromStorage(taskArr); 
+        }
     }
     static createItemsFromStorage(arr) {
         switch(arr) {
-            case myTasks:
+            case projectArr:
                 for(let i = 0; i < arr.length; i++) {
-                    //createTaskDom(arr[i]); 
+                    UI.createProjectListDom(arr[i]); 
+                }
+                break; 
+            case taskArr:
+                for(let i = 0; i < arr.length; i++) {
+                    UI.createTaskDom(arr[i]); 
                 }
                 break;
-            case myProjects:
-                for(let i = 0; i < arr.length; i++) {
-                    //createProjectListDom(arr[i]); 
-                } 
-        }
-    }
-    // checks if tasks array is empty if it's not generate tasks 
-    static loadItemsFromStorage() {
-        if(localStorage.getItem('tasks') === null || localStorage.getItem('projects') === null) {
-            // myTasks = [];
-            // myProjects = [];
-        } else {
-            const tasksFromStorage = getItemsFromStorage('tasks'); 
-            myTasks = tasksFromStorage;
-            const projectsFromStorage = getItemsFromStorage('projects')
-            myProjects = projectsFromStorage; 
-            // creates from existing library 
-            //createItemsFromStorage(myTasks); 
-            //createItemsFromStorage(myProjects);
         }
     }
 }

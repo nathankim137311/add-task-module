@@ -1,7 +1,6 @@
 // imports
 import Event from "./event.js";
-import { projectArr } from "./project.js";
-import { taskArr } from "./task.js";
+import { taskArr } from "./storage.js";
 import Utility from "./utility.js";
 //////////////////
 // Todo List UI //
@@ -33,6 +32,13 @@ export default class UI {
         trashBtn.textContent = 'trash'; 
         taskItems.append(taskTitle, taskPriority, trashBtn); 
         taskList.appendChild(taskItems); 
+    }
+    static deleteTaskDom(str) { // modify later 
+        const taskItemsArr = [...document.querySelectorAll('.task-titles')];
+        taskItemsArr.forEach(item => {
+            // if title matches string delete task item 
+            item.parentNode.remove();
+        });
     }
     static createProjectListDom(str) {
         const projectList = document.getElementById('projects-list'); 

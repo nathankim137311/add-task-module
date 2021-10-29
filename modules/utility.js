@@ -2,8 +2,9 @@
 import Task from "./task.js";
 import UI from "./ui.js";
 import Storage from "./storage.js";
-import { taskArr } from "./task.js";
-import Project, { projectArr } from "./project.js";
+import { taskArr } from "./storage.js";
+import { projectArr } from "./storage.js";
+import Project from "./project.js";
 ///////////////////////
 // utility functions //
 ///////////////////////
@@ -46,24 +47,16 @@ export default class Utility {
             Utility.deleteFromStorage(projectArr, str)
             // delete tasks 
             Utility.deleteSpecificTasks(taskArr, str); 
-            Utility.deleteTaskDom(str);
+            UI.deleteTaskDom(str);
             Storage.saveAll(); 
         } 
-    }
-    // move to ui
-    static deleteTaskDom(str) { // modify later 
-        const taskItemsArr = [...document.querySelectorAll('.task-titles')];
-        taskItemsArr.forEach(item => {
-            item.parentNode.remove();
-        });
     }
     static deleteSpecificTasks(arr, value) {
         for(let i = arr.length - 1; i >= 0; --i) {
             if(arr[i].project == value) {
                 arr.splice(i, 1); 
             }
-        }
-        // delete tasks in container 
+        } 
     }
     static deleteFromStorage(arr, value) {
         const position = arr.indexOf(value);

@@ -1,7 +1,6 @@
 // imports
 import Storage from "./storage.js";
-// task array 
-export const taskArr = []
+import { taskArr } from "./storage.js";
 // task class 
 export default class Task {
     constructor(title, project, priority) {
