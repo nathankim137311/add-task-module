@@ -36,10 +36,13 @@ export default class UI {
     }
     static deleteTaskDom(str) { // modify later 
         const taskItemsArr = [...document.querySelectorAll('.task-titles')];
-        taskItemsArr.forEach(item => {
-            // if title matches string delete task item 
-            item.parentNode.remove();
-        });
+        for(let i = 0; i < taskItemsArr.length; i++) {
+            if(taskItemsArr[i] === str) {
+                let index = taskItemsArr.indexOf(str)
+                console.log(index);
+                taskItemsArr[index].parentNode.remove();
+            }
+        }
     }
     static clearTaskList() {
         document.getElementById('task-list').innerHTML = ''; 
