@@ -76,64 +76,27 @@ export default class Utility {
             UI.createTaskDom(project[i]);  
         }
     }
-    static findOcc(arr, key) {
-        let arr2 = [];
-        arr.forEach((x) => {
-            if(arr2.some((val)=>{ return val[key] == x[key] })) {
-                arr2.forEach((k)=>{
-                    if(k[key] === x[key]) {
-                        k['occurrence']++
-                    }
-                })
-            } else {
-                let a = {}
-                a[key] = x[key]
-                a["occurrence"] = 1
-                arr2.push(a);
-            }
-        });
-        return arr2
-    }
 }
 
-export class Iterators { // refactor and simplify 
-    static createIterators() {
-        const occurrencesArr = Iterators.createOccurrencesArray();
-        console.log(occurrencesArr); 
-        Iterators.checkNumberArr(occurrencesArr); 
+export class Counter { // refactor and simplify 
+    static updateCounters() {
+        const counterObject = Counter.taskCounter(); 
+        Counter.createCounters(counterObject); 
     }
-    static createOccurrencesArray() {
-        const occurrenceArr = Iterators.findOcc(taskArr, 'projects');
-        const arr = [taskArr.length];
-        occurrenceArr.forEach((obj)=>{
-            arr.push(obj.occurrence);
-        })
-        return arr
-    }
-    static findOcc(arr, key) {
-        let arr2 = [];
-        arr.forEach((x) => {
-            if(arr2.some((val)=>{ return val[key] == x[key] })) {
-                arr2.forEach((k)=>{
-                    if(k[key] === x[key]) {
-                        k['occurrence']++
-                    }
-                })
-            } else {
-                let a = {}
-                a[key] = x[key]
-                a["occurrence"] = 1
-                arr2.push(a);
-            }
+    static taskCounter() {
+        const count = {
+            total:taskArr.length
+        };
+        taskArr.forEach(task => {
+            count[task.project] = count[task.project] + 1 || 1
         });
-        return arr2
+        return count
     }
-    static checkNumberArr(arr) {
-        const numberArray = Array.from(document.querySelectorAll('.number-of-tasks'));
-        if(numberArray.length === 1) {
-            console.log('numberArray is empty'); 
-        } else {
-            UI.displayNumbers(numberArray, arr); // change
+    static createCounters(obj) { // change 
+        const counterNum = Array.from(document.querySelectorAll('.number-of-tasks p'));
+        const counterArr = Object.values(obj);  
+        for(let i = 0; i < counterArr.length; i++) {
+            counterNum[i].textContent = counterArr[i]; 
         }
     }
 }

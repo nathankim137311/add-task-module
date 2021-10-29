@@ -1,7 +1,7 @@
 // imports
 import Event from "./event.js";
 import { projectArr, taskArr } from "./storage.js";
-import Utility from "./utility.js";
+import Utility, {Counter} from "./utility.js";
 //////////////////
 // Todo List UI //
 //////////////////
@@ -27,6 +27,7 @@ export default class UI {
         trashBtn.addEventListener('click', () => {
             Utility.deleteTask(obj);  
             trashBtn.parentNode.remove(); 
+            Counter.updateCounters(); 
         });
         trashBtn.classList.add('btn'); 
         trashBtn.textContent = 'trash'; 
@@ -50,7 +51,7 @@ export default class UI {
         const projectListItemDiv = document.createElement('div'); 
         projectListItemDiv.classList.add('number-of-tasks');
         const projectListItemP = document.createElement('p');
-        projectListItemP.textContent = '';
+        projectListItemP.textContent = '0';
         // project link
         const projectLink = document.createElement('a');
         projectLink.addEventListener('click', () => {
@@ -59,20 +60,17 @@ export default class UI {
         projectLink.classList.add('project-links'); 
         projectLink.setAttribute('href', '#');
         // trash button 
-        const trashBtn = document.createElement('button'); 
-        trashBtn.addEventListener('click', () => {
+        const deleteBtn = document.createElement('button'); 
+        deleteBtn.addEventListener('click', () => {
             Utility.deleteProject(str);
-            trashBtn.parentNode.remove(); 
+            deleteBtn.parentNode.remove();
+            Counter.updateCounters();  
         });
-        trashBtn.classList.add('btn'); 
-        trashBtn.textContent = 'delete'; 
+        deleteBtn.classList.add('btn'); 
+        deleteBtn.textContent = 'delete'; 
         projectLink.textContent = str;
         projectList.appendChild(projectListItem);
         projectListItemDiv.appendChild(projectListItemP); 
-        projectListItem.append(projectListItemDiv, projectLink, trashBtn);
-    }
-    static displayNumbers() { // change 
-        const p = document.createElement('p'); 
-        p.textContent = 'poop'; 
+        projectListItem.append(projectListItemDiv, projectLink, deleteBtn);
     }
 }

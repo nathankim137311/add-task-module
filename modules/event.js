@@ -1,5 +1,5 @@
 // imports 
-import Utility, { Iterators } from "./utility.js";
+import Utility, { Counter } from "./utility.js";
 //////////////////////////
 // event listener class //
 //////////////////////////
@@ -12,7 +12,7 @@ export default class Event {
             e.preventDefault(); 
             Utility.createNewTask(); 
             Utility.checkProject(); 
-            Iterators.createIterators(); 
+            Counter.updateCounters(); 
         });
     }
     // opens pop-up form 
