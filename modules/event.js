@@ -42,16 +42,3 @@ export default class Event {
             });
     }
 }
-
-/*
- // when link is clicked populates container with tasks
- static relevantTasks() {
-    const projectLink = document.getElementById('project-link'); 
-    projectLink.addEventListener('click', (e) => {
-        const projectName = e.target.textContent; 
-        const projectNameH2 = document.getElementById('project-name'); 
-        projectNameH2.textContent = projectName.toUpperCase(); 
-        replaceProjectList(projectName);
-    });
-}
-*/
