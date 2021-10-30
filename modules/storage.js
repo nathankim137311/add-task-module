@@ -1,8 +1,10 @@
 // imports
 import UI from "./ui.js";
+import ButtonStates from "./btn.js";
 // arrays
 export let taskArr = []
 export let projectArr = [];
+export let btnStatesArr = []; 
 ///////////////////////////
 // save to local storage //
 ///////////////////////////
@@ -51,6 +53,15 @@ export default class Storage {
             this.createItemsFromStorage(taskArr); 
         }
     }
+    /*
+    static loadBtnStates() {
+        btnStatesArr = JSON.parse(localStorage.getItem('btn-states'));
+        for(let i = 0; i < btnStatesArr.length; i++) {
+            ButtonStates.checkStates(btnStatesArr, i);
+            localStorage.setItem('btn-states', JSON.stringify(btnStatesArr));
+        }
+    }
+    */
     static createItemsFromStorage(arr) {
         switch(arr) {
             case projectArr:
@@ -65,4 +76,17 @@ export default class Storage {
                 break;
         }
     }
+    /*
+    static btnStates() {
+        if(localStorage.getItem('status') === null) {
+            for(let i = 0; i < taskArr.length; i++) {
+                btnStatesArr.push('incomplete');
+                localStorage.setItem('status', JSON.stringify(btnStatesArr)); 
+            }  
+        } else {
+            localStorage.getItem('status').split(',');
+        }
+        console.log(btnStatesArr);
+    }
+    */
 }
