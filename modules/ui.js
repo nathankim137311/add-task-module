@@ -17,7 +17,7 @@ export default class UI {
         // project 
         const taskProject = document.createElement('h4');
         taskProject.classList.add('task-projects'); 
-        taskProject.textContent = `Project: ${obj.project}`; 
+        taskProject.textContent = `${obj.project}`; 
         const taskList = document.getElementById('task-list');
         const taskItems = document.createElement('li'); 
         taskItems.classList.add('task-items');
@@ -46,13 +46,11 @@ export default class UI {
     }
     static deleteTaskDom(str) { // modify later 
         const taskProjectsArr = [...document.querySelectorAll('.task-projects')];
-        taskProjectsArr.forEach(item => {
-            const projectNameArr = item.textContent.split(' ');
-            const projectName = projectNameArr[1];
-            if(projectName === str) {
-                item.parentNode.remove(); 
+        for(let i = 0; i < taskProjectsArr.length; i++) {
+            if(taskProjectsArr[i].textContent === str) {
+                taskProjectsArr[i].parentNode.remove();
             }
-            });
+        }
     }
     static borderLeftColor(obj, priority) {
         switch(priority.toLowerCase()) {
@@ -72,7 +70,8 @@ export default class UI {
     }
     static createProjectListDom(str) {
         const projectList = document.getElementById('projects-list'); 
-        const projectListItem = document.createElement('li'); 
+        const projectListItem = document.createElement('li');
+        projectListItem.setAttribute('id', str); 
         projectListItem.classList.add('project-items'); 
         const projectListItemDiv = document.createElement('div'); 
         projectListItemDiv.classList.add('number-of-tasks');
@@ -87,7 +86,8 @@ export default class UI {
         projectLink.setAttribute('href', '#');
         // trash button 
         const deleteBtn = document.createElement('button'); 
-        deleteBtn.addEventListener('click', () => {
+        deleteBtn.addEventListener('click', (e) => {
+            str = e.target.parentNode.id;
             Utility.deleteProject(str);
             deleteBtn.parentNode.remove();
             Counter.updateCounters();  
