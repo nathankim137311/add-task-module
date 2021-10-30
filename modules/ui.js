@@ -28,24 +28,21 @@ export default class UI {
         taskItemDiv.addEventListener('click', (e) => { // modify later
             let idNum = e.target.id;
             const specificItem = document.getElementById(`task-details-${idNum}`)
-            specificItem.classList.toggle('active');
-            console.log(specificItem); 
-            //specificTask.style.display = 'block';  
+            if(specificItem !== null) {
+                specificItem.classList.toggle('active');
+            }
         });
         // title 
         const taskTitle = document.createElement('h3'); 
         taskTitle.classList.add('task-titles');
         taskTitle.textContent = obj.title;
-        // priority 
-        const taskPriority = document.createElement('p');
-        taskPriority.textContent = obj.priority; 
         // border color based on priority
         UI.borderLeftColor(taskItems, obj.priority);
         // trash button 
         const trashBtn = document.createElement('button'); 
         trashBtn.addEventListener('click', () => {
             Utility.deleteTask(obj);  
-            trashBtn.parentNode.remove(); 
+            trashBtn.parentNode.parentNode.remove(); 
             Counter.updateCounters(); 
         });
         trashBtn.classList.add('btn'); 
@@ -55,10 +52,11 @@ export default class UI {
         const taskDetailsP = document.createElement('p');
         taskDetailsP.textContent = `description: ${obj.description}`;  
         taskDetailsDiv.setAttribute('id', 'task-details-' + taskArr.indexOf(obj)); 
-        taskDetailsDiv.style.display = 'none'; 
+        taskDetailsDiv.classList.add('active');
+        taskDetailsDiv.classList.add('task-details'); 
         // append 
         taskItems.append(taskItemDiv, taskDetailsDiv);
-        taskItemDiv.append(taskProject, taskTitle, taskPriority, trashBtn); 
+        taskItemDiv.append(taskProject, taskTitle, trashBtn); 
         taskDetailsDiv.appendChild(taskDetailsP);
         taskList.appendChild(taskItems); 
     }
@@ -66,7 +64,7 @@ export default class UI {
         const taskProjectsArr = [...document.querySelectorAll('.task-projects')];
         for(let i = 0; i < taskProjectsArr.length; i++) {
             if(taskProjectsArr[i].textContent === str) {
-                taskProjectsArr[i].parentNode.remove();
+                taskProjectsArr[i].parentNode.parentNode.remove();
             }
         }
     }
