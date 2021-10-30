@@ -77,7 +77,7 @@ export default class UI {
         taskDetailsDiv.appendChild(taskDetailsP);
         taskList.appendChild(taskItems); 
     }
-    static deleteTaskDom(str) { // modify later 
+    static deleteTaskDom(str) {
         const taskProjectsArr = [...document.querySelectorAll('.task-projects')];
         for(let i = 0; i < taskProjectsArr.length; i++) {
             if(taskProjectsArr[i].textContent === str) {
