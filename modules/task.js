@@ -3,8 +3,9 @@ import Storage from "./storage.js";
 import { taskArr } from "./storage.js";
 // task class 
 export default class Task {
-    constructor(title, project, priority) {
+    constructor(title, description, project, priority) {
         this.title = title;
+        this.description = description;
         this.project = project; 
         this.priority = priority;
         Task.addTask(this);

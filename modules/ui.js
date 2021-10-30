@@ -19,9 +19,19 @@ export default class UI {
         taskProject.classList.add('task-projects'); 
         taskProject.textContent = `${obj.project}`; 
         const taskList = document.getElementById('task-list');
+        // task item container 
         const taskItems = document.createElement('li'); 
         taskItems.classList.add('task-items');
-        taskItems.setAttribute('id', 'task-' + taskArr.indexOf(obj));
+        // task item div 
+        const taskItemDiv = document.createElement('div');
+        taskItemDiv.setAttribute('id', taskArr.indexOf(obj));
+        taskItemDiv.addEventListener('click', (e) => { // modify later
+            let idNum = e.target.id;
+            const specificItem = document.getElementById(`task-details-${idNum}`)
+            specificItem.classList.toggle('active');
+            console.log(specificItem); 
+            //specificTask.style.display = 'block';  
+        });
         // title 
         const taskTitle = document.createElement('h3'); 
         taskTitle.classList.add('task-titles');
@@ -40,8 +50,16 @@ export default class UI {
         });
         trashBtn.classList.add('btn'); 
         trashBtn.textContent = 'trash'; 
+        // description 
+        const taskDetailsDiv = document.createElement('div');
+        const taskDetailsP = document.createElement('p');
+        taskDetailsP.textContent = `description: ${obj.description}`;  
+        taskDetailsDiv.setAttribute('id', 'task-details-' + taskArr.indexOf(obj)); 
+        taskDetailsDiv.style.display = 'none'; 
         // append 
-        taskItems.append(taskProject, taskTitle, taskPriority, trashBtn); 
+        taskItems.append(taskItemDiv, taskDetailsDiv);
+        taskItemDiv.append(taskProject, taskTitle, taskPriority, trashBtn); 
+        taskDetailsDiv.appendChild(taskDetailsP);
         taskList.appendChild(taskItems); 
     }
     static deleteTaskDom(str) { // modify later 
@@ -98,5 +116,15 @@ export default class UI {
         projectList.appendChild(projectListItem);
         projectListItemDiv.appendChild(projectListItemP); 
         projectListItem.append(projectListItemDiv, projectLink, deleteBtn);
+    }
+}
+
+export class DisplayManager { // modify later 
+    static toggleDisplay(id) {
+        if (id.style.display = 'none') {
+            id.style.display = 'block'; 
+        } else {
+            id.style.display = 'none';
+        }
     }
 }

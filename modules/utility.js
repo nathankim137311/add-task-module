@@ -11,10 +11,11 @@ import Project from "./project.js";
 export default class Utility {
     static createNewTask() {
         const title = document.getElementById('title-input').value;
+        const description = document.getElementById('description-input').value;
         const project = document.getElementById('project-input').value; 
-        const priority = document.getElementById('priority-input').value; 
+        const priority = document.getElementById('priority-input').value;
         // create new Task object
-        const task = new Task(title, project, priority);
+        const task = new Task(title, description, project, priority);
         UI.createTaskDom(task);
         Storage.saveTasks(); 
     }

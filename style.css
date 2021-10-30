@@ -50,6 +50,10 @@
 /* task list */
 .task-items {
     display: flex;
+    flex-direction: column;
+}
+.task-items div {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -58,6 +62,10 @@
 }
 
 .task-items h3 {
+    margin: 0px;
+}
+
+.task-items h4 {
     margin: 0px;
 }
 
@@ -92,4 +100,9 @@
     background-color: black;
     color: white;
     margin: 10px;
+}
+
+/* class active (modify later) */
+.active {
+    display: block; 
 }
