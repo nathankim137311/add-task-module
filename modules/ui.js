@@ -13,15 +13,23 @@ export default class UI {
         Event.closeBtn();
     }
     static createTaskDom(obj) {   
+        // project 
+        const taskProject = document.createElement('h4');
+        taskProject.classList.add('task-projects'); 
+        taskProject.textContent = `Project: ${obj.project}`; 
         const taskList = document.getElementById('task-list');
         const taskItems = document.createElement('li'); 
         taskItems.classList.add('task-items');
         taskItems.setAttribute('id', 'task-' + taskArr.indexOf(obj));
+        // title 
         const taskTitle = document.createElement('h3'); 
         taskTitle.classList.add('task-titles');
         taskTitle.textContent = obj.title;
+        // priority 
         const taskPriority = document.createElement('p');
         taskPriority.textContent = obj.priority; 
+        // border color based on priority
+        UI.checkPriority(taskItems, obj.priority);
         // trash button 
         const trashBtn = document.createElement('button'); 
         trashBtn.addEventListener('click', () => {
@@ -31,10 +39,7 @@ export default class UI {
         });
         trashBtn.classList.add('btn'); 
         trashBtn.textContent = 'trash'; 
-        // expand elements 
-        const taskProject = document.createElement('h4');
-        taskProject.classList.add('task-projects'); 
-        taskProject.textContent = `Project: ${obj.project}`; 
+        // append 
         taskItems.append(taskProject, taskTitle, taskPriority, trashBtn); 
         taskList.appendChild(taskItems); 
     }
@@ -47,6 +52,19 @@ export default class UI {
                 item.parentNode.remove(); 
             }
             });
+    }
+    static borderLeftColor(obj, priority) {
+        switch(priority.toLowerCase()) {
+            case 'high':
+                obj.style.borderLeft = '3px solid red'; 
+                break; 
+            case 'medium':
+                obj.style.borderLeft = '3px solid yellow';
+                break;
+            case 'low':   
+                obj.style.borderLeft = '3px solid green';
+                break;
+        }
     }
     static clearTaskList() {
         document.getElementById('task-list').innerHTML = ''; 
