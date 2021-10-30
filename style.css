@@ -102,7 +102,7 @@
     color: white;
     margin: 10px;
 }
-/* class active (modify later) */
+/* class active */
 .active {
     display: none; 
 }
@@ -110,9 +110,9 @@
 .task-details {
     box-sizing: border-box;
     height: fit-content;
-    border: 1px solid red;
     width: 100%;
     padding: 10px;
+    border: 1px red solid;
 }
 
 .task-details p {

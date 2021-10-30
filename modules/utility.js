@@ -28,9 +28,9 @@ export default class Utility {
     static checkProject() {
         const projectName = document.getElementById('project-input').value; 
         if(projectArr.length === 0) { // if there are no items 
-            Utility.createNewProject(projectName); 
+            this.createNewProject(projectName); 
         } else if(projectArr.includes(projectName) === false) { 
-            Utility.createNewProject(projectName); 
+            this.createNewProject(projectName); 
         }
     }
     static deleteTask(obj) {
@@ -39,14 +39,14 @@ export default class Utility {
         Storage.saveTasks(); 
     }
     static deleteProject(str) {
-        Utility.confirmDelete(str); 
+        this.confirmDelete(str); 
     }
     static confirmDelete(str) { // prompts user 
         if(confirm('delete project and all of its contents?')) {
             // delete current project
-            Utility.deleteFromStorage(projectArr, str)
+            this.deleteFromStorage(projectArr, str)
             // delete tasks 
-            Utility.deleteSpecificTasks(taskArr, str); 
+            this.deleteSpecificTasks(taskArr, str); 
             UI.deleteTaskDom(str);
             Storage.saveAll(); 
         } 
@@ -65,8 +65,9 @@ export default class Utility {
     // sorts tasks by project name 
     static filterTasksByProject(name) {
         UI.clearTaskList();
-        const specificProject = Utility.filter(name); 
-        Utility.createNewProjectList(specificProject);
+        const specificProject = this.filter(name); 
+        this.changeProjectHeading(name);
+        this.createNewProjectList(specificProject);
     }
     static filter(name) {
         const specificProject = taskArr.filter(task => task.project == name);
@@ -77,12 +78,16 @@ export default class Utility {
             UI.createTaskDom(project[i]);  
         }
     }
+    static changeProjectHeading(name) {
+        const projectNameH2 = document.getElementById('project-name');
+        projectNameH2.textContent = name.toUpperCase() + ' ' + 'Tasks';
+    }
 }
 
 export class Counter { // refactor and simplify 
     static updateCounters() {
-        const counterObject = Counter.taskCounter(); 
-        Counter.createCounters(counterObject); 
+        const counterObject = this.taskCounter(); 
+        this.createCounters(counterObject); 
     }
     static taskCounter() {
         const count = {

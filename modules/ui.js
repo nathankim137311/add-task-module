@@ -37,7 +37,7 @@ export default class UI {
         taskTitle.classList.add('task-titles');
         taskTitle.textContent = obj.title;
         // border color based on priority
-        UI.borderLeftColor(taskItems, obj.priority);
+        this.borderLeftColor(taskItems, obj.priority);
         // trash button 
         const trashBtn = document.createElement('button'); 
         trashBtn.addEventListener('click', () => {
@@ -114,15 +114,5 @@ export default class UI {
         projectList.appendChild(projectListItem);
         projectListItemDiv.appendChild(projectListItemP); 
         projectListItem.append(projectListItemDiv, projectLink, deleteBtn);
-    }
-}
-
-export class DisplayManager { // modify later 
-    static toggleDisplay(id) {
-        if (id.style.display = 'none') {
-            id.style.display = 'block'; 
-        } else {
-            id.style.display = 'none';
-        }
     }
 }

@@ -20,9 +20,9 @@ export default class Storage {
     }
     // load items if local storage is not empty (false)
     static loadItemsFromStorage() {
-        if(Storage.checkItemsFromStorage() === false) {
-            Storage.loadProjects();
-            Storage.loadTasks();
+        if(this.checkItemsFromStorage() === false) {
+            this.loadProjects();
+            this.loadTasks();
         }
     }
     // returns false if there are items in local storage 
@@ -40,7 +40,7 @@ export default class Storage {
             projectArr = []; 
         } else {
             projectArr = JSON.parse(localStorage.getItem('projects'));
-            Storage.createItemsFromStorage(projectArr); 
+            this.createItemsFromStorage(projectArr); 
         }
     }
     static loadTasks() {
@@ -48,7 +48,7 @@ export default class Storage {
             taskArr = []; 
         } else {
             taskArr = JSON.parse(localStorage.getItem('tasks'));
-            Storage.createItemsFromStorage(taskArr); 
+            this.createItemsFromStorage(taskArr); 
         }
     }
     static createItemsFromStorage(arr) {
