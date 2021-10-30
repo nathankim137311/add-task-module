@@ -21,11 +21,3 @@ export default class Task {
     }
 }
 
-/*
-// testing 
-let task = new Tasks(); 
-task.newTasks('homework', 'school', 'low'); 
-task.newTasks('workout', 'gym', 'high'); 
-console.log(task.allTasks);
-*/
-
