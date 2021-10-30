@@ -1,6 +1,6 @@
 // imports
 import Event from "./event.js";
-import { projectArr, taskArr } from "./storage.js";
+import { taskArr } from "./storage.js";
 import Utility, {Counter} from "./utility.js";
 //////////////////
 // Todo List UI //
@@ -16,9 +16,9 @@ export default class UI {
         const taskList = document.getElementById('task-list');
         const taskItems = document.createElement('li'); 
         taskItems.classList.add('task-items');
-        taskItems.setAttribute('id', 'task-' + taskArr.indexOf(obj))
+        taskItems.setAttribute('id', 'task-' + taskArr.indexOf(obj));
         const taskTitle = document.createElement('h3'); 
-        taskTitle.classList.add('task-titles')
+        taskTitle.classList.add('task-titles');
         taskTitle.textContent = obj.title;
         const taskPriority = document.createElement('p');
         taskPriority.textContent = obj.priority; 
@@ -31,18 +31,22 @@ export default class UI {
         });
         trashBtn.classList.add('btn'); 
         trashBtn.textContent = 'trash'; 
-        taskItems.append(taskTitle, taskPriority, trashBtn); 
+        // expand elements 
+        const taskProject = document.createElement('h4');
+        taskProject.classList.add('task-projects'); 
+        taskProject.textContent = `Project: ${obj.project}`; 
+        taskItems.append(taskProject, taskTitle, taskPriority, trashBtn); 
         taskList.appendChild(taskItems); 
     }
     static deleteTaskDom(str) { // modify later 
-        const taskItemsArr = [...document.querySelectorAll('.task-titles')];
-        for(let i = 0; i < taskItemsArr.length; i++) {
-            if(taskItemsArr[i] === str) {
-                let index = taskItemsArr.indexOf(str)
-                console.log(index);
-                taskItemsArr[index].parentNode.remove();
+        const taskProjectsArr = [...document.querySelectorAll('.task-projects')];
+        taskProjectsArr.forEach(item => {
+            const projectNameArr = item.textContent.split(' ');
+            const projectName = projectNameArr[1];
+            if(projectName === str) {
+                item.parentNode.remove(); 
             }
-        }
+            });
     }
     static clearTaskList() {
         document.getElementById('task-list').innerHTML = ''; 
