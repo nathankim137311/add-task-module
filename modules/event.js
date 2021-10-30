@@ -8,7 +8,9 @@ import Utility, { Counter } from "./utility.js";
 export default class Event {
     static allTasksLink() {
         const allTasksLink = document.getElementById('all-tasks-link');
-        allTasksLink.addEventListener('click', () => {
+        allTasksLink.addEventListener('click', (e) => {
+            const name = e.target.textContent;
+            Utility.changeProjectHeading(name);
             UI.clearTaskList(); 
             taskArr.forEach(task => {
                 UI.createTaskDom(task);

@@ -80,7 +80,11 @@ export default class Utility {
     }
     static changeProjectHeading(name) {
         const projectNameH2 = document.getElementById('project-name');
-        projectNameH2.textContent = name.toUpperCase() + ' ' + 'Tasks';
+        if(name === 'All Tasks') {
+            projectNameH2.textContent = 'All Tasks'
+        } else {
+            projectNameH2.textContent = name.toUpperCase() + ' ' + 'Tasks';
+        }
     }
 }
 

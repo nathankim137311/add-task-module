@@ -32,6 +32,14 @@ export default class UI {
                 specificItem.classList.toggle('active');
             }
         });
+        // check button  
+        const completedBtn = document.createElement('button');
+        completedBtn.innerHTML = '<span class="material-icons">done</span>';
+        completedBtn.classList.add('complete-btn');
+        completedBtn.addEventListener('click', (e) => {
+            const todo = e.target.parentNode.parentNode.parentNode;
+            todo.classList.toggle('completed'); 
+        });
         // title 
         const taskTitle = document.createElement('h3'); 
         taskTitle.classList.add('task-titles');
@@ -40,13 +48,13 @@ export default class UI {
         this.borderLeftColor(taskItems, obj.priority);
         // trash button 
         const trashBtn = document.createElement('button'); 
+        trashBtn.classList.add('btn'); 
+        trashBtn.textContent = 'trash'; 
         trashBtn.addEventListener('click', () => {
             Utility.deleteTask(obj);  
             trashBtn.parentNode.parentNode.remove(); 
             Counter.updateCounters(); 
         });
-        trashBtn.classList.add('btn'); 
-        trashBtn.textContent = 'trash'; 
         // description 
         const taskDetailsDiv = document.createElement('div');
         const taskDetailsP = document.createElement('p');
@@ -56,7 +64,7 @@ export default class UI {
         taskDetailsDiv.classList.add('task-details'); 
         // append 
         taskItems.append(taskItemDiv, taskDetailsDiv);
-        taskItemDiv.append(taskProject, taskTitle, trashBtn); 
+        taskItemDiv.append(completedBtn, taskProject, taskTitle, trashBtn); 
         taskDetailsDiv.appendChild(taskDetailsP);
         taskList.appendChild(taskItems); 
     }
