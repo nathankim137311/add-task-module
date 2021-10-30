@@ -1,11 +1,21 @@
 // imports 
+import { taskArr } from "./storage.js";
+import UI from "./ui.js";
 import Utility, { Counter } from "./utility.js";
 //////////////////////////
 // event listener class //
 //////////////////////////
 export default class Event {
+    static allTasksLink() {
+        const allTasksLink = document.getElementById('all-tasks-link');
+        allTasksLink.addEventListener('click', () => {
+            UI.clearTaskList(); 
+            taskArr.forEach(task => {
+                UI.createTaskDom(task);
+            });
+        }); 
+    }
     // form buttons // 
-    // adds task
     static addBtn() {
         const addBtn = document.getElementById('add-btn'); 
         addBtn.addEventListener('click', (e) => { 

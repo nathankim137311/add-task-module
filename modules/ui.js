@@ -8,6 +8,7 @@ import Utility, {Counter} from "./utility.js";
 export default class UI {
     // LOADING CONTENT
     static loadFormBtns() {
+        Event.allTasksLink();
         Event.addBtn(); 
         Event.taskBtn();
         Event.closeBtn();
@@ -29,7 +30,7 @@ export default class UI {
         const taskPriority = document.createElement('p');
         taskPriority.textContent = obj.priority; 
         // border color based on priority
-        UI.checkPriority(taskItems, obj.priority);
+        UI.borderLeftColor(taskItems, obj.priority);
         // trash button 
         const trashBtn = document.createElement('button'); 
         trashBtn.addEventListener('click', () => {
