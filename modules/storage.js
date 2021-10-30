@@ -53,15 +53,26 @@ export default class Storage {
             this.createItemsFromStorage(taskArr); 
         }
     }
-    /*
+    // modify later 
     static loadBtnStates() {
         btnStatesArr = JSON.parse(localStorage.getItem('btn-states'));
-        for(let i = 0; i < btnStatesArr.length; i++) {
-            ButtonStates.checkStates(btnStatesArr, i);
-            localStorage.setItem('btn-states', JSON.stringify(btnStatesArr));
+        const todo = Array.from(document.getElementsByClassName('tasks'));
+        if(btnStatesArr !== null) {
+            for(let i = 0; i < btnStatesArr.length; i++) {
+                if(btnStatesArr[i] === 'complete') {
+                    todo[i].classList.add('complete');
+                } else {
+                    todo[i].classList.remove('complete'); 
+                }
+            }
+        } else {
+            for(let i = 0; i < taskArr.length; i++) {
+                btnStatesArr = []
+                btnStatesArr.push('incomplete');
+                localStorage.setItem('btn-states', JSON.stringify(btnStatesArr)); 
+            }
         }
     }
-    */
     static createItemsFromStorage(arr) {
         switch(arr) {
             case projectArr:

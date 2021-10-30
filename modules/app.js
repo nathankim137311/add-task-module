@@ -10,8 +10,8 @@ import Storage from "./storage.js"
 window.onload = function() {
     // localStorage.clear();
     UI.loadFormBtns(); 
-    // Storage.loadBtnStates();
     Storage.loadItemsFromStorage();
     Counter.updateCounters();
+    Storage.loadBtnStates();
 }
 

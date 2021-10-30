@@ -26,6 +26,7 @@ export default class UI {
         // task item div 
         const taskItemDiv = document.createElement('div');
         taskItemDiv.setAttribute('id', taskArr.indexOf(obj));
+        taskItemDiv.classList.add('tasks'); 
         taskItemDiv.addEventListener('click', (e) => { // modify later
             let idNum = e.target.id;
             const specificItem = document.getElementById(`task-details-${idNum}`)
@@ -37,26 +38,11 @@ export default class UI {
         const completedBtn = document.createElement('button');
         completedBtn.innerHTML = '<span class="material-icons">done</span>';
         completedBtn.classList.add('complete-btn');
-        completedBtn.addEventListener('click', (e) => {
+        completedBtn.addEventListener('click', (e) => { // modify later 
             const id = e.target.parentNode.parentNode.id; 
             const todo = e.target.parentNode.parentNode.parentNode; 
             const statesArr = JSON.parse(localStorage.getItem('btn-states'));
             ButtonStates.checkBtnStates(todo, statesArr, id);
-            /*
-            if(btnStates[id] === 'incomplete') {
-                btnStates.splice(id, 1, 'complete'); 
-                todo.classList.add('complete'); 
-                localStorage.setItem('btn-states', JSON.stringify(btnStates)); 
-            } else {
-                btnStates.splice(id, 1, 'incomplete');
-                todo.classList.remove('complete'); 
-                localStorage.setItem('btn-states', JSON.stringify(btnStates)); 
-            }
-            */
-            // btnStates.splice(id, 1, 'complete'); 
-            // const todo = e.target.parentNode.parentNode.parentNode;
-            //todo.classList.toggle('complete'); 
-            //localStorage.setItem('status', 'complete'); 
         });
         // title 
         const taskTitle = document.createElement('h3'); 
@@ -73,10 +59,11 @@ export default class UI {
             trashBtn.parentNode.parentNode.remove(); 
             Counter.updateCounters(); 
         });
-        // pushing state to local storage 
+        // push to local storage // modify later 
+        /*
         btnStatesArr.push('incomplete');
-        localStorage.setItem('btn-states', JSON.stringify(btnStatesArr)); 
-        // btnStatesArr.push('incomplete'); 
+        localStorage.setItem('btn-states', JSON.stringify(btnStatesArr));
+        */
         // description 
         const taskDetailsDiv = document.createElement('div');
         const taskDetailsP = document.createElement('p');
