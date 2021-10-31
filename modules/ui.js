@@ -56,6 +56,7 @@ export default class UI {
         trashBtn.textContent = 'trash'; 
         trashBtn.addEventListener('click', () => {
             Utility.deleteTask(obj);  
+            Status.deleteStatus(trashBtn); 
             trashBtn.parentNode.parentNode.remove(); 
             Counter.updateCounters(); 
         });
