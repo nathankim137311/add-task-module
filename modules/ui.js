@@ -2,7 +2,7 @@
 import Event from "./event.js";
 import { taskArr } from "./storage.js";
 import Utility, {Counter} from "./utility.js";
-import ButtonStates from "./btn.js";
+import Status from "./status.js";
 //////////////////
 // Todo List UI //
 //////////////////
@@ -41,8 +41,8 @@ export default class UI {
         completedBtn.addEventListener('click', (e) => { // modify later 
             const id = e.target.parentNode.parentNode.id; 
             const todo = e.target.parentNode.parentNode.parentNode; 
-            const btnStatesArr = JSON.parse(localStorage.getItem('btn-states'));
-            ButtonStates.checkBtnStates(todo, btnStatesArr, id);
+            const statusArr = JSON.parse(localStorage.getItem('status'));
+            Status.checkBtnStates(todo, statusArr, id);
         });
         // title 
         const taskTitle = document.createElement('h3'); 

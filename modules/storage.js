@@ -52,11 +52,11 @@ export default class Storage {
         }
     }
     static loadBtnStates() {
-        let btnStatesArr = JSON.parse(localStorage.getItem('btn-states'));
+        const statusArr = JSON.parse(localStorage.getItem('status'));
         const todo = [...document.querySelectorAll('.task-items')];
-        if(btnStatesArr !== null) {
+        if(statusArr !== null) {
             for(let i = 0; i < todo.length; i++) {
-                if(btnStatesArr[i] === 'complete') {
+                if(statusArr[i] === 'complete') {
                     todo[i].classList.add('complete'); 
                 } 
             }
