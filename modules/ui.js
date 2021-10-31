@@ -1,6 +1,6 @@
 // imports
 import Event from "./event.js";
-import { taskArr, btnStatesArr} from "./storage.js";
+import { taskArr } from "./storage.js";
 import Utility, {Counter} from "./utility.js";
 import ButtonStates from "./btn.js";
 //////////////////
@@ -41,8 +41,8 @@ export default class UI {
         completedBtn.addEventListener('click', (e) => { // modify later 
             const id = e.target.parentNode.parentNode.id; 
             const todo = e.target.parentNode.parentNode.parentNode; 
-            // const statesArr = JSON.parse(localStorage.getItem('btn-states'));
-            // ButtonStates.checkBtnStates(todo, statesArr, id);
+            const btnStatesArr = JSON.parse(localStorage.getItem('btn-states'));
+            ButtonStates.checkBtnStates(todo, btnStatesArr, id);
         });
         // title 
         const taskTitle = document.createElement('h3'); 

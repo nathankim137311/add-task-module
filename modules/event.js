@@ -1,6 +1,6 @@
 // imports 
 import ButtonStates from "./btn.js";
-import { btnStatesArr, taskArr } from "./storage.js";
+import { taskArr } from "./storage.js";
 import UI from "./ui.js";
 import Utility, { Counter } from "./utility.js";
 //////////////////////////

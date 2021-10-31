@@ -1,9 +1,9 @@
 // imports 
-import { btnStatesArr } from "./storage.js";
 ///////////////////
 // button states //
 ///////////////////
 // modify later
+const btnStatesArr = []; 
 export default class ButtonStates {
     static checkBtnStates(todo, arr, id) {
         if(arr[id] === 'incomplete') {
