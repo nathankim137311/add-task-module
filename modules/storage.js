@@ -53,6 +53,7 @@ export default class Storage {
             this.createItemsFromStorage(taskArr); 
         }
     }
+    /*
     // modify later 
     static loadBtnStates() {
         btnStatesArr = JSON.parse(localStorage.getItem('btn-states'));
@@ -73,6 +74,7 @@ export default class Storage {
             }
         }
     }
+    */
     static createItemsFromStorage(arr) {
         switch(arr) {
             case projectArr:

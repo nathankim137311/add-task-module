@@ -41,8 +41,8 @@ export default class UI {
         completedBtn.addEventListener('click', (e) => { // modify later 
             const id = e.target.parentNode.parentNode.id; 
             const todo = e.target.parentNode.parentNode.parentNode; 
-            const statesArr = JSON.parse(localStorage.getItem('btn-states'));
-            ButtonStates.checkBtnStates(todo, statesArr, id);
+            // const statesArr = JSON.parse(localStorage.getItem('btn-states'));
+            // ButtonStates.checkBtnStates(todo, statesArr, id);
         });
         // title 
         const taskTitle = document.createElement('h3'); 

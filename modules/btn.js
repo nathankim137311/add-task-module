@@ -1,8 +1,9 @@
 // imports 
+import { btnStatesArr } from "./storage.js";
 ///////////////////
 // button states //
 ///////////////////
-// modify later 
+// modify later
 export default class ButtonStates {
     static checkBtnStates(todo, arr, id) {
         if(arr[id] === 'incomplete') {
@@ -15,6 +16,10 @@ export default class ButtonStates {
             localStorage.setItem('btn-states', JSON.stringify(arr)); 
         }
     }
+    static addBtnState() {
+        btnStatesArr.push('incomplete');
+        localStorage.setItem('btn-states', JSON.stringify(btnStatesArr)); 
+    } 
     /*
     static checkBtns() {
         if()

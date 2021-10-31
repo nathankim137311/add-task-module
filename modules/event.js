@@ -1,5 +1,6 @@
 // imports 
-import { taskArr } from "./storage.js";
+import ButtonStates from "./btn.js";
+import { btnStatesArr, taskArr } from "./storage.js";
 import UI from "./ui.js";
 import Utility, { Counter } from "./utility.js";
 //////////////////////////
@@ -25,6 +26,7 @@ export default class Event {
             Utility.createNewTask(); 
             Utility.checkProject(); 
             Counter.updateCounters(); 
+            ButtonStates.addBtnState(); 
         });
     }
     // opens pop-up form 
