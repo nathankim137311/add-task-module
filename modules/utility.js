@@ -86,7 +86,7 @@ export default class Utility {
     }
 }
 
-export class Counter { // refactor and simplify 
+export class Counter {
     static updateCounters() {
         const counterObject = this.taskCounter(); 
         this.createCounters(counterObject); 
