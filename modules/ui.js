@@ -60,11 +60,6 @@ export default class UI {
             trashBtn.parentNode.parentNode.remove(); 
             Counter.updateCounters(); 
         });
-        // push to local storage // modify later 
-        /*
-        btnStatesArr.push('incomplete');
-        localStorage.setItem('btn-states', JSON.stringify(btnStatesArr));
-        */
         // description 
         const taskDetailsDiv = document.createElement('div');
         const taskDetailsP = document.createElement('p');
@@ -122,8 +117,7 @@ export default class UI {
         const deleteBtn = document.createElement('button'); 
         deleteBtn.addEventListener('click', (e) => {
             str = e.target.parentNode.id;
-            Utility.deleteProject(str);
-            deleteBtn.parentNode.remove();
+            Utility.confirmDelete(deleteBtn, str);
             Counter.updateCounters();  
         });
         deleteBtn.classList.add('btn'); 

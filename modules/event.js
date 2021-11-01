@@ -26,7 +26,7 @@ export default class Event {
             Utility.createNewTask(); 
             Utility.checkProject(); 
             Counter.updateCounters(); 
-            Status.addBtnState(); 
+            Status.addStatus(); 
         });
     }
     // opens pop-up form 

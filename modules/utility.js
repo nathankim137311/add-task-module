@@ -5,6 +5,7 @@ import Storage from "./storage.js";
 import { taskArr } from "./storage.js";
 import { projectArr } from "./storage.js";
 import Project from "./project.js";
+import Status from "./status.js";
 ///////////////////////
 // utility functions //
 ///////////////////////
@@ -38,14 +39,11 @@ export default class Utility {
         taskArr.splice(taskPosition, 1); 
         Storage.saveTasks(); 
     }
-    static deleteProject(str) {
-        this.confirmDelete(str); 
-    }
-    static confirmDelete(str) { // prompts user 
-        if(confirm('delete project and all of its contents?')) {
-            // delete current project
+    static confirmDelete(deleteBtn, str) { // prompts user 
+        if(confirm('delete project and all of its contents?')) { 
+            deleteBtn.parentNode.remove();
+            Status.filterStatus(str);
             this.deleteFromStorage(projectArr, str)
-            // delete tasks 
             this.deleteSpecificTasks(taskArr, str); 
             UI.deleteTaskDom(str);
             Storage.saveAll(); 
@@ -70,8 +68,8 @@ export default class Utility {
         this.createNewProjectList(specificProject);
     }
     static filter(name) {
-        const specificProject = taskArr.filter(task => task.project == name);
-        return specificProject
+        const newArray = taskArr.filter(task => task.project == name);
+        return newArray
     }
     static createNewProjectList(project) {
         for(let i = 0; i < project.length; i++) {
