@@ -4,25 +4,35 @@ import { counterArr } from "./storage.js";
 // Counter //
 ///////////// 
 export default class Counter {
+    static createCounters() {
+        this.addCounter();
+        // display counter
+    }
     static addCounter() {
         const str = document.getElementById('project-input').value; 
-        counterArr.push([str, 1]); 
-        console.log(counterArr);
-        localStorage.setItem('counters', JSON.stringify(counterArr)); 
+        counterArr.push(str);
+        const newObj = this.findOcc(counterArr);
+        const newArr = [];
+        newArr.push(newObj); 
+        localStorage.setItem('counters', JSON.stringify(newArr));  
     }
-    static addCountersToList(counterArr) {
+    static displayCounter() {
+        // display numbers 
+    }
+    static findOcc(counterArr) {
+        const count = {};
+        counterArr.forEach((el) => {
+            count[el] = count[el] + 1 || 1
+        });
+        return count
+    }
+    static addCountersToList(counterArr) { // modify later 
         const counterNum = Array.from(document.querySelectorAll('.number-of-tasks p'));
         //for(let i = 0; i < counter.length; i++) {
             //console.log(i);
             //console.log(counterNum[i]);
             //counterNum[i].textContent = counterArr[i][1]; 
         //}
-    }
-    static decrementCounter() {
-        // empty
-    }
-    static incrementCounter() {
-        // empty 
     }
 }
 

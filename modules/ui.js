@@ -28,7 +28,7 @@ export default class UI {
         const taskItemDiv = document.createElement('div');
         taskItemDiv.setAttribute('id', taskArr.indexOf(obj));
         taskItemDiv.classList.add('tasks'); 
-        taskItemDiv.addEventListener('click', (e) => { // modify later
+        taskItemDiv.addEventListener('click', (e) => {
             let idNum = e.target.id;
             const specificItem = document.getElementById(`task-details-${idNum}`)
             if(specificItem !== null) {

@@ -9,7 +9,7 @@ import UI from "./ui.js"
 import Storage, { Load } from "./storage.js"  
 
 window.onload = function() {
-    // localStorage.clear();
+    //localStorage.clear();
     UI.loadFormBtns(); 
     Load.itemsFromStorage();
     // Counter.loadCounters();
