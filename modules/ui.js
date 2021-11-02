@@ -1,7 +1,8 @@
 // imports
 import Event from "./event.js";
 import { taskArr } from "./storage.js";
-import Utility, {Counter} from "./utility.js";
+import Utility from "./utility.js";
+import Counter from "./counter.js";
 import Status from "./status.js";
 //////////////////
 // Todo List UI //
@@ -58,7 +59,7 @@ export default class UI {
             Utility.deleteTask(obj);  
             Status.deleteStatus(trashBtn); 
             trashBtn.parentNode.parentNode.remove(); 
-            Counter.updateCounters(); 
+            // Counter.updateCounters(); 
         });
         // description 
         const taskDetailsDiv = document.createElement('div');
