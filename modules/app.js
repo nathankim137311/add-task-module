@@ -6,13 +6,12 @@ import Tasks from "./task.js"
 import Utility from "./utility.js"
 import Counter from "./counter.js"
 import UI from "./ui.js"
-import Storage from "./storage.js"  
+import Storage, { Load } from "./storage.js"  
 
 window.onload = function() {
     // localStorage.clear();
     UI.loadFormBtns(); 
-    Storage.loadItemsFromStorage();
-    Storage.loadBtnStates();
+    Load.itemsFromStorage();
     // Counter.loadCounters();
     // Counter.updateCounters();
 }

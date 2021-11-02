@@ -45,7 +45,7 @@ export default class Utility {
             Status.filterStatus(str);
             this.deleteFromStorage(projectArr, str)
             this.deleteSpecificTasks(taskArr, str);
-            Counter.updateCounters();   
+            // Counter.updateCounters();   
             UI.deleteTaskDom(str);
             Storage.saveAll(); 
         } 

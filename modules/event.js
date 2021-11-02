@@ -27,6 +27,7 @@ export default class Event {
             Utility.createNewTask(); 
             Utility.checkProject(); 
             // Counter.updateCounters(); 
+            Counter.addCounter(); 
             Status.addStatus(); 
         });
     }
