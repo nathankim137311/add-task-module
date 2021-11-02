@@ -108,7 +108,18 @@
     margin: 0px;
 }
 
-/* iterators */ 
+/* iterators */
+.total-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    margin: 10px;
+}
 .number-of-tasks {
     display: flex;
     justify-content: center;

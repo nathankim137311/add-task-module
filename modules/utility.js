@@ -44,7 +44,8 @@ export default class Utility {
             deleteBtn.parentNode.remove();
             Status.filterStatus(str);
             this.deleteFromStorage(projectArr, str)
-            this.deleteSpecificTasks(taskArr, str); 
+            this.deleteSpecificTasks(taskArr, str);
+            Counter.updateCounters();   
             UI.deleteTaskDom(str);
             Storage.saveAll(); 
         } 
@@ -88,23 +89,38 @@ export default class Utility {
 
 export class Counter {
     static updateCounters() {
-        const counterObject = this.taskCounter(); 
-        this.createCounters(counterObject); 
+        const counterObj = this.createCounterObj(); 
+        const counterArr = Object.keys(counterObj).map((key) => [key, counterObj[key]]);
+        localStorage.setItem('counters', JSON.stringify(counterArr)); 
+        this.createCounters(counterArr); 
     }
-    static taskCounter() {
-        const count = {
-            total:taskArr.length
-        };
+    static createCounterObj() {
+        const count = {};
         taskArr.forEach(task => {
             count[task.project] = count[task.project] + 1 || 1
         });
         return count
     }
-    static createCounters(obj) { // change 
+    static createCounters(counterArr) {  
+        const allTasks = document.getElementById('total-number');
+        allTasks.textContent = ' ' + taskArr.length;
         const counterNum = Array.from(document.querySelectorAll('.number-of-tasks p'));
-        const counterArr = Object.values(obj);  
+        const projectName = Array.from(document.querySelectorAll('.project-links'));
+        counterArr.push(counterArr.shift()); 
+        console.log(counterArr);
+        projectName.shift(); 
+        console.log(projectName);
+        console.log(counterNum);
         for(let i = 0; i < counterArr.length; i++) {
-            counterNum[i].textContent = counterArr[i]; 
+            if(counterArr[i][0] === projectName[i].textContent) {
+                counterNum[i].textContent = counterArr[i][1]; 
+            }
         }
+    }
+    static decrementCounter() {
+        // empty
+    }
+    static incrementCounter() {
+        // empty 
     }
 }

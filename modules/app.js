@@ -8,10 +8,10 @@ import UI from "./ui.js"
 import Storage from "./storage.js"  
 
 window.onload = function() {
-    localStorage.clear();
+    //localStorage.clear();
     UI.loadFormBtns(); 
     Storage.loadItemsFromStorage();
-    Counter.updateCounters();
     Storage.loadBtnStates();
+    Counter.updateCounters();
 }
 

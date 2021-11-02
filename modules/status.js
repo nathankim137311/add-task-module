@@ -40,10 +40,10 @@ export default class Status {
     static addStatus() {
         let statusArr = JSON.parse(localStorage.getItem('status')); 
         if(statusArr !== null) {
-            statusArr = JSON.parse(localStorage.getItem('status')); 
             statusArr.push('incomplete');
             localStorage.setItem('status', JSON.stringify(statusArr)); 
-        } else {
+        } 
+        else {
             statusArr = [];
             statusArr.push('incomplete');
             localStorage.setItem('status', JSON.stringify(statusArr)); 

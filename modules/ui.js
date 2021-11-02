@@ -118,7 +118,6 @@ export default class UI {
         deleteBtn.addEventListener('click', (e) => {
             str = e.target.parentNode.id;
             Utility.confirmDelete(deleteBtn, str);
-            Counter.updateCounters();  
         });
         deleteBtn.classList.add('btn'); 
         deleteBtn.textContent = 'delete'; 
