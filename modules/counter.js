@@ -30,19 +30,26 @@ export default class Counter {
         }); 
         return count;
     }
-    static displayCounters() { // modify 
+    static displayCounters() { // simplify and refactor?
         const countersArr = Object.values(JSON.parse(localStorage.getItem('counters')));
         const countersArrProjects = Object.keys(JSON.parse(localStorage.getItem('counters')));
         const projectsArr = JSON.parse(localStorage.getItem('projects')); 
         const numberTasks = [...document.querySelectorAll('.counts')];
-        //console.log(countersArr);
-        //numberTasks[1].textContent = 2;
-        for(let i = 0; i < numberTasks.length; i++) {
-            let position = projectsArr.indexOf(countersArrProjects[i]);
-            console.log(position);
-            if(position === -1) {
-                position = numberTasks.length - 1; 
-                numberTasks[position].textContent = countersArr[i];
+        // checks if counter object in storage is empty 
+        if(countersArr.length === 0) {
+            numberTasks.forEach(el => {
+                el.textContent = '0';
+            });
+        } else {
+            for(let i = 0; i < numberTasks.length; i++) {
+                let position = projectsArr.indexOf(countersArrProjects[i]);
+                if(position === -1) {
+                    position = numberTasks.length - 1; 
+                    let position2 = countersArr.length - 1; 
+                    numberTasks[position].textContent = countersArr[position2];
+                } else {
+                    numberTasks[position].textContent = countersArr[i];
+                }
             }
         }
     }
