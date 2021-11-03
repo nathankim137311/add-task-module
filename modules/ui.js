@@ -107,6 +107,7 @@ export default class UI {
         projectListItemDiv.classList.add('counts-div');
         const projectListItemP = document.createElement('p');
         projectListItemP.classList.add('counts'); 
+        projectListItemP.setAttribute('id', str); 
         projectListItemP.textContent = '0';
         // project link
         const projectLink = document.createElement('a');

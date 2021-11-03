@@ -30,11 +30,20 @@ export default class Counter {
         }); 
         return count;
     }
-    static displayCounters() {
+    static displayCounters() { // modify 
         const countersArr = Object.values(JSON.parse(localStorage.getItem('counters')));
+        const countersArrProjects = Object.keys(JSON.parse(localStorage.getItem('counters')));
+        const projectsArr = JSON.parse(localStorage.getItem('projects')); 
         const numberTasks = [...document.querySelectorAll('.counts')];
+        //console.log(countersArr);
+        //numberTasks[1].textContent = 2;
         for(let i = 0; i < numberTasks.length; i++) {
-            numberTasks[i].textContent = countersArr[i]; 
+            let position = projectsArr.indexOf(countersArrProjects[i]);
+            console.log(position);
+            if(position === -1) {
+                position = numberTasks.length - 1; 
+                numberTasks[position].textContent = countersArr[i];
+            }
         }
     }
 }
