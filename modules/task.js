@@ -8,9 +8,19 @@ export default class Task {
         this.description = description;
         this.project = project; 
         this.priority = priority;
+        this.status = 'incomplete'; 
         Task.addTask(this);
         Task.saveTask(); 
     }
+    // You should be referencing a private variable in the context of the getter and setter prefix each variable with an underscore
+    /*
+    get status() {
+        return this._status
+    }
+    set status(value) {
+        this._status = value; 
+    }
+    */
     static addTask(item) {
         taskArr.push(item);
     }

@@ -41,10 +41,12 @@ export default class UI {
         completedBtn.innerHTML = '<span class="material-icons">done</span>';
         completedBtn.classList.add('complete-btn');
         completedBtn.addEventListener('click', (e) => { // modify later 
-            const id = e.target.parentNode.parentNode.id; 
             const todo = e.target.parentNode.parentNode.parentNode; 
-            const statusArr = JSON.parse(localStorage.getItem('status'));
-            Status.checkBtnStates(todo, statusArr, id);
+            Status.toggleStates(obj, todo);
+            console.log(obj);
+            // const id = e.target.parentNode.parentNode.id; 
+            //const statusArr = JSON.parse(localStorage.getItem('status'));
+            //Status.checkBtnStates(todo, statusArr, id);
         });
         // title 
         const taskTitle = document.createElement('h3'); 
@@ -57,7 +59,6 @@ export default class UI {
         trashBtn.classList.add('btn'); 
         trashBtn.textContent = 'trash'; 
         trashBtn.addEventListener('click', () => {
-            // Counter.displayCounters();
             Utility.deleteTask(obj);  
             Counter.decrementCounter(obj); 
             Status.deleteStatus(trashBtn); 

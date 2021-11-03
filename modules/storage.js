@@ -1,5 +1,6 @@
 // imports
 import Counter from "./counter.js";
+import Status from "./status.js";
 import UI from "./ui.js";
 // arrays
 export let taskArr = [];
@@ -35,21 +36,14 @@ export default class Storage {
                 break;
         }
     }
-    static createStatesFromLocal(statusArr) {
-        const todo = [...document.querySelectorAll('.task-items')];
-        if(statusArr !== null) {
-            for(let i = 0; i < todo.length; i++) {
-                if(statusArr[i] === 'complete') {
-                    todo[i].classList.add('complete'); 
-                } 
-            }
-        }
+    static createStatesFromLocal(taskArr) {
+        console.log(taskArr)
+        Status.createStates(taskArr);
     }
-    static createCountersFromLocal(counterArr) {
+    static createCountersFromLocal() {
         Counter.updateCounters(); 
     }
 }
-
 export class Load extends Storage {
     static itemsFromStorage() {
         this.projects();
@@ -74,11 +68,12 @@ export class Load extends Storage {
         }
     }
     static states() {
-        if(localStorage.getItem('status') === null) {
-            statusArr = []; 
+        if(localStorage.getItem('tasks') === null) {
+            taskArr = []; 
         } else {
-            statusArr = JSON.parse(localStorage.getItem('status'));
-            Storage.createStatesFromLocal(statusArr);
+            taskArr = JSON.parse(localStorage.getItem('tasks'));
+            console.log(taskArr)
+            Storage.createStatesFromLocal(taskArr);
         }
     }
     static counters() {
@@ -86,7 +81,7 @@ export class Load extends Storage {
             counterArr = [];
         } else {
             counterArr = JSON.parse(localStorage.getItem('counters'));
-            Storage.createCountersFromLocal(counterArr); 
+            Storage.createCountersFromLocal(); 
         }
     }
 }

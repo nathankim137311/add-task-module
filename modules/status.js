@@ -4,7 +4,53 @@ import { taskArr } from "./storage.js";
 // button states //
 ///////////////////
 export default class Status {
-    static checkBtnStates(todo, arr, id) {
+    static toggleStates(obj, todo) {
+        const taskArr = JSON.parse(localStorage.getItem('tasks'));
+        let position = taskArr.indexOf(obj);
+        position === -1 ? position = 0 : taskArr.indexOf(obj);   
+        if(obj.status === 'incomplete') {
+            obj.status ='complete'; 
+            taskArr[position].status = 'complete'; 
+            todo.classList.add('complete');  
+        } else {
+            obj.status = 'incomplete'; 
+            taskArr[position].status = 'incomplete'; 
+            todo.classList.remove('complete');  
+        }
+        this.saveStates(taskArr);  
+    }
+    static saveStates(taskArr) {
+        /*
+        for(let i = 0; i < taskArr.length; i++) {
+            const arr = JSON.parse(localStorage.getItem('status'));
+            arr.push(obj.status); 
+        }
+        const statusArr = localStorage.setItem('status', JSON.stringify(arr));
+        */
+        const newTaskArr = localStorage.setItem('tasks', JSON.stringify(taskArr));
+    }
+    static createStates(taskArr) {
+        console.log(taskArr)
+        const statesArr = this.createStatesArray(taskArr);
+        this.displayStates(statesArr); 
+    }
+    static createStatesArray(taskArr) {
+        const arr = [];
+        console.log(taskArr.length);
+        for(let i = 0; i < taskArr.length; i++) {
+            arr.push(taskArr[i].status)
+        }
+        localStorage.setItem('states', JSON.stringify(arr)); 
+        return arr; 
+    }
+    static displayStates(statesArr) {
+        // display states
+        console.log(statesArr);
+    }
+}
+
+/*
+static checkBtnStates(todo, arr, id) {
         if(arr[id] === 'incomplete') {
             arr.splice(id, 1, 'complete'); 
             todo.classList.add('complete');  
@@ -54,4 +100,4 @@ export default class Status {
         statusArr.splice(index, 1);
         localStorage.setItem('status', JSON.stringify(statusArr)); 
     }
-}
+*/
