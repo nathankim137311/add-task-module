@@ -4,6 +4,7 @@ import { taskArr } from "./storage.js";
 import Utility from "./utility.js";
 import Counter from "./counter.js";
 import Status from "./status.js";
+import { Load } from "./storage.js";
 //////////////////
 // Todo List UI //
 //////////////////
@@ -56,10 +57,11 @@ export default class UI {
         trashBtn.classList.add('btn'); 
         trashBtn.textContent = 'trash'; 
         trashBtn.addEventListener('click', () => {
+            // Counter.displayCounters();
             Utility.deleteTask(obj);  
+            Counter.decrementCounter(obj); 
             Status.deleteStatus(trashBtn); 
             trashBtn.parentNode.parentNode.remove(); 
-            // Counter.createCounters();
         });
         // description 
         const taskDetailsDiv = document.createElement('div');
@@ -107,7 +109,6 @@ export default class UI {
         projectListItemDiv.classList.add('counts-div');
         const projectListItemP = document.createElement('p');
         projectListItemP.classList.add('counts'); 
-        projectListItemP.setAttribute('id', str); 
         projectListItemP.textContent = '0';
         // project link
         const projectLink = document.createElement('a');
@@ -121,7 +122,7 @@ export default class UI {
         deleteBtn.addEventListener('click', (e) => {
             str = e.target.parentNode.id;
             Utility.confirmDelete(deleteBtn, str);
-            // Counter.createCounters();
+            Counter.updateCounters();
         });
         deleteBtn.classList.add('btn'); 
         deleteBtn.textContent = 'delete'; 

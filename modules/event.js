@@ -1,6 +1,6 @@
 // imports 
 import Status from "./status.js";
-import { taskArr } from "./storage.js";
+import { Load, taskArr } from "./storage.js";
 import UI from "./ui.js";
 import Utility from "./utility.js";
 import Counter from "./counter.js";
@@ -26,7 +26,8 @@ export default class Event {
             e.preventDefault(); 
             Utility.createNewTask(); 
             Utility.checkProject(); 
-            Counter.createCounters(); 
+            Counter.updateCounters();
+            // Counter.displayCounters(); 
             Status.addStatus(); 
         });
     }

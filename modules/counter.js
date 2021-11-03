@@ -51,7 +51,20 @@ export default class Counter {
                     numberTasks[position].textContent = countersArr[i];
                 }
             }
-        }
+        } 
+    }
+    static decrementCounter(obj) {
+        this.allTasksCounter();
+        // decrement 
+        const numberTasks = [...document.querySelectorAll('.counts')];
+        const projectsArr = JSON.parse(localStorage.getItem('projects'));
+        const position = projectsArr.indexOf(obj.project); 
+        let num = parseInt(numberTasks[position].textContent);
+        numberTasks[position].textContent = num - 1; 
+        console.log('working');
+    }
+    static clearCounters() {
+        // clear counters 
     }
 }
 

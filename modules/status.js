@@ -17,7 +17,6 @@ export default class Status {
     }
     static filterStatus(str) {
         const indexArr = this.findStatusIndex(str);
-        console.log(indexArr);
         let statusArr = JSON.parse(localStorage.getItem('status'));
         this.deleteStatusFromLocal(statusArr, indexArr); 
     }
