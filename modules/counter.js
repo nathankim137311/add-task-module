@@ -1,38 +1,41 @@
 // import
-import { counterArr } from "./storage.js";
+import { counterArr, projectArr, taskArr } from "./storage.js";
 /////////////
 // Counter //
 ///////////// 
 export default class Counter {
+    static updateCounters() {
+        this.allTasksCounter();
+        this.createCounters();
+        this.displayCounters();
+    }
+    static allTasksCounter() {
+        const totalTasks = JSON.parse(localStorage.getItem('tasks')).length;
+        const allTasksP = document.getElementById('total-number');
+        allTasksP.textContent = ' ' + totalTasks;
+    }
     static createCounters() {
-        this.addCounter();
-        // display counter
-    }
-    static addCounter() {
-        const str = document.getElementById('project-input').value; 
-        counterArr.push(str);
-        const newObj = this.findOcc(counterArr);
+        const taskArr = JSON.parse(localStorage.getItem('tasks'));
         const newArr = [];
-        newArr.push(newObj); 
-        localStorage.setItem('counters', JSON.stringify(newArr));  
+        for(let i = 0; i < taskArr.length; i++) {
+            newArr.push(taskArr[i].project);
+        }
+        const count = this.findOcc(newArr);
+        localStorage.setItem('counters', JSON.stringify(count)); 
     }
-    static displayCounter() {
-        // display numbers 
-    }
-    static findOcc(counterArr) {
+    static findOcc(newArr) {
         const count = {};
-        counterArr.forEach((el) => {
+        newArr.forEach(el => {
             count[el] = count[el] + 1 || 1
-        });
-        return count
+        }); 
+        return count;
     }
-    static addCountersToList(counterArr) { // modify later 
-        const counterNum = Array.from(document.querySelectorAll('.number-of-tasks p'));
-        //for(let i = 0; i < counter.length; i++) {
-            //console.log(i);
-            //console.log(counterNum[i]);
-            //counterNum[i].textContent = counterArr[i][1]; 
-        //}
+    static displayCounters() {
+        const countersArr = Object.values(JSON.parse(localStorage.getItem('counters')));
+        const numberTasks = [...document.querySelectorAll('.counts')];
+        for(let i = 0; i < numberTasks.length; i++) {
+            numberTasks[i].textContent = countersArr[i]; 
+        }
     }
 }
 

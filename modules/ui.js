@@ -59,7 +59,7 @@ export default class UI {
             Utility.deleteTask(obj);  
             Status.deleteStatus(trashBtn); 
             trashBtn.parentNode.parentNode.remove(); 
-            // Counter.updateCounters(); 
+            // Counter.createCounters();
         });
         // description 
         const taskDetailsDiv = document.createElement('div');
@@ -104,8 +104,9 @@ export default class UI {
         projectListItem.setAttribute('id', str); 
         projectListItem.classList.add('project-items'); 
         const projectListItemDiv = document.createElement('div'); 
-        projectListItemDiv.classList.add('number-of-tasks');
+        projectListItemDiv.classList.add('counts-div');
         const projectListItemP = document.createElement('p');
+        projectListItemP.classList.add('counts'); 
         projectListItemP.textContent = '0';
         // project link
         const projectLink = document.createElement('a');
@@ -119,6 +120,7 @@ export default class UI {
         deleteBtn.addEventListener('click', (e) => {
             str = e.target.parentNode.id;
             Utility.confirmDelete(deleteBtn, str);
+            // Counter.createCounters();
         });
         deleteBtn.classList.add('btn'); 
         deleteBtn.textContent = 'delete'; 

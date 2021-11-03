@@ -12,7 +12,6 @@ window.onload = function() {
     //localStorage.clear();
     UI.loadFormBtns(); 
     Load.itemsFromStorage();
-    // Counter.loadCounters();
-    // Counter.updateCounters();
+    // Counters.updateCounters();
 }
 

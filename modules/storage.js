@@ -46,8 +46,7 @@ export default class Storage {
         }
     }
     static createCountersFromLocal(counterArr) {
-        // create items from local 
-        Counter.addCountersToList(counterArr); 
+        Counter.updateCounters(); 
     }
 }
 

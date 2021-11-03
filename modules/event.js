@@ -26,8 +26,7 @@ export default class Event {
             e.preventDefault(); 
             Utility.createNewTask(); 
             Utility.checkProject(); 
-            // Counter.updateCounters(); 
-            Counter.addCounter(); 
+            Counter.createCounters(); 
             Status.addStatus(); 
         });
     }
