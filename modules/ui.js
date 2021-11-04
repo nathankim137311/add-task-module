@@ -51,10 +51,9 @@ export default class UI {
         this.borderLeftColor(taskItems, obj.priority);
         // trash button 
         const trashBtn = document.createElement('button'); 
-        trashBtn.classList.add('btn'); 
-        trashBtn.textContent = 'trash'; 
+        trashBtn.innerHTML = '<span class="material-icons-outlined">delete</span>'; 
+        trashBtn.classList.add('trash-btn'); 
         trashBtn.addEventListener('click', () => {
-            console.log(obj.id);
             Utility.deleteTask(obj);
             Counter.updateCounters();
             Status.saveStates();
