@@ -54,8 +54,9 @@ export default class UI {
         trashBtn.classList.add('btn'); 
         trashBtn.textContent = 'trash'; 
         trashBtn.addEventListener('click', () => {
-            Utility.deleteTask(obj);  
-            Counter.decrementCounter(obj); 
+            console.log(obj.id);
+            Utility.deleteTask(obj);
+            Counter.updateCounters();
             Status.saveStates();
             trashBtn.parentNode.parentNode.remove(); 
         });
@@ -118,7 +119,6 @@ export default class UI {
         deleteBtn.addEventListener('click', (e) => {
             str = e.target.parentNode.id;
             Utility.confirmDelete(deleteBtn, str);
-            Counter.updateCounters();
         });
         deleteBtn.classList.add('btn'); 
         deleteBtn.textContent = 'delete'; 

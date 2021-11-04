@@ -36,9 +36,13 @@ export default class Utility {
         }
     }
     static deleteTask(obj) {
-        const taskPosition = taskArr.indexOf(obj);
-        taskArr.splice(taskPosition, 1); 
-        Storage.saveTasks(); 
+        const taskArr = JSON.parse(localStorage.getItem('tasks')); 
+        for(let i = 0; i < taskArr.length; i++) {
+            if(taskArr[i].id === obj.id) {
+                taskArr.splice(i, 1); 
+            }
+        }
+        localStorage.setItem('tasks', JSON.stringify(taskArr));
     }
     static confirmDelete(deleteBtn, str) { // prompts user 
         if(confirm('delete project and all of its contents?')) { 

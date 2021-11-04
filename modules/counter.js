@@ -30,35 +30,23 @@ export default class Counter {
         return count;
     }
     static displayCounters() {
-        const countersArr = Object.values(JSON.parse(localStorage.getItem('counters')));
-        const countersArrProjects = Object.keys(JSON.parse(localStorage.getItem('counters')));
+        const countersKeys = Object.keys(JSON.parse(localStorage.getItem('counters')));
         const projectsArr = JSON.parse(localStorage.getItem('projects')); 
-        const numberTasks = [...document.querySelectorAll('.counts')];
-        // checks if counter object in storage is empty 
-        if(countersArr.length === 0) {
-            numberTasks.forEach(el => {
-                el.textContent = '0';
-            });
-        } else {
-            for(let i = 0; i < numberTasks.length; i++) {
-                let position = projectsArr.indexOf(countersArrProjects[i]);
-                if(position === -1) {
-                    position = numberTasks.length - 1; 
-                    let position2 = countersArr.length - 1; 
-                    numberTasks[position].textContent = countersArr[position2];
-                } else {
-                    numberTasks[position].textContent = countersArr[i];
-                }
+        for(let i = 0; i < projectsArr.length; i++) {
+            if(projectsArr[i] === countersKeys[i]) {
+                this.setCounter(i); 
+            } else {
+                this.setCounterZero(i);
             }
-        } 
+        }
     }
-    static decrementCounter(obj) {
-        this.allTasksCounter();
-        // decrement 
-        const numberTasks = [...document.querySelectorAll('.counts')];
-        const projectsArr = JSON.parse(localStorage.getItem('projects'));
-        const position = projectsArr.indexOf(obj.project); 
-        let num = parseInt(numberTasks[position].textContent);
-        numberTasks[position].textContent = num - 1; 
+    static setCounter(num) {
+        const countsP = [...document.querySelectorAll('.counts')];
+        const counterValues = Object.values(JSON.parse(localStorage.getItem('counters')));
+        countsP[num].textContent = counterValues[num]; 
+    }
+    static setCounterZero(num) {
+        const countsP = [...document.querySelectorAll('.counts')];
+        countsP[num].textContent = '0'; 
     }
 }
