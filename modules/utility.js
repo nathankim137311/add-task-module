@@ -42,12 +42,11 @@ export default class Utility {
     static confirmDelete(deleteBtn, str) { // prompts user 
         if(confirm('delete project and all of its contents?')) { 
             deleteBtn.parentNode.remove();
-            Status.filterStatus(str);
             this.deleteFromStorage(projectArr, str)
-            this.deleteSpecificTasks(taskArr, str);
-            // Counter.updateCounters();   
+            this.deleteSpecificTasks(taskArr, str); 
             UI.deleteTaskDom(str);
             Storage.saveAll(); 
+            Status.saveStates(); 
         } 
     }
     static deleteSpecificTasks(arr, value) {

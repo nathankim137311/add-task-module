@@ -37,7 +37,6 @@ export default class Storage {
         }
     }
     static createStatesFromLocal(taskArr) {
-        console.log(taskArr)
         Status.createStates(taskArr);
     }
     static createCountersFromLocal() {
@@ -72,7 +71,6 @@ export class Load extends Storage {
             taskArr = []; 
         } else {
             taskArr = JSON.parse(localStorage.getItem('tasks'));
-            console.log(taskArr)
             Storage.createStatesFromLocal(taskArr);
         }
     }
@@ -84,4 +82,12 @@ export class Load extends Storage {
             Storage.createCountersFromLocal(); 
         }
     }
+    /*
+    static id() {
+        if(localStorage.getItem('id') === null) {
+            const id = 0; 
+            localStorage.setItem('id', JSON.stringify(id));
+        } 
+    }
+    */
 }

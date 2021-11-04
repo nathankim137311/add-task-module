@@ -43,10 +43,6 @@ export default class UI {
         completedBtn.addEventListener('click', (e) => { // modify later 
             const todo = e.target.parentNode.parentNode.parentNode; 
             Status.toggleStates(obj, todo);
-            console.log(obj);
-            // const id = e.target.parentNode.parentNode.id; 
-            //const statusArr = JSON.parse(localStorage.getItem('status'));
-            //Status.checkBtnStates(todo, statusArr, id);
         });
         // title 
         const taskTitle = document.createElement('h3'); 
@@ -61,7 +57,7 @@ export default class UI {
         trashBtn.addEventListener('click', () => {
             Utility.deleteTask(obj);  
             Counter.decrementCounter(obj); 
-            Status.deleteStatus(trashBtn); 
+            Status.saveStates();
             trashBtn.parentNode.parentNode.remove(); 
         });
         // description 

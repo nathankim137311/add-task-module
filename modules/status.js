@@ -4,10 +4,14 @@ import { taskArr } from "./storage.js";
 // button states //
 ///////////////////
 export default class Status {
-    static toggleStates(obj, todo) {
+    static toggleStates(obj, todo) { // when check mark is clicked toggle class
         const taskArr = JSON.parse(localStorage.getItem('tasks'));
+        let position = taskArr.findIndex(({ id }) => id === obj.id);
+        /*
         let position = taskArr.indexOf(obj);
-        position === -1 ? position = 0 : taskArr.indexOf(obj);   
+        position === -1 ? position = taskArr.length - 1 : taskArr.indexOf(obj);   
+        console.log(position);
+        */
         if(obj.status === 'incomplete') {
             obj.status ='complete'; 
             taskArr[position].status = 'complete'; 
@@ -15,37 +19,41 @@ export default class Status {
         } else {
             obj.status = 'incomplete'; 
             taskArr[position].status = 'incomplete'; 
-            todo.classList.remove('complete');  
+            todo.classList.remove('complete'); 
         }
-        this.saveStates(taskArr);  
+        localStorage.setItem('tasks', JSON.stringify(taskArr));
+        this.saveStates(); 
     }
-    static saveStates(taskArr) {
-        /*
+    static saveStates() { // when check mark is clicked save state 
+        const taskArr = JSON.parse(localStorage.getItem('tasks'));
+        const arr = [];
         for(let i = 0; i < taskArr.length; i++) {
-            const arr = JSON.parse(localStorage.getItem('status'));
-            arr.push(obj.status); 
+            arr.push(taskArr[i].status);
         }
-        const statusArr = localStorage.setItem('status', JSON.stringify(arr));
-        */
-        const newTaskArr = localStorage.setItem('tasks', JSON.stringify(taskArr));
+        localStorage.setItem('states', JSON.stringify(arr));
     }
-    static createStates(taskArr) {
-        console.log(taskArr)
+    static createStates(taskArr) { // when page loads 
         const statesArr = this.createStatesArray(taskArr);
         this.displayStates(statesArr); 
     }
-    static createStatesArray(taskArr) {
+    static createStatesArray(taskArr) { // when page loads 
         const arr = [];
-        console.log(taskArr.length);
         for(let i = 0; i < taskArr.length; i++) {
             arr.push(taskArr[i].status)
         }
         localStorage.setItem('states', JSON.stringify(arr)); 
         return arr; 
     }
-    static displayStates(statesArr) {
+    static displayStates(statesArr) { // when page loads 
         // display states
-        console.log(statesArr);
+        const todoItems = [...document.querySelectorAll('.task-items')];
+        for(let i = 0; i < statesArr.length; i++) {
+            if(statesArr[i] === 'complete') {
+                todoItems[i].classList.add('complete');   
+            } else {
+                todoItems[i].classList.remove('complete');
+            }
+        }
     }
 }
 
