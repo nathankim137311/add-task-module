@@ -29,7 +29,7 @@ export default class Counter {
         }); 
         return count;
     }
-    static displayCounters() { // simplify and refactor?
+    static displayCounters() {
         const countersArr = Object.values(JSON.parse(localStorage.getItem('counters')));
         const countersArrProjects = Object.keys(JSON.parse(localStorage.getItem('counters')));
         const projectsArr = JSON.parse(localStorage.getItem('projects')); 
@@ -60,6 +60,5 @@ export default class Counter {
         const position = projectsArr.indexOf(obj.project); 
         let num = parseInt(numberTasks[position].textContent);
         numberTasks[position].textContent = num - 1; 
-        console.log('working');
     }
 }

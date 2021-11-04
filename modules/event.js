@@ -1,6 +1,6 @@
 // imports 
 import Status from "./status.js";
-import { Load, taskArr } from "./storage.js";
+import { taskArr } from "./storage.js";
 import UI from "./ui.js";
 import Utility from "./utility.js";
 import Counter from "./counter.js";
@@ -17,6 +17,8 @@ export default class Event {
             taskArr.forEach(task => {
                 UI.createTaskDom(task);
             });
+            const newArr = JSON.parse(localStorage.getItem('tasks'));
+            Status.filteredStates(newArr);
         }); 
     }
     // form buttons // 

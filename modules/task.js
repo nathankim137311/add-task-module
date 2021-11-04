@@ -37,5 +37,4 @@ export default class Task {
         return taskArr
     }
 }
-// Task.currentId = 0; 
 

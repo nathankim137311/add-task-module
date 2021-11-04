@@ -6,6 +6,7 @@ import { taskArr } from "./storage.js";
 import { projectArr } from "./storage.js";
 import Project from "./project.js";
 import Status from "./status.js";
+import Counter from "./counter.js";
 ///////////////////////
 // utility functions //
 ///////////////////////
@@ -46,6 +47,7 @@ export default class Utility {
             this.deleteSpecificTasks(taskArr, str); 
             UI.deleteTaskDom(str);
             Storage.saveAll(); 
+            Counter.updateCounters();
             Status.saveStates(); 
         } 
     }
@@ -75,6 +77,7 @@ export default class Utility {
         for(let i = 0; i < project.length; i++) {
             UI.createTaskDom(project[i]);  
         }
+        Status.filteredStates(project);
     }
     static changeProjectHeading(name) {
         const projectNameH2 = document.getElementById('project-name');

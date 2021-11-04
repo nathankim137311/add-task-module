@@ -82,12 +82,4 @@ export class Load extends Storage {
             Storage.createCountersFromLocal(); 
         }
     }
-    /*
-    static id() {
-        if(localStorage.getItem('id') === null) {
-            const id = 0; 
-            localStorage.setItem('id', JSON.stringify(id));
-        } 
-    }
-    */
 }

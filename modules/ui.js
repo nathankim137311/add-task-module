@@ -4,7 +4,6 @@ import { taskArr } from "./storage.js";
 import Utility from "./utility.js";
 import Counter from "./counter.js";
 import Status from "./status.js";
-import { Load } from "./storage.js";
 //////////////////
 // Todo List UI //
 //////////////////
