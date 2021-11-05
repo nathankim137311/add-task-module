@@ -4,6 +4,7 @@ import { taskArr } from "./storage.js";
 import Utility from "./utility.js";
 import Counter from "./counter.js";
 import Status from "./status.js";
+import Edit from "./edit.js";
 //////////////////
 // Todo List UI //
 //////////////////
@@ -31,10 +32,12 @@ export default class UI {
         taskItemDiv.addEventListener('click', (e) => {
             let idNum = e.target.id;
             const specificItem = document.getElementById(`task-details-${idNum}`)
-            if(specificItem.style.display === 'flex' || specificItem.style.display === null) {
-                specificItem.style.display = 'none';
-            } else {
-                specificItem.style.display = 'flex';
+            if(specificItem !== null) {
+                if(specificItem.style.display === 'flex') {
+                    specificItem.style.display = 'none';
+                } else {
+                    specificItem.style.display = 'flex';
+                }
             }
         });
         // check button  
@@ -63,9 +66,12 @@ export default class UI {
         });
         // input container // 
         const taskDetailsDiv = document.createElement('div');
+        taskDetailsDiv.setAttribute('id', 'task-details-' + taskArr.indexOf(obj)); 
+        taskDetailsDiv.classList.add('task-details'); 
         // description input
         const taskDetailsDesc = document.createElement('textarea');
-        taskDetailsDesc.classList.add('detail-inputs'); 
+        taskDetailsDesc.setAttribute('id', 'description' + obj.id);
+        taskDetailsDesc.classList.add('detail-inputs-' + obj.id); 
         taskDetailsDesc.setAttribute('type', 'text');
         taskDetailsDesc.setAttribute('readonly', 'readonly'); 
         taskDetailsDesc.textContent = `${obj.description}`; 
@@ -74,27 +80,9 @@ export default class UI {
         const editBtn = document.createElement('button');
         editBtn.innerHTML = '<span class="material-icons-outlined">edit</span>'; 
         editBtn.addEventListener('click', () => {
-        // put below into own function? 
-        const detailInputs = [...document.querySelectorAll('.detail-inputs')];
-            if(editBtn.innerHTML !== 'Save') {
-                editBtn.innerHTML = 'Save'; 
-                taskDetailsDesc.readOnly = false; 
-                detailInputs.forEach(input => {
-                    input.style.border = '1px black solid'; 
-                });
-            } else {
-                // save changes to local storage
-                
-                console.log('saved changes!'); 
-                editBtn.innerHTML = '<span class="material-icons-outlined">edit</span>';
-                taskDetailsDesc.readOnly = true;
-                detailInputs.forEach(input => {
-                    input.style.border = 'none'; 
-                });
-            }
-        }); 
-        taskDetailsDiv.setAttribute('id', 'task-details-' + taskArr.indexOf(obj)); 
-        taskDetailsDiv.classList.add('task-details'); 
+        // toggles edit/save 
+        Edit.toggleEdit(editBtn, obj.id); 
+        });
         // append 
         taskItems.append(taskItemDiv, taskDetailsDiv);
         taskItemDiv.append(completedBtn, taskProject, taskTitle, trashBtn); 
