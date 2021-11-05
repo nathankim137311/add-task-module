@@ -154,12 +154,12 @@ button {
     color: white;
     margin: 10px;
 }
-/* class active */
-.active {
-    display: none; 
-}
 
 .task-details {
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     box-sizing: border-box;
     height: fit-content;
     width: 100%;
@@ -167,6 +167,14 @@ button {
     border: 1px red solid;
 }
 
-.task-details p {
-    width: fit-content;
+.task-details textarea {
+    margin: 10px;
+    border: none;
+    height: fit-content;
+    width: 100%;
 }
+
+.task-details textarea:focus {
+    outline: none;
+}
+

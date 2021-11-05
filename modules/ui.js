@@ -31,8 +31,10 @@ export default class UI {
         taskItemDiv.addEventListener('click', (e) => {
             let idNum = e.target.id;
             const specificItem = document.getElementById(`task-details-${idNum}`)
-            if(specificItem !== null) {
-                specificItem.classList.toggle('active');
+            if(specificItem.style.display === 'flex' || specificItem.style.display === null) {
+                specificItem.style.display = 'none';
+            } else {
+                specificItem.style.display = 'flex';
             }
         });
         // check button  
@@ -59,17 +61,44 @@ export default class UI {
             Status.saveStates();
             trashBtn.parentNode.parentNode.remove(); 
         });
-        // description 
+        // input container // 
         const taskDetailsDiv = document.createElement('div');
-        const taskDetailsP = document.createElement('p');
-        taskDetailsP.textContent = `description: ${obj.description}`;  
+        // description input
+        const taskDetailsDesc = document.createElement('textarea');
+        taskDetailsDesc.classList.add('detail-inputs'); 
+        taskDetailsDesc.setAttribute('type', 'text');
+        taskDetailsDesc.setAttribute('readonly', 'readonly'); 
+        taskDetailsDesc.textContent = `${obj.description}`; 
+        taskDetailsDesc.setAttribute('value', `${obj.description}`);
+        // edit button 
+        const editBtn = document.createElement('button');
+        editBtn.innerHTML = '<span class="material-icons-outlined">edit</span>'; 
+        editBtn.addEventListener('click', () => {
+        // put below into own function? 
+        const detailInputs = [...document.querySelectorAll('.detail-inputs')];
+            if(editBtn.innerHTML !== 'Save') {
+                editBtn.innerHTML = 'Save'; 
+                taskDetailsDesc.readOnly = false; 
+                detailInputs.forEach(input => {
+                    input.style.border = '1px black solid'; 
+                });
+            } else {
+                // save changes to local storage
+                
+                console.log('saved changes!'); 
+                editBtn.innerHTML = '<span class="material-icons-outlined">edit</span>';
+                taskDetailsDesc.readOnly = true;
+                detailInputs.forEach(input => {
+                    input.style.border = 'none'; 
+                });
+            }
+        }); 
         taskDetailsDiv.setAttribute('id', 'task-details-' + taskArr.indexOf(obj)); 
-        taskDetailsDiv.classList.add('active');
         taskDetailsDiv.classList.add('task-details'); 
         // append 
         taskItems.append(taskItemDiv, taskDetailsDiv);
         taskItemDiv.append(completedBtn, taskProject, taskTitle, trashBtn); 
-        taskDetailsDiv.appendChild(taskDetailsP);
+        taskDetailsDiv.append(taskDetailsDesc, editBtn);
         taskList.appendChild(taskItems); 
     }
     static deleteTaskDom(str) {
