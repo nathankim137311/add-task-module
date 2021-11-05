@@ -68,14 +68,47 @@ export default class UI {
         const taskDetailsDiv = document.createElement('div');
         taskDetailsDiv.setAttribute('id', 'task-details-' + taskArr.indexOf(obj)); 
         taskDetailsDiv.classList.add('task-details'); 
+        // project input 
+        const projInput = document.createElement('input');
+        projInput.setAttribute('id', 'project' + obj.id);
+        projInput.classList.add('detail-inputs-' + obj.id);
+        projInput.setAttribute('type', 'text'); 
+        projInput.setAttribute('readonly', 'readonly'); 
+        projInput.textContent = `${obj.project}`;
+        projInput.setAttribute('value', `${obj.project}`);
+        // title 
+        const titleInput = document.createElement('input'); 
+        titleInput.setAttribute('id', 'title' + obj.id);
+        titleInput.classList.add('detail-inputs-' + obj.id);
+        titleInput.setAttribute('type', 'text'); 
+        titleInput.setAttribute('readonly', 'readonly'); 
+        titleInput.textContent = `${obj.title}`;
+        titleInput.setAttribute('value', `${obj.title}`);
+        // due date 
+        // priority 
+        const prioritySelect = document.createElement('select');
+        prioritySelect.setAttribute('id', 'priority' + obj.id);
+        prioritySelect.classList.add('detail-inputs-' + obj.id);
+        prioritySelect.setAttribute('value', obj.priority);
+        prioritySelect.setAttribute('disabled', 'disabled');
+        const priorityLow = document.createElement('option');
+        priorityLow.setAttribute('value', 'low');
+        priorityLow.textContent = 'Low'; 
+        const priorityMedium = document.createElement('option');
+        priorityMedium.setAttribute('value', 'medium'); 
+        priorityMedium.textContent = 'Medium'; 
+        const priorityHigh = document.createElement('option');
+        priorityHigh.setAttribute('value', 'high');
+        priorityHigh.textContent = 'High'; 
+        prioritySelect.append(priorityLow, priorityMedium, priorityHigh);
         // description input
-        const taskDetailsDesc = document.createElement('textarea');
-        taskDetailsDesc.setAttribute('id', 'description' + obj.id);
-        taskDetailsDesc.classList.add('detail-inputs-' + obj.id); 
-        taskDetailsDesc.setAttribute('type', 'text');
-        taskDetailsDesc.setAttribute('readonly', 'readonly'); 
-        taskDetailsDesc.textContent = `${obj.description}`; 
-        taskDetailsDesc.setAttribute('value', `${obj.description}`);
+        const descInput = document.createElement('textarea');
+        descInput.setAttribute('id', 'description' + obj.id);
+        descInput.classList.add('detail-inputs-' + obj.id); 
+        descInput.setAttribute('type', 'text');
+        descInput.setAttribute('readonly', 'readonly'); 
+        descInput.textContent = `${obj.description}`; 
+        descInput.setAttribute('value', `${obj.description}`);
         // edit button 
         const editBtn = document.createElement('button');
         editBtn.innerHTML = '<span class="material-icons-outlined">edit</span>'; 
@@ -86,7 +119,7 @@ export default class UI {
         // append 
         taskItems.append(taskItemDiv, taskDetailsDiv);
         taskItemDiv.append(completedBtn, taskProject, taskTitle, trashBtn); 
-        taskDetailsDiv.append(taskDetailsDesc, editBtn);
+        taskDetailsDiv.append(projInput, titleInput, descInput, prioritySelect, editBtn);
         taskList.appendChild(taskItems); 
     }
     static deleteTaskDom(str) {
