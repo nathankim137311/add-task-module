@@ -167,6 +167,10 @@ button {
     border: 1px red solid;
 }
 
+.task-details span {
+    margin: 10px;
+}
+
 .task-details button {
     width: 90%;
     height: 50px;

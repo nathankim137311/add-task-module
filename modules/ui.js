@@ -68,14 +68,9 @@ export default class UI {
         const taskDetailsDiv = document.createElement('div');
         taskDetailsDiv.setAttribute('id', 'task-details-' + taskArr.indexOf(obj)); 
         taskDetailsDiv.classList.add('task-details'); 
-        // project input 
-        const projInput = document.createElement('input');
-        projInput.setAttribute('id', 'project' + obj.id);
-        projInput.classList.add('detail-inputs-' + obj.id);
-        projInput.setAttribute('type', 'text'); 
-        projInput.setAttribute('readonly', 'readonly'); 
+        // project info 
+        const projInput = document.createElement('span');
         projInput.textContent = `${obj.project}`;
-        projInput.setAttribute('value', `${obj.project}`);
         // title 
         const titleInput = document.createElement('input'); 
         titleInput.setAttribute('id', 'title' + obj.id);
