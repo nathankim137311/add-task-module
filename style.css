@@ -171,6 +171,12 @@ button {
     border-bottom: 1px black solid;
 }
 
+.task-details label {
+    margin: 5px 10px 5px 10px;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
 .task-details span {
     margin: 10px;
     font-size: 1.2rem;
@@ -214,5 +220,6 @@ button {
 .task-details select {
     margin: 10px;
     border: none;
+    font-size: 1rem;
 }
 

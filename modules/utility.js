@@ -91,4 +91,12 @@ export default class Utility {
             projectNameH2.textContent = name.toUpperCase() + ' ' + 'Tasks';
         }
     }
+    static defaultValue(select, objValue) {
+        for(let i, j = 0; i = select.options[j]; j++) {
+            if(i.value == objValue) {
+                select.selectedIndex = j; 
+                break;
+            }
+        }
+    }
 }

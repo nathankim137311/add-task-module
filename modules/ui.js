@@ -69,9 +69,13 @@ export default class UI {
         taskDetailsDiv.setAttribute('id', 'task-details-' + taskArr.indexOf(obj)); 
         taskDetailsDiv.classList.add('task-details'); 
         // project info 
-        const projInput = document.createElement('span');
-        projInput.textContent = `${obj.project}`;
+        const projSpan = document.createElement('span');
+        projSpan.setAttribute('id', 'project' + obj.id); 
+        projSpan.textContent = `Project: ${obj.project}`;
         // title 
+        const titleLabel = document.createElement('label');
+        titleLabel.htmlFor = 'title' + obj.id;
+        titleLabel.textContent = 'Title:';
         const titleInput = document.createElement('input'); 
         titleInput.setAttribute('id', 'title' + obj.id);
         titleInput.classList.add('detail-inputs-' + obj.id);
@@ -81,11 +85,15 @@ export default class UI {
         titleInput.setAttribute('value', `${obj.title}`);
         // due date 
         // priority 
+        const selectLabel = document.createElement('label');
+        selectLabel.htmlFor = 'priority' + obj.id;
+        selectLabel.textContent = 'Priority level:';
         const prioritySelect = document.createElement('select');
         prioritySelect.setAttribute('id', 'priority' + obj.id);
         prioritySelect.classList.add('detail-inputs-' + obj.id);
         prioritySelect.setAttribute('value', obj.priority);
         prioritySelect.setAttribute('disabled', 'disabled');
+        // options
         const priorityLow = document.createElement('option');
         priorityLow.setAttribute('value', 'low');
         priorityLow.textContent = 'Low'; 
@@ -96,7 +104,12 @@ export default class UI {
         priorityHigh.setAttribute('value', 'high');
         priorityHigh.textContent = 'High'; 
         prioritySelect.append(priorityLow, priorityMedium, priorityHigh);
+        // default value for select element
+        Utility.defaultValue(prioritySelect, obj.priority);
         // description input
+        const descLabel = document.createElement('label');
+        descLabel.htmlFor = 'description' + obj.id;
+        descLabel.textContent = 'Description:';
         const descInput = document.createElement('textarea');
         descInput.setAttribute('id', 'description' + obj.id);
         descInput.classList.add('detail-inputs-' + obj.id); 
@@ -114,7 +127,7 @@ export default class UI {
         // append 
         taskItems.append(taskItemDiv, taskDetailsDiv);
         taskItemDiv.append(completedBtn, taskProject, taskTitle, trashBtn); 
-        taskDetailsDiv.append(projInput, titleInput, descInput, prioritySelect, editBtn);
+        taskDetailsDiv.append(projSpan, titleLabel, titleInput, descLabel, descInput, selectLabel, prioritySelect, editBtn);
         taskList.appendChild(taskItems); 
     }
     static deleteTaskDom(str) {
