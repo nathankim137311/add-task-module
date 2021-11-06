@@ -44,20 +44,32 @@ export default class Utility {
         }
         localStorage.setItem('tasks', JSON.stringify(taskArr));
     }
-    static deleteProjectTasks(str) {
-        const confirmPrompt = confirm(`Delete project ${str} and all its tasks?`);
+    static deleteProjectTasks(e) {
+        const projectName = e.target.parentNode.id;
+        const confirmPrompt = confirm(`Delete project ${projectName} and all its tasks?`);
         if(confirmPrompt === true) {
-            this.deleteProjectTasksFromStorage(str);
+            e.target.parentNode.remove();
+            this.deleteProjectTasksFromStorage(projectName);
+            this.deleteProjectFromStorage(projectName); 
         }
     }
-    static deleteProjectTasksFromStorage(str) {
+    static deleteProjectTasksFromStorage(name) {
         const taskArr = JSON.parse(localStorage.getItem('tasks'));
         for(let i = taskArr.length - 1; i >= 0; --i) {
-            if(taskArr[i].project == str) {
+            if(taskArr[i].project == name) {
                 taskArr.splice(i, 1); 
             }
         } 
         localStorage.setItem('tasks', JSON.stringify(taskArr)); 
+    }
+    static deleteProjectFromStorage(name) {
+        const projectArr = JSON.parse(localStorage.getItem('projects'));
+        for(let i = projectArr.length - 1; i >= 0; --i) {
+            if(projectArr[i] === name) {
+                projectArr.splice(i, 1); 
+            }
+        }
+        localStorage.setItem('projects', JSON.stringify(projectArr)); 
     }
     static filterTasksByProject(name) {
         UI.clearTaskList();

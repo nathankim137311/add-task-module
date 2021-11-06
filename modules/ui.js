@@ -179,8 +179,7 @@ export default class UI {
         // trash button 
         const deleteBtn = document.createElement('button'); 
         deleteBtn.addEventListener('click', (e) => {
-            str = e.target.parentNode.id;
-            Utility.deleteProjectTasks(str);
+            Utility.deleteProjectTasks(e);
             location.reload(); 
         });
         deleteBtn.classList.add('btn'); 
