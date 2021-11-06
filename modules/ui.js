@@ -18,12 +18,13 @@ export default class UI {
     }
     static createTaskDom(obj) {   
         // project 
-        const taskProject = document.createElement('h4');
-        taskProject.classList.add('task-projects'); 
-        taskProject.textContent = `${obj.project}`; 
+        //const taskProject = document.createElement('h4');
+        //taskProject.classList.add('task-projects'); 
+        //taskProject.textContent = `${obj.project}`; 
         const taskList = document.getElementById('task-list');
         // task item container 
         const taskItems = document.createElement('li'); 
+        taskItems.setAttribute('id', 'task-items-container');
         taskItems.classList.add('task-items');
         // task item div 
         const taskItemDiv = document.createElement('div');
@@ -52,6 +53,9 @@ export default class UI {
         const taskTitle = document.createElement('h3'); 
         taskTitle.classList.add('task-titles');
         taskTitle.textContent = obj.title;
+        // due date 
+        const taskDate = document.createElement('h3');
+        taskDate.textContent = `due: ${obj.date}`;
         // border color based on priority
         this.borderLeftColor(taskItems, obj.priority);
         // trash button 
@@ -84,6 +88,15 @@ export default class UI {
         titleInput.textContent = `${obj.title}`;
         titleInput.setAttribute('value', `${obj.title}`);
         // due date 
+        const dateLabel = document.createElement('label');
+        dateLabel.htmlFor = 'date' + obj.id;
+        dateLabel.textContent = 'Due date:';
+        const dateInput = document.createElement('input');
+        dateInput.setAttribute('id', 'date' + obj.id);
+        dateInput.classList.add('detail-inputs-' + obj.id);
+        dateInput.setAttribute('type', 'date'); 
+        dateInput.setAttribute('value', obj.date);
+        dateInput.setAttribute('readonly', 'readonly');
         // priority 
         const selectLabel = document.createElement('label');
         selectLabel.htmlFor = 'priority' + obj.id;
@@ -126,17 +139,9 @@ export default class UI {
         });
         // append 
         taskItems.append(taskItemDiv, taskDetailsDiv);
-        taskItemDiv.append(completedBtn, taskProject, taskTitle, trashBtn); 
-        taskDetailsDiv.append(projSpan, titleLabel, titleInput, descLabel, descInput, selectLabel, prioritySelect, editBtn);
+        taskItemDiv.append(completedBtn, taskTitle, taskDate, trashBtn); 
+        taskDetailsDiv.append(projSpan, titleLabel, titleInput, descLabel, descInput, dateLabel, dateInput, selectLabel, prioritySelect, editBtn);
         taskList.appendChild(taskItems); 
-    }
-    static deleteTaskDom(str) {
-        const taskProjectsArr = [...document.querySelectorAll('.task-projects')];
-        for(let i = 0; i < taskProjectsArr.length; i++) {
-            if(taskProjectsArr[i].textContent === str) {
-                taskProjectsArr[i].parentNode.parentNode.remove();
-            }
-        }
     }
     static borderLeftColor(obj, priority) {
         switch(priority.toLowerCase()) {
@@ -175,7 +180,8 @@ export default class UI {
         const deleteBtn = document.createElement('button'); 
         deleteBtn.addEventListener('click', (e) => {
             str = e.target.parentNode.id;
-            Utility.confirmDelete(deleteBtn, str);
+            Utility.deleteProjectTasks(str);
+            location.reload(); 
         });
         deleteBtn.classList.add('btn'); 
         deleteBtn.textContent = 'delete'; 

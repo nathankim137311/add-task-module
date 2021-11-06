@@ -24,6 +24,7 @@ export default class Edit {
     static saveEdit(id) {
         const title = document.getElementById('title' + id);
         const description = document.getElementById('description' + id);
+        const date = document.getElementById('date' + id);
         const priority = document.getElementById('priority' + id);
         const taskArr = JSON.parse(localStorage.getItem('tasks'));
         const index = taskArr.map(task => {
@@ -31,6 +32,7 @@ export default class Edit {
         }).indexOf(id); 
         taskArr[index].title = title.value; 
         taskArr[index].description = description.value; 
+        taskArr[index].date = date.value;
         taskArr[index].priority = priority.value; 
         localStorage.setItem('tasks', JSON.stringify(taskArr));   
         location.reload(); 

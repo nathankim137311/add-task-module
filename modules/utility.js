@@ -16,20 +16,20 @@ export default class Utility {
         const description = document.getElementById('description-input').value;
         const project = document.getElementById('project-input').value; 
         const priority = document.getElementById('priority-input').value;
+        const date = document.getElementById('date-input').value;
         // create new Task object
-        const task = new Task(title, description, project, priority);
+        const task = new Task(title, description, project, priority, date);
         UI.createTaskDom(task);
         Storage.saveTasks(); 
     }
     static createNewProject(str) {
-        // create new Project object
         const project = new Project(str);  
         UI.createProjectListDom(project.project);
         Storage.saveProjects();
     }
     static checkProject() {
         const projectName = document.getElementById('project-input').value; 
-        if(projectArr.length === 0) { // if there are no items 
+        if(projectArr.length === 0) {
             this.createNewProject(projectName); 
         } else if(projectArr.includes(projectName) === false) { 
             this.createNewProject(projectName); 
@@ -44,29 +44,21 @@ export default class Utility {
         }
         localStorage.setItem('tasks', JSON.stringify(taskArr));
     }
-    static confirmDelete(deleteBtn, str) { // prompts user 
-        if(confirm('delete project and all of its contents?')) { 
-            deleteBtn.parentNode.remove();
-            this.deleteFromStorage(projectArr, str)
-            this.deleteSpecificTasks(taskArr, str); 
-            UI.deleteTaskDom(str);
-            Storage.saveAll(); 
-            Counter.updateCounters();
-            Status.saveStates(); 
-        } 
+    static deleteProjectTasks(str) {
+        const confirmPrompt = confirm(`Delete project ${str} and all its tasks?`);
+        if(confirmPrompt === true) {
+            this.deleteProjectTasksFromStorage(str);
+        }
     }
-    static deleteSpecificTasks(arr, value) {
-        for(let i = arr.length - 1; i >= 0; --i) {
-            if(arr[i].project == value) {
-                arr.splice(i, 1); 
+    static deleteProjectTasksFromStorage(str) {
+        const taskArr = JSON.parse(localStorage.getItem('tasks'));
+        for(let i = taskArr.length - 1; i >= 0; --i) {
+            if(taskArr[i].project == str) {
+                taskArr.splice(i, 1); 
             }
         } 
+        localStorage.setItem('tasks', JSON.stringify(taskArr)); 
     }
-    static deleteFromStorage(arr, value) {
-        const position = arr.indexOf(value);
-        arr.splice(position, 1); 
-    }
-    // sorts tasks by project name 
     static filterTasksByProject(name) {
         UI.clearTaskList();
         const specificProject = this.filter(name); 
