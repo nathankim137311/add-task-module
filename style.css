@@ -1,3 +1,8 @@
+html {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 #projects-container {
     display: flex;
     flex-direction: column;
@@ -29,15 +34,14 @@
 }
 
 #task-container {
-    overflow-y: auto;
-    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
     border: 1px black solid;
     background-color: grey;
-    height: 600px;
+    min-height: 500px;
+    height: fit-content;
 }
 
 #task-list {

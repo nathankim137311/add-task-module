@@ -6,7 +6,6 @@ import { taskArr } from "./storage.js";
 import { projectArr } from "./storage.js";
 import Project from "./project.js";
 import Status from "./status.js";
-import Counter from "./counter.js";
 ///////////////////////
 // utility functions //
 ///////////////////////

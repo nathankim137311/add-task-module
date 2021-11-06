@@ -17,10 +17,7 @@ export default class UI {
         Event.closeBtn();
     }
     static createTaskDom(obj) {   
-        // project 
-        //const taskProject = document.createElement('h4');
-        //taskProject.classList.add('task-projects'); 
-        //taskProject.textContent = `${obj.project}`; 
+        // task list 
         const taskList = document.getElementById('task-list');
         // task item container 
         const taskItems = document.createElement('li'); 
